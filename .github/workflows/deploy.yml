@@ -55,6 +55,7 @@ jobs:
   deploy-book:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pages: write      # Needed to deploy to Pages
       id-token: write   # Needed for OIDC auth
     steps:
