@@ -14,6 +14,7 @@ experiments/
 dubai_segmentation/
 data/
 *.ckpt
+book/2_geo_python/4_putting_it_together/data/*.nc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
