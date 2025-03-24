@@ -59,6 +59,9 @@ jobs:
       id-token: write   # Needed for OIDC auth
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: 'leamhowe/sense-jb'
+          token: ${{ secrets.GITHUB_TOKEN }}  # Add this line
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
