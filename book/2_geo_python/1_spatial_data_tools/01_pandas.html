@@ -1,0 +1,2222 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to pandas &#8212; SENSE Training Resources</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/2_geo_python/1_spatial_data_tools/01_pandas';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-light" alt="SENSE Training Resources - Home"/>
+    <script>document.write(`<img src="../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-dark" alt="SENSE Training Resources - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Software Carpentry - zero2Hero</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/1_intro.html">1 - Intro to Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/00-Introduction.html">Introduction to Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/01-How-to-Run-Python-Code.html">How to Run Python Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/02-Jupyter-Notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/03-Basic-Python-Syntax.html">Python Language Syntax</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics.html">2 - Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/01-Semantics-Variables.html">Variables and Objects in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/02-Semantics-Operators.html">Basic Python Semantics: Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/03-Built-in-Scalar-Types.html">Built-In Types: Simple Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/04-Built-in-Data-Structures.html">Built-In Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/05-Control-Flow-Statements.html">Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/06-Defining-Functions.html">Defining and Using Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/07-Ex-Create-module.html">Exercise: create a module and reuse code from it (1 h)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/08-Modules-and-Packages.html">Modules and Packages</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/09-Ex-Try-Python-Basics.html">Try what you’ve learned so far</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/3_plotting.html">3 - Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_plotting/15-Matplotlib.html">Matplotlib - Intro</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_plotting/17-Futher-plotting.html">Statistical plotting with Seaborn</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning for EO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro.html">2 - Classical ML with satellite data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/1_linear_regression.html">Practical 1: Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/2_classification.html">Practical 2: Classification</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/3_kalman_filter.html">Practical 3: Kalman Filter</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep.html">3 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/00_intro.html">Satellite image deep learning with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html"><strong>Semantic segmentation of Aerial Imaginary with U-Net-like architectures</strong></a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/chapter4.html">Chapter 4: Embeddings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fbook/2_geo_python/1_spatial_data_tools/01_pandas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/2_geo_python/1_spatial_data_tools/01_pandas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to pandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-data-structures-of-pandas">Primary data structures of pandas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data">Loading data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-dataframe-and-series">Data structures: <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">Series</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-pandas-1d-data-containter">Series, pandas’ 1D data containter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-as-pandas-s-backend">Numpy as pandas’s backend</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-data">Cleaning data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-dates-and-times">Dealing with dates and times</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-columns">Renaming columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-columns">Deleting columns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-visualisation">Basic visualisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-missing-values">Setting missing values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-data">Saving data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-spreadsheets">Excel spreadsheets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-writing-to-csv-text-files">Exercise: writing to CSV text files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-statistics">Some statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-correlations">Computing correlations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-dataframes">Creating DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-square-ols-regressions">Ordinary Least Square (OLS) regressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-way-using-numpy-s-polynomial-fitting">Primitive way: using numpy’s polynomial fitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-and-more-convenient-ways-require-additional-packages">Recommended (and more convenient) ways (require additional packages)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">Statsmodels</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-create-a-scatter-plot">Exercise: create a scatter plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-scatter-plot">Advanced scatter plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-rolling-functions">Exercise: rolling functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-pandas">
+<h1>Introduction to pandas<a class="headerlink" href="#introduction-to-pandas" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>pandas</strong> is a Python package providing convenient data structures to work with labelled data.</p></li>
+<li><p><strong>pandas</strong> is perfectly suited for observational / statistical data sets, having many similarities with Excel spreadsheets.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Key features:</p>
+<ul>
+<li><p>easy handling of <strong>missing data</strong></p></li>
+<li><p><strong>size mutability</strong>: columns can be inserted and deleted from DataFrame</p></li>
+<li><p>automatic and explicit <strong>data alignment</strong>: objects can be explicitly aligned to a set of labels, or the user can simply ignore the labels and let Series, DataFrame, etc. automatically align the data for you in computations</p></li>
+<li><p>powerful, flexible <strong>group by</strong> functionality to perform split-apply-combine operations on data sets</p></li>
+<li><p>make it <strong>easy to convert</strong> ragged, differently-indexed data in other Python and NumPy data structures into DataFrame objects</p></li>
+<li><p>intelligent label-based <strong>slicing</strong>, <strong>fancy indexing</strong>, and <strong>subsetting</strong> of large data sets</p></li>
+<li><p>intuitive <strong>merging</strong> and <strong>joining</strong> data sets</p></li>
+<li><p>flexible <strong>reshaping</strong> and pivoting of data sets</p></li>
+<li><p><strong>hierarchical</strong> labeling of axes (possible to have multiple labels per tick)</p></li>
+<li><p>robust IO tools for loading data from <strong>flat files</strong> (CSV and delimited), Excel files, databases, and saving / loading data from the ultrafast HDF5 format</p></li>
+<li><p><strong>time series</strong>-specific functionality</p></li>
+</ul>
+</li>
+</ul>
+<section id="primary-data-structures-of-pandas">
+<h2>Primary data structures of pandas<a class="headerlink" href="#primary-data-structures-of-pandas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Series</strong> (1-dimensional)</p></li>
+<li><p><strong>DataFrame</strong> (2-dimensional)</p></li>
+</ul>
+<p>pandas is built on top of <strong>NumPy</strong> and is intended to integrate well within a scientific computing environment with many other 3rd party libraries.</p>
+</section>
+<section id="loading-data">
+<h2>Loading data<a class="headerlink" href="#loading-data" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In this part, we will use observations of the air quality as an example</p></li>
+<li><p>The data have been collected <strong>hourly</strong> from one of the monitoring sites in London (Marleybone Road) <strong>over the year 2015</strong></p></li>
+<li><p>Measured are: ozone (<span class="math notranslate nohighlight">\(O_3\)</span>), nitrogen oxides (NOx), carbon monoxide (CO) and PM10 particulate matter</p></li>
+<li><p>Data source: <a class="reference external" href="https://uk-air.defra.gov.uk/data/">https://uk-air.defra.gov.uk/data/</a></p></li>
+<li><p>Site description: <a class="reference external" href="https://uk-air.defra.gov.uk/networks/site-info?uka_id=UKA00315">https://uk-air.defra.gov.uk/networks/site-info?uka_id=UKA00315</a></p></li>
+</ul>
+<p>First, we import pandas module. We use an alias “pd” to write code quicker.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also import the <code class="docutils literal notranslate"><span class="pre">os</span></code> module that is useful for building paths to files (among many other things). And <code class="docutils literal notranslate"><span class="pre">numpy</span></code> with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> just in case too.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;../../data/air_quality_hourly_london_marylebone.csv&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try to read the data using <code class="docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># minimal setup to read the given file</span>
+<span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">skipfooter</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;No data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Q</strong>: What happens if you remove the header? skipfooter? engine?</p>
+</section>
+<section id="data-structures-dataframe-and-series">
+<h2>Data structures: <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">Series</span></code><a class="headerlink" href="#data-structures-dataframe-and-series" title="Link to this heading">#</a></h2>
+<p>Let’s interrogate the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> object!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">air_quality</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.frame.DataFrame
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Internal nature of the object</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">air_quality</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">air_quality</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8760, 12)
+
+Start date                                    object
+End Date                                      object
+Ozone                                        float64
+Status                                        object
+Nitrogen oxides as nitrogen dioxide          float64
+Status.1                                      object
+Carbon monoxide                              float64
+Status.2                                      object
+PM10 particulate matter (Hourly measured)    float64
+Status.3                                      object
+Cobalt                                       float64
+Status.4                                     float64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View just the tip of data</span>
+<span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Start date</th>
+      <th>End Date</th>
+      <th>Ozone</th>
+      <th>Status</th>
+      <th>Nitrogen oxides as nitrogen dioxide</th>
+      <th>Status.1</th>
+      <th>Carbon monoxide</th>
+      <th>Status.2</th>
+      <th>PM10 particulate matter (Hourly measured)</th>
+      <th>Status.3</th>
+      <th>Cobalt</th>
+      <th>Status.4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-01-01</td>
+      <td>01:00:00</td>
+      <td>13.70381</td>
+      <td>V ugm-3</td>
+      <td>177.01526</td>
+      <td>V ugm-3</td>
+      <td>0.375260</td>
+      <td>V mgm-3</td>
+      <td>39.3</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-01-01</td>
+      <td>02:00:00</td>
+      <td>8.58151</td>
+      <td>V ugm-3</td>
+      <td>294.46380</td>
+      <td>V ugm-3</td>
+      <td>0.542517</td>
+      <td>V mgm-3</td>
+      <td>41.1</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-01-01</td>
+      <td>03:00:00</td>
+      <td>9.77893</td>
+      <td>V ugm-3</td>
+      <td>209.99537</td>
+      <td>V ugm-3</td>
+      <td>0.406306</td>
+      <td>V mgm-3</td>
+      <td>35.1</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-01-01</td>
+      <td>04:00:00</td>
+      <td>13.96990</td>
+      <td>V ugm-3</td>
+      <td>160.89863</td>
+      <td>V ugm-3</td>
+      <td>0.281445</td>
+      <td>V mgm-3</td>
+      <td>27.6</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-01-01</td>
+      <td>05:00:00</td>
+      <td>15.66625</td>
+      <td>V ugm-3</td>
+      <td>153.89362</td>
+      <td>V ugm-3</td>
+      <td>0.250303</td>
+      <td>V mgm-3</td>
+      <td>27.9</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Q:</strong> What did you notice about “Status” columns? Compare them to the original text file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># View the last rows of data</span>
+<span class="n">air_quality</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Note the optional argument (available for head() too)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Start date</th>
+      <th>End Date</th>
+      <th>Ozone</th>
+      <th>Status</th>
+      <th>Nitrogen oxides as nitrogen dioxide</th>
+      <th>Status.1</th>
+      <th>Carbon monoxide</th>
+      <th>Status.2</th>
+      <th>PM10 particulate matter (Hourly measured)</th>
+      <th>Status.3</th>
+      <th>Cobalt</th>
+      <th>Status.4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8758</th>
+      <td>2015-12-31</td>
+      <td>23:00:00</td>
+      <td>5.63785</td>
+      <td>V ugm-3</td>
+      <td>323.28183</td>
+      <td>V ugm-3</td>
+      <td>0.842881</td>
+      <td>V mgm-3</td>
+      <td>NaN</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8759</th>
+      <td>2015-12-31</td>
+      <td>24:00:00</td>
+      <td>4.83957</td>
+      <td>V ugm-3</td>
+      <td>290.91803</td>
+      <td>V ugm-3</td>
+      <td>0.722095</td>
+      <td>V mgm-3</td>
+      <td>NaN</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Get descriptors for the <strong>vertical</strong> axis (axis=0):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RangeIndex(start=0, stop=8760, step=1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Get descriptors for the horizontal axis (axis=1):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Start date&#39;, &#39;End Date&#39;, &#39;Ozone&#39;, &#39;Status&#39;,
+       &#39;Nitrogen oxides as nitrogen dioxide&#39;, &#39;Status.1&#39;, &#39;Carbon monoxide&#39;,
+       &#39;Status.2&#39;, &#39;PM10 particulate matter (Hourly measured)&#39;, &#39;Status.3&#39;,
+       &#39;Cobalt&#39;, &#39;Status.4&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>A lot of information at once including memory usage:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 8760 entries, 0 to 8759
+Data columns (total 12 columns):
+ #   Column                                     Non-Null Count  Dtype  
+---  ------                                     --------------  -----  
+ 0   Start date                                 8760 non-null   object 
+ 1   End Date                                   8760 non-null   object 
+ 2   Ozone                                      8601 non-null   float64
+ 3   Status                                     8760 non-null   object 
+ 4   Nitrogen oxides as nitrogen dioxide        8640 non-null   float64
+ 5   Status.1                                   8760 non-null   object 
+ 6   Carbon monoxide                            8539 non-null   float64
+ 7   Status.2                                   8760 non-null   object 
+ 8   PM10 particulate matter (Hourly measured)  8502 non-null   float64
+ 9   Status.3                                   8760 non-null   object 
+ 10  Cobalt                                     0 non-null      float64
+ 11  Status.4                                   0 non-null      float64
+dtypes: float64(6), object(6)
+memory usage: 821.4+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<section id="series-pandas-1d-data-containter">
+<h3>Series, pandas’ 1D data containter<a class="headerlink" href="#series-pandas-1d-data-containter" title="Link to this heading">#</a></h3>
+<p>A series can be constructed with the <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code> constructor (passing an array of values) or from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, by extracting one of its columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">carbon_monoxide</span> <span class="o">=</span> <span class="n">air_quality</span><span class="p">[</span><span class="s1">&#39;Carbon monoxide&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Some of its attributes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">carbon_monoxide</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">carbon_monoxide</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">carbon_monoxide</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">carbon_monoxide</span><span class="o">.</span><span class="n">nbytes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+float64
+(8760,)
+70080
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show me what you got!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment to see the values</span>
+<span class="c1"># carbon_monoxide</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="numpy-as-pandas-s-backend">
+<h3>Numpy as pandas’s backend<a class="headerlink" href="#numpy-as-pandas-s-backend" title="Link to this heading">#</a></h3>
+<p>It is always possible to fall back to a good old NumPy array to pass on to scientific libraries that need them: SciPy, scikit-learn, etc</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="p">[</span><span class="s1">&#39;Nitrogen oxides as nitrogen dioxide&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([177.01526, 294.4638 , 209.99537, ..., 314.07697, 323.28183,
+       290.91803])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">air_quality</span><span class="p">[</span><span class="s1">&#39;Nitrogen oxides as nitrogen dioxide&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.ndarray
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="cleaning-data">
+<h2>Cleaning data<a class="headerlink" href="#cleaning-data" title="Link to this heading">#</a></h2>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The truth about data science: cleaning your data is 90% of the work. Fitting the model is easy. Interpreting the results is the other 90%.</p>&mdash; Jake VanderPlas (@jakevdp) <a href="https://twitter.com/jakevdp/status/742406386525446144">June 13, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><section id="dealing-with-dates-and-times">
+<h3>Dealing with dates and times<a class="headerlink" href="#dealing-with-dates-and-times" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># def dateparse(date_str, time_str):</span>
+<span class="c1">#     diff = pd.to_timedelta((df[&#39;End Date&#39;] == &#39;24:00:00&#39;).astype(int), unit=&#39;d&#39;)</span>
+<span class="c1">#     pd.datetime.strptime(x+y, &#39;%Y-%m-%d%H:%M:%S&#39;) </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">skipfooter</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="s1">&#39;No data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
+                          <span class="n">parse_dates</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Time</th>
+      <th>Ozone</th>
+      <th>Status</th>
+      <th>Nitrogen oxides as nitrogen dioxide</th>
+      <th>Status.1</th>
+      <th>Carbon monoxide</th>
+      <th>Status.2</th>
+      <th>PM10 particulate matter (Hourly measured)</th>
+      <th>Status.3</th>
+      <th>Cobalt</th>
+      <th>Status.4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-01-01 01:00:00</td>
+      <td>13.70381</td>
+      <td>V ugm-3</td>
+      <td>177.01526</td>
+      <td>V ugm-3</td>
+      <td>0.375260</td>
+      <td>V mgm-3</td>
+      <td>39.3</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-01-01 02:00:00</td>
+      <td>8.58151</td>
+      <td>V ugm-3</td>
+      <td>294.46380</td>
+      <td>V ugm-3</td>
+      <td>0.542517</td>
+      <td>V mgm-3</td>
+      <td>41.1</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-01-01 03:00:00</td>
+      <td>9.77893</td>
+      <td>V ugm-3</td>
+      <td>209.99537</td>
+      <td>V ugm-3</td>
+      <td>0.406306</td>
+      <td>V mgm-3</td>
+      <td>35.1</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-01-01 04:00:00</td>
+      <td>13.96990</td>
+      <td>V ugm-3</td>
+      <td>160.89863</td>
+      <td>V ugm-3</td>
+      <td>0.281445</td>
+      <td>V mgm-3</td>
+      <td>27.6</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-01-01 05:00:00</td>
+      <td>15.66625</td>
+      <td>V ugm-3</td>
+      <td>153.89362</td>
+      <td>V ugm-3</td>
+      <td>0.250303</td>
+      <td>V mgm-3</td>
+      <td>27.9</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="renaming-columns">
+<h3>Renaming columns<a class="headerlink" href="#renaming-columns" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">,</span> <span class="s1">&#39;O3_status&#39;</span><span class="p">,</span> <span class="s1">&#39;NOx&#39;</span><span class="p">,</span> <span class="s1">&#39;NOx_status&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;CO&#39;</span><span class="p">,</span> <span class="s1">&#39;CO_status&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10_status&#39;</span><span class="p">,</span> <span class="s1">&#39;Co&#39;</span><span class="p">,</span> <span class="s1">&#39;Co_status&#39;</span><span class="p">]</span>
+<span class="n">air_quality</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Time&#39;, &#39;O3&#39;, &#39;O3_status&#39;, &#39;NOx&#39;, &#39;NOx_status&#39;, &#39;CO&#39;, &#39;CO_status&#39;,
+       &#39;PM10&#39;, &#39;PM10_status&#39;, &#39;Co&#39;, &#39;Co_status&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Time</th>
+      <th>O3</th>
+      <th>O3_status</th>
+      <th>NOx</th>
+      <th>NOx_status</th>
+      <th>CO</th>
+      <th>CO_status</th>
+      <th>PM10</th>
+      <th>PM10_status</th>
+      <th>Co</th>
+      <th>Co_status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-01-01 01:00:00</td>
+      <td>13.70381</td>
+      <td>V ugm-3</td>
+      <td>177.01526</td>
+      <td>V ugm-3</td>
+      <td>0.375260</td>
+      <td>V mgm-3</td>
+      <td>39.3</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-01-01 02:00:00</td>
+      <td>8.58151</td>
+      <td>V ugm-3</td>
+      <td>294.46380</td>
+      <td>V ugm-3</td>
+      <td>0.542517</td>
+      <td>V mgm-3</td>
+      <td>41.1</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-01-01 03:00:00</td>
+      <td>9.77893</td>
+      <td>V ugm-3</td>
+      <td>209.99537</td>
+      <td>V ugm-3</td>
+      <td>0.406306</td>
+      <td>V mgm-3</td>
+      <td>35.1</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-01-01 04:00:00</td>
+      <td>13.96990</td>
+      <td>V ugm-3</td>
+      <td>160.89863</td>
+      <td>V ugm-3</td>
+      <td>0.281445</td>
+      <td>V mgm-3</td>
+      <td>27.6</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-01-01 05:00:00</td>
+      <td>15.66625</td>
+      <td>V ugm-3</td>
+      <td>153.89362</td>
+      <td>V ugm-3</td>
+      <td>0.250303</td>
+      <td>V mgm-3</td>
+      <td>27.9</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="deleting-columns">
+<h3>Deleting columns<a class="headerlink" href="#deleting-columns" title="Link to this heading">#</a></h3>
+<p>Let us concentrate our attention on the first 4 chemical species, and remove cobalt data from our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1 means delete a column, 0 means delete a row.</span>
+<span class="n">air_quality</span> <span class="o">=</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Co&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">air_quality</span> <span class="o">=</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Co_status&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\s2112771\AppData\Local\Temp\ipykernel_12892\1015230927.py:2: FutureWarning: In a future version of pandas all arguments of DataFrame.drop except for the argument &#39;labels&#39; will be keyword-only.
+  air_quality = air_quality.drop(&#39;Co&#39;, 1)
+C:\Users\s2112771\AppData\Local\Temp\ipykernel_12892\1015230927.py:3: FutureWarning: In a future version of pandas all arguments of DataFrame.drop except for the argument &#39;labels&#39; will be keyword-only.
+  air_quality = air_quality.drop(&#39;Co_status&#39;, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Time</th>
+      <th>O3</th>
+      <th>O3_status</th>
+      <th>NOx</th>
+      <th>NOx_status</th>
+      <th>CO</th>
+      <th>CO_status</th>
+      <th>PM10</th>
+      <th>PM10_status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-01-01 01:00:00</td>
+      <td>13.70381</td>
+      <td>V ugm-3</td>
+      <td>177.01526</td>
+      <td>V ugm-3</td>
+      <td>0.375260</td>
+      <td>V mgm-3</td>
+      <td>39.3</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-01-01 02:00:00</td>
+      <td>8.58151</td>
+      <td>V ugm-3</td>
+      <td>294.46380</td>
+      <td>V ugm-3</td>
+      <td>0.542517</td>
+      <td>V mgm-3</td>
+      <td>41.1</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-01-01 03:00:00</td>
+      <td>9.77893</td>
+      <td>V ugm-3</td>
+      <td>209.99537</td>
+      <td>V ugm-3</td>
+      <td>0.406306</td>
+      <td>V mgm-3</td>
+      <td>35.1</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-01-01 04:00:00</td>
+      <td>13.96990</td>
+      <td>V ugm-3</td>
+      <td>160.89863</td>
+      <td>V ugm-3</td>
+      <td>0.281445</td>
+      <td>V mgm-3</td>
+      <td>27.6</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-01-01 05:00:00</td>
+      <td>15.66625</td>
+      <td>V ugm-3</td>
+      <td>153.89362</td>
+      <td>V ugm-3</td>
+      <td>0.250303</td>
+      <td>V mgm-3</td>
+      <td>27.9</td>
+      <td>V ugm-3 (TEOM FDMS)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="basic-visualisation">
+<h2>Basic visualisation<a class="headerlink" href="#basic-visualisation" title="Link to this heading">#</a></h2>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p>Try calling <code class="docutils literal notranslate"><span class="pre">plot()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">air_quality</span></code> object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/794a17b1a7cf174133e539965826db9641e32e22bb9bc12a080b17f0840d0000.png" src="../../../_images/794a17b1a7cf174133e539965826db9641e32e22bb9bc12a080b17f0840d0000.png" />
+</div>
+</div>
+<p>What happens if put <code class="docutils literal notranslate"><span class="pre">subplots=True</span></code> as an argument of the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> method?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&lt;AxesSubplot:&gt;, &lt;AxesSubplot:&gt;, &lt;AxesSubplot:&gt;, &lt;AxesSubplot:&gt;],
+      dtype=object)
+</pre></div>
+</div>
+<img alt="../../../_images/63d3600060a0bdc45bf01fa402d1acc7c461c8e2cd1724620682996ff54f302f.png" src="../../../_images/63d3600060a0bdc45bf01fa402d1acc7c461c8e2cd1724620682996ff54f302f.png" />
+</div>
+</div>
+<p>It is easy to create other useful plots using <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">air_quality</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;O3&#39;</span><span class="p">,</span> <span class="s1">&#39;PM10&#39;</span><span class="p">])</span>
+<span class="n">air_quality</span><span class="o">.</span><span class="n">O3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/81315fb6a27a63d1623f63a45ef39cb95af0254acb7c888c850968d27f306513.png" src="../../../_images/81315fb6a27a63d1623f63a45ef39cb95af0254acb7c888c850968d27f306513.png" />
+</div>
+</div>
+<p><strong>Q:</strong> the plot is too small. How to make it bigger?</p>
+<p>As well as just a simple line plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">O3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/5f7a0f7b234a0929c656be24d07786f78582e0a0c129d20e173bec9a3a497d64.png" src="../../../_images/5f7a0f7b234a0929c656be24d07786f78582e0a0c129d20e173bec9a3a497d64.png" />
+</div>
+</div>
+</section>
+<section id="setting-missing-values">
+<h3>Setting missing values<a class="headerlink" href="#setting-missing-values" title="Link to this heading">#</a></h3>
+<p>As you may notice, we have negative values of ozone concentration, which does not make sense. So, let us replace those negative values with NaN:</p>
+<p><strong>Q:</strong> how to list data entries with negative O3?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+<span class="c1"># air_quality.O3[air_quality.O3.values&lt;0]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can mask them out in the same way as you do with numpy arrays:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace negative ozone values with NaN</span>
+<span class="n">air_quality</span><span class="o">.</span><span class="n">O3</span><span class="p">[</span><span class="n">air_quality</span><span class="o">.</span><span class="n">O3</span><span class="o">.</span><span class="n">values</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\s2112771\AppData\Local\Temp\ipykernel_12892\170794360.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  air_quality.O3[air_quality.O3.values &lt; 0] = np.nan
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="saving-data">
+<h2>Saving data<a class="headerlink" href="#saving-data" title="Link to this heading">#</a></h2>
+<p>For each <code class="docutils literal notranslate"><span class="pre">read_**</span></code> function to load data, there is a <code class="docutils literal notranslate"><span class="pre">to_**</span></code> method attached to <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>.</p>
+<section id="excel-spreadsheets">
+<h3>Excel spreadsheets<a class="headerlink" href="#excel-spreadsheets" title="Link to this heading">#</a></h3>
+<p>Uncomment the following code cell and run to save the whole <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> to an Excel file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s2">&quot;test.xls&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+    <span class="n">air_quality</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Blah-blah&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\s2112771\AppData\Local\Temp\ipykernel_12892\2009421416.py:1: FutureWarning: As the xlwt package is no longer maintained, the xlwt engine will be removed in a future version of pandas. This is the only engine in pandas that supports writing in the xls format. Install openpyxl and write to an xlsx file instead. You can set the option io.excel.xls.writer to &#39;xlwt&#39; to silence this warning. While this option is deprecated and will also raise a warning, it can be globally set and the warning suppressed.
+  with pd.ExcelWriter(&quot;test.xls&quot;) as writer:
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-writing-to-csv-text-files">
+<h3>Exercise: writing to CSV text files<a class="headerlink" href="#exercise-writing-to-csv-text-files" title="Link to this heading">#</a></h3>
+<p>Find a method to save <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> to a text file (or whatever format you like more).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="some-statistics">
+<h2>Some statistics<a class="headerlink" href="#some-statistics" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>O3</th>
+      <th>NOx</th>
+      <th>CO</th>
+      <th>PM10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>8599.000000</td>
+      <td>8640.000000</td>
+      <td>8539.000000</td>
+      <td>8502.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>15.109839</td>
+      <td>298.584537</td>
+      <td>0.508970</td>
+      <td>24.098553</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>12.427924</td>
+      <td>205.757696</td>
+      <td>0.248388</td>
+      <td>13.043507</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.199570</td>
+      <td>18.447340</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.039140</td>
+      <td>135.326110</td>
+      <td>0.324230</td>
+      <td>15.200000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>11.425380</td>
+      <td>241.762950</td>
+      <td>0.468008</td>
+      <td>21.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>21.703240</td>
+      <td>431.754645</td>
+      <td>0.661994</td>
+      <td>29.700000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>69.749710</td>
+      <td>1409.545970</td>
+      <td>1.978267</td>
+      <td>117.100000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="computing-correlations">
+<h2>Computing correlations<a class="headerlink" href="#computing-correlations" title="Link to this heading">#</a></h2>
+<p>Both <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> have a <strong><code class="docutils literal notranslate"><span class="pre">corr()</span></code></strong> method to compute the correlation coefficient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">NOx</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">air_quality</span><span class="p">[</span><span class="s1">&#39;CO&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7712297105293434
+</pre></div>
+</div>
+</div>
+</div>
+<p>If series are already grouped into a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, computing all correlation coefficients is trivial:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>O3</th>
+      <th>NOx</th>
+      <th>CO</th>
+      <th>PM10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>O3</th>
+      <td>1.000000</td>
+      <td>-0.616442</td>
+      <td>-0.562254</td>
+      <td>-0.448305</td>
+    </tr>
+    <tr>
+      <th>NOx</th>
+      <td>-0.616442</td>
+      <td>1.000000</td>
+      <td>0.771230</td>
+      <td>0.529790</td>
+    </tr>
+    <tr>
+      <th>CO</th>
+      <td>-0.562254</td>
+      <td>0.771230</td>
+      <td>1.000000</td>
+      <td>0.532399</td>
+    </tr>
+    <tr>
+      <th>PM10</th>
+      <td>-0.448305</td>
+      <td>0.529790</td>
+      <td>0.532399</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>If you want to visualise this correlation matrix, uncomment the following code cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_quality</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">air_quality</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">air_quality</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">air_quality</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">air_quality</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x1f5c747ac70&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/33730c84846cb9544a0e5f6df032e515f2b3f354d8dab0bddd35f6a4c6630b9f.png" src="../../../_images/33730c84846cb9544a0e5f6df032e515f2b3f354d8dab0bddd35f6a4c6630b9f.png" />
+</div>
+</div>
+</section>
+<section id="creating-dataframes">
+<h2>Creating DataFrames<a class="headerlink" href="#creating-dataframes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> can also be created manually, by grouping several <code class="docutils literal notranslate"><span class="pre">Series</span></code> together.</p></li>
+<li><p>Now just for fun we switch to <strong>another dataset</strong></p>
+<ul>
+<li><p>create 2 <code class="docutils literal notranslate"><span class="pre">Series</span></code> objects from 2 CSV files</p></li>
+<li><p>create a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> by combining the two <code class="docutils literal notranslate"><span class="pre">Series</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Data are monthly values of</p>
+<ul>
+<li><p>Southern Oscillation Index (SOI)</p></li>
+<li><p>Outgoing Longwave Radiation (OLR), which is a proxy for convective precipitation in the western equatorial Pacific</p></li>
+</ul>
+</li>
+<li><p>Data were downloaded from NOAA’s website: <a class="reference external" href="https://www.ncdc.noaa.gov/teleconnections/">https://www.ncdc.noaa.gov/teleconnections/</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soi_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../data/soi.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=-</span><span class="mf">999.9</span><span class="p">,</span>
+                     <span class="n">date_parser</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;%Y%m&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\s2112771\AppData\Local\Temp\ipykernel_12892\4214018588.py:2: FutureWarning: The pandas.datetime class is deprecated and will be removed from pandas in a future version. Import from datetime module instead.
+  date_parser=lambda x: pd.datetime.strptime(x, &#39;%Y%m&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">olr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../../data/olr.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=-</span><span class="mf">999.9</span><span class="p">,</span>
+                     <span class="n">date_parser</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;%Y%m&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\s2112771\AppData\Local\Temp\ipykernel_12892\2108767475.py:2: FutureWarning: The pandas.datetime class is deprecated and will be removed from pandas in a future version. Import from datetime module instead.
+  date_parser=lambda x: pd.datetime.strptime(x, &#39;%Y%m&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;OLR&#39;</span><span class="p">:</span> <span class="n">olr_df</span><span class="o">.</span><span class="n">Value</span><span class="p">,</span>
+                   <span class="s1">&#39;SOI&#39;</span><span class="p">:</span> <span class="n">soi_df</span><span class="o">.</span><span class="n">Value</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OLR</th>
+      <th>SOI</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1951-01-01</th>
+      <td>NaN</td>
+      <td>1.5</td>
+    </tr>
+    <tr>
+      <th>1951-02-01</th>
+      <td>NaN</td>
+      <td>0.9</td>
+    </tr>
+    <tr>
+      <th>1951-03-01</th>
+      <td>NaN</td>
+      <td>-0.1</td>
+    </tr>
+    <tr>
+      <th>1951-04-01</th>
+      <td>NaN</td>
+      <td>-0.3</td>
+    </tr>
+    <tr>
+      <th>1951-05-01</th>
+      <td>NaN</td>
+      <td>-0.7</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2016-06-01</th>
+      <td>0.1</td>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <th>2016-07-01</th>
+      <td>0.5</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <th>2016-08-01</th>
+      <td>0.8</td>
+      <td>0.7</td>
+    </tr>
+    <tr>
+      <th>2016-09-01</th>
+      <td>0.9</td>
+      <td>1.2</td>
+    </tr>
+    <tr>
+      <th>2016-10-01</th>
+      <td>1.0</td>
+      <td>-0.3</td>
+    </tr>
+  </tbody>
+</table>
+<p>790 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OLR</th>
+      <th>SOI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>493.000000</td>
+      <td>790.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.035294</td>
+      <td>0.123544</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.978162</td>
+      <td>0.950473</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-2.600000</td>
+      <td>-3.600000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.600000</td>
+      <td>-0.500000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.100000</td>
+      <td>0.100000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.700000</td>
+      <td>0.800000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2.400000</td>
+      <td>2.900000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="ordinary-least-square-ols-regressions">
+<h2>Ordinary Least Square (OLS) regressions<a class="headerlink" href="#ordinary-least-square-ols-regressions" title="Link to this heading">#</a></h2>
+<section id="primitive-way-using-numpy-s-polynomial-fitting">
+<h3>Primitive way: using numpy’s polynomial fitting<a class="headerlink" href="#primitive-way-using-numpy-s-polynomial-fitting" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy.polynomial</span><span class="w"> </span><span class="kn">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;SOI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span><span class="p">,</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y2</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">coefs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1f5c9051bb0&gt;]
+</pre></div>
+</div>
+<img alt="../../../_images/71d56f1088ef80f502c58859d8aa8c6bbfe40993f197dae4058d435c36699eb4.png" src="../../../_images/71d56f1088ef80f502c58859d8aa8c6bbfe40993f197dae4058d435c36699eb4.png" />
+</div>
+</div>
+</section>
+<section id="recommended-and-more-convenient-ways-require-additional-packages">
+<h3>Recommended (and more convenient) ways (require additional packages)<a class="headerlink" href="#recommended-and-more-convenient-ways-require-additional-packages" title="Link to this heading">#</a></h3>
+<section id="statsmodels">
+<h4>Statsmodels<a class="headerlink" href="#statsmodels" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import statsmodels.formula.api as sm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sm_model = sm.ols(formula=&quot;SOI ~ OLR&quot;, data=df).fit()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df[&#39;SOI&#39;].plot()</span>
+<span class="c1"># df[&#39;OLR&#39;].plot()</span>
+<span class="c1"># ax = sm_model.fittedvalues.plot(label=&quot;model prediction&quot;)</span>
+<span class="c1"># ax.legend(loc=&quot;lower center&quot;, ncol=3)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>More examples: <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/05.06-linear-regression.html">https://jakevdp.github.io/PythonDataScienceHandbook/05.06-linear-regression.html</a></p>
+</section>
+</section>
+<section id="exercise-create-a-scatter-plot">
+<h3>Exercise: create a scatter plot<a class="headerlink" href="#exercise-create-a-scatter-plot" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>You can use <code class="docutils literal notranslate"><span class="pre">df.plot</span></code> function with the appropriate keywords</p></li>
+<li><p>What happens if you use “c=” keyword?</p></li>
+<li><p>Pass another parameter: <code class="docutils literal notranslate"><span class="pre">edgecolors='none'</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="advanced-scatter-plot">
+<h3>Advanced scatter plot<a class="headerlink" href="#advanced-scatter-plot" title="Link to this heading">#</a></h3>
+<p>Using the power of matplotlib, we can create a scatter plot with points coloured by the date index. To do this we need to import one additional submodule:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import matplotlib.dates as mdates</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convert <code class="docutils literal notranslate"><span class="pre">numpy.datetime64</span></code> objects (which are the indices of our <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>) to matplotlib floating point numbers. These numbers represent the number of days (fraction part represents hours, minutes, seconds) since 0001-01-01 00:00:00 UTC (assuming Gregorian calendar).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mdt = mdates.date2num(df.index)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Append the new data to the original <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df[&#39;mpl_date&#39;] = mdt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create a scatter plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ax = df.plot(kind=&#39;scatter&#39;, x=&#39;OLR&#39;, y=&#39;SOI&#39;, c=&#39;mpl_date&#39;,</span>
+<span class="c1">#              colormap=&#39;viridis&#39;, colorbar=False, edgecolors=&#39;none&#39;)</span>
+<span class="c1"># plt.colorbar(ax.collections[0], ticks=mdates.YearLocator(5), </span>
+<span class="c1">#              format=mdates.DateFormatter(&#39;%Y&#39;))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-rolling-functions">
+<h2>Exercise: rolling functions<a class="headerlink" href="#exercise-rolling-functions" title="Link to this heading">#</a></h2>
+<p><strong>1. Subset data</strong></p>
+<ul class="simple">
+<li><p>Start by subsetting the SOI <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p></li>
+<li><p>Use either numerical indices, or, even better, datetime indices</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2. Plot the subset data</strong></p>
+<ul class="simple">
+<li><p>You can create figure and axis using <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code></p></li>
+<li><p>Or just use the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> method of pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>3. Explore what <code class="docutils literal notranslate"><span class="pre">rolling()</span></code> method is</strong></p>
+<ul class="simple">
+<li><p>What does this method return?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df.rolling?</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>4. Plot the original series and the smoothed series</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="github reference external" href="https://github.com/jonathanrocher/pandas_tutorial">jonathanrocher/pandas_tutorial</a></p></li>
+<li><p><a class="github reference external" href="https://github.com/koldunovn/python_for_geosciences">koldunovn/python_for_geosciences</a></p></li>
+<li><p><a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/index.html#module-pandas">http://pandas.pydata.org/pandas-docs/stable/index.html#module-pandas</a></p></li>
+<li><p><a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/10min.html">http://pandas.pydata.org/pandas-docs/stable/10min.html</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/2_geo_python/1_spatial_data_tools"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-data-structures-of-pandas">Primary data structures of pandas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data">Loading data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-dataframe-and-series">Data structures: <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">Series</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-pandas-1d-data-containter">Series, pandas’ 1D data containter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-as-pandas-s-backend">Numpy as pandas’s backend</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-data">Cleaning data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-dates-and-times">Dealing with dates and times</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-columns">Renaming columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-columns">Deleting columns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-visualisation">Basic visualisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-missing-values">Setting missing values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-data">Saving data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excel-spreadsheets">Excel spreadsheets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-writing-to-csv-text-files">Exercise: writing to CSV text files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-statistics">Some statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-correlations">Computing correlations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-dataframes">Creating DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-square-ols-regressions">Ordinary Least Square (OLS) regressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-way-using-numpy-s-polynomial-fitting">Primitive way: using numpy’s polynomial fitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-and-more-convenient-ways-require-additional-packages">Recommended (and more convenient) ways (require additional packages)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#statsmodels">Statsmodels</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-create-a-scatter-plot">Exercise: create a scatter plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-scatter-plot">Advanced scatter plot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-rolling-functions">Exercise: rolling functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By SENSE CDT
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
