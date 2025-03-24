@@ -5,6 +5,7 @@ experiments/
 dubai_segmentation/
 data/
 *.ckpt
+lightning_logs/
 
 
 # Byte-compiled / optimized / DLL files

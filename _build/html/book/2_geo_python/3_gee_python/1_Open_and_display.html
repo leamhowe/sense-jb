@@ -1,0 +1,1904 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Google Earth Engine: JavaScript, but Python &#8212; SENSE Training Resources</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/2_geo_python/3_gee_python/1_Open_and_display';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="ImageCollection" href="2_Time_series.html" />
+    <link rel="prev" title="Linking Google Colab to your GitHub page" href="0_First_steps.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-light" alt="SENSE Training Resources - Home"/>
+    <script>document.write(`<img src="../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-dark" alt="SENSE Training Resources - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 1 - Python Software Carpentry</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1_python_zero2hero/book1_overview.html">0 - Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/1_intro.html">1 - Intro to Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/00-Introduction.html">1.0 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/01-How-to-Run-Python-Code.html">1.1 How to Run Python Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/02-Jupyter-Notebook.html">1.2 Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/03-Basic-Python-Syntax.html">1.3 Python Language Syntax</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics.html">2 - Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/01-Semantics-Variables.html">2.1 Variables and Objects in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/02-Semantics-Operators.html">2.2 Basic Python Semantics: Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/03-Built-in-Scalar-Types.html">2.3 Built-In Types: Simple Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/04-Built-in-Data-Structures.html">2.4 Built-In Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/05-Ex-Try-Python-Basics.html">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/06-Control-Flow-Statements.html">2.5 Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/07-Defining-Functions.html">2.6 Defining and Using Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/09-Modules-and-Packages.html">Modules and Packages</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation.html">3 - Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/01-Numpy-Intro.html"> Introduction to NumPy</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/02-Matplotlib.html">Matplotlib - Intro</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/03-Working-with-datetime.html">Working with dates and times</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/04-Pandas-Intro.html">Introduction to pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/05-Plotting-with-Seaborn.html">Statistical plotting with Seaborn</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 2 - GeoPython</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book2_overview.html">0 - Overview</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/cartopy.html">Cartopy</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/geopandas.html">GeoPandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/rasterio.html">Rasterio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/rioxarray.html">Rioxarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/xarray.html">Xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/20-Xarray-NetCDF-Intro.html">Working with NetCDF files</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_eo_data.html">2 - EO data</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../3_gee_python.html">3 - GEE Python</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Google Earth Engine: JavaScript, but Python</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="2_Time_series.html">ImageCollection</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 3 - Machine Learning for EO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro.html">2 - Classical ML with satellite data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/1_linear_regression.html">Practical 1: Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/2_classification.html">Practical 2: Classification</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/3_kalman_filter.html">Practical 3: Kalman Filter</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep.html">3 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/00_intro.html">Satellite image deep learning with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/4_embeddings.html">4 - Embeddings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/1a_Use_PCA_analysis_to_study_tile_embeddings.html">Use PCA analysis on tile embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/1b_Exploring_embedding_space_with_clustering_methods.html">How are the study tiles clustered in the embedding space?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/2_Working_with_your_own_data.html">Working with your own input data</a></li>
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/book/2_geo_python/3_gee_python/1_Open_and_display.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fbook/2_geo_python/3_gee_python/1_Open_and_display.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/2_geo_python/3_gee_python/1_Open_and_display.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Google Earth Engine: JavaScript, but Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Google Earth Engine: JavaScript, but Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps-warning"><code class="docutils literal notranslate"><span class="pre">Maps</span></code> warning!</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#some-basic-gee-concepts">Some basic GEE concepts</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-constructor-ee-image">Image constructor: ee.Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-images-and-image-bands">Visualising images and image bands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-an-ee-image-from-an-ee-imagecollection">Get an ee.Image from an ee.ImageCollection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-static-image">Display static image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-images">Constant images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rgb-composites">RGB composites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colour-palettes">Colour palettes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#masking">Masking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mosaicking">Mosaicking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clipping">Clipping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-information-and-metadata">Image information and metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-operators">Mathematical operators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expressions">Expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relational-conditional-and-boolean-operations">Relational, conditional and Boolean operations</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="google-earth-engine-javascript-but-python">
+<h1>Google Earth Engine: JavaScript, but Python<a class="headerlink" href="#google-earth-engine-javascript-but-python" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://earthengine.google.com/">Google Earth Engine (GEE)</a> is an online tool that combines a huge catalogue of satellite imagery and other geospatial datasets with Google’s processing capabilities to reduce processes that before would take days to only seconds.</p>
+<p>GEE API (Application Programming Interface) is available in JavaScript (the original one) and Python.</p>
+<p>The GEE JavaScript API is available through the <a class="reference external" href="https://code.earthengine.google.com/#workspace">Code Editor</a>, and while it is very useful to get started with GEE, it is limited in terms of processing power (time limitations, slower).</p>
+<p>The GEE Python API can be loaded via a library (<code class="docutils literal notranslate"><span class="pre">ee</span></code>), and combines the power of Python with everything else you can do via the JavaScript API.</p>
+<p>The only “issue” with the Python API: ALL of the GEE <a class="reference external" href="https://developers.google.com/earth-engine/">documentation</a> and <a class="reference external" href="https://developers.google.com/earth-engine/tutorials">tutorials</a> are developed in JavaScript!!</p>
+<p>Which means there are two possible routes:</p>
+<ol class="arabic simple">
+<li><p>The painful one (the one I took): learn everything in JavaScript and THEN transfer to Python (NOT RECOMMENDED!).</p></li>
+<li><p>The sensible one, but slower: to learn the Pythonic way from the start.</p></li>
+</ol>
+<p>We are only going to use Python in this course, but it is very useful to have all the documentation,e ven if it is JavaScript, as we can see how things are done and translate them!</p>
+<p>Note: we are going to jump directly to Python, but here we show how some things can be expressed in JavaScript and their equivalent in Python. And remember, if you want to use the <a class="reference external" href="https://code.earthengine.google.com/">GEE online code editor</a>, it has to be JavaScript style!</p>
+<p>I recommend working from Google Colab (using Google’s cloud computing services for free!!) and the GEE Python API from the start.</p>
+<p>We are using the GEE Guides, but online you will find them in JavaScript, while here we have the Python version. You should go through the GEE guides and tutorials in your own time, and try to transfer to Python for consistency.</p>
+<section id="maps-warning">
+<h2><code class="docutils literal notranslate"><span class="pre">Maps</span></code> warning!<a class="headerlink" href="#maps-warning" title="Link to this heading">#</a></h2>
+<p>The GEE JavaScript does not allow loops or conditionals. Instead, you will have to use the <code class="docutils literal notranslate"><span class="pre">Map</span></code> function. This is a huge limitation , particularly when we want to work with satellite data and other big datasets, machine learning applications, etc.</p>
+<p>Keep that in mind if you use the GEE Code Editor.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="some-basic-gee-concepts">
+<h1>Some basic GEE concepts<a class="headerlink" href="#some-basic-gee-concepts" title="Link to this heading">#</a></h1>
+<p>Import the GEE API:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ee</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Authenticate and initialise:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Trigger the authentication flow.</span>
+<span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
+
+<span class="c1"># Initialize the library.</span>
+<span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="image-constructor-ee-image">
+<h2>Image constructor: ee.Image<a class="headerlink" href="#image-constructor-ee-image" title="Link to this heading">#</a></h2>
+<p>Raster data is represented as Image objects in Earth Engine.</p>
+<p>Images are composed of one or more bands and each band has its own name, data type, scale, mask and projection. Each image has metadata stored as a set of properties.</p>
+<p>Images can be loaded by pasting an Earth Engine asset ID into the ee.Image constructor. You can find image IDs in the data catalog. For example, to load JAXA’s ALOS DSM:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loadedImage</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;JAXA/ALOS/AW3D30/V2_2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/exports/csce/datastore/geos/users/s2112771/miniforge3/envs/sensebook/lib/python3.12/site-packages/ee/deprecation.py:207: DeprecationWarning: 
+
+Attention required for JAXA/ALOS/AW3D30/V2_2! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/JAXA_ALOS_AW3D30_V2_2
+
+  warnings.warn(warning, category=DeprecationWarning)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that finding an image through the GEE Code Editor search tool is equivalent. When you import the asset, the image construction code is written for you in the imports section of the Code Editor. You can also use the asset ID (bottom left when you search online).</p>
+</section>
+<section id="visualising-images-and-image-bands">
+<h2>Visualising images and image bands<a class="headerlink" href="#visualising-images-and-image-bands" title="Link to this heading">#</a></h2>
+</section>
+<section id="get-an-ee-image-from-an-ee-imagecollection">
+<h2>Get an ee.Image from an ee.ImageCollection<a class="headerlink" href="#get-an-ee-image-from-an-ee-imagecollection" title="Link to this heading">#</a></h2>
+<p>The standard way to get an image out of a collection is to load the collection, filter the collection, with filters in order of decreasing specificity. For example, to get an image out of the Sentinel-2 surface reflectance collection (level 2A):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Image near Acra (Ghana)</span>
+<span class="n">first</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2_SR&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span><span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-12-31&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>      
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/exports/csce/datastore/geos/users/s2112771/miniforge3/envs/sensebook/lib/python3.12/site-packages/ee/deprecation.py:207: DeprecationWarning: 
+
+Attention required for COPERNICUS/S2_SR! You are using a deprecated asset.
+To make sure your code keeps working, please update it.
+Learn more: https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR
+
+  warnings.warn(warning, category=DeprecationWarning)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="display-static-image">
+<h2>Display static image<a class="headerlink" href="#display-static-image" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">first</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">({</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;bands&#39;</span><span class="p">:[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">],</span><span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">512</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1/projects/522364178051/thumbnails/0b86cab7904fb25b76a50dc70aaa2964-434163318343e7bc95317bf99c16c8d2:getPixels"/></div></div>
+</div>
+</section>
+<section id="constant-images">
+<h2>Constant images<a class="headerlink" href="#constant-images" title="Link to this heading">#</a></h2>
+<p>In addition to loading images by ID, you can also create images from constants, lists or other suitable Earth Engine objects. The following illustrates methods for creating images, getting band subsets, and manipulating bands:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a constant image</span>
+<span class="n">image1</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;image1:&quot;</span><span class="p">,</span><span class="n">image1</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+
+<span class="c1"># Concatenate two images into one multi-band image.</span>
+<span class="n">image2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">image3</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;image3:&quot;</span><span class="p">,</span><span class="n">image3</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+
+<span class="c1"># Create a multi-band image from a list of constants.</span>
+<span class="n">multiband</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mutiband:&quot;</span><span class="p">,</span><span class="n">multiband</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+
+<span class="c1"># Select and (optionally) rename bands.</span>
+<span class="n">renamed</span> <span class="o">=</span> <span class="n">multiband</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="s1">&#39;constant_1&#39;</span><span class="p">,</span> <span class="s1">&#39;constant_2&#39;</span><span class="p">],[</span><span class="s1">&#39;band1&#39;</span><span class="p">,</span> <span class="s1">&#39;band2&#39;</span><span class="p">,</span> <span class="s1">&#39;band3&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;renamed:&quot;</span><span class="p">,</span><span class="n">renamed</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+
+<span class="c1"># Add bands to an image.</span>
+<span class="n">image4</span> <span class="o">=</span> <span class="n">image3</span><span class="o">.</span><span class="n">addBands</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;image4:&quot;</span><span class="p">,</span><span class="n">image4</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>image1: {&#39;type&#39;: &#39;Image&#39;, &#39;bands&#39;: [{&#39;id&#39;: &#39;constant&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 1, &#39;max&#39;: 1}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}]}
+image3: {&#39;type&#39;: &#39;Image&#39;, &#39;bands&#39;: [{&#39;id&#39;: &#39;constant&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 1, &#39;max&#39;: 1}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}, {&#39;id&#39;: &#39;constant_1&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 2, &#39;max&#39;: 2}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}]}
+mutiband: {&#39;type&#39;: &#39;Image&#39;, &#39;bands&#39;: [{&#39;id&#39;: &#39;constant&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 1, &#39;max&#39;: 1}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}, {&#39;id&#39;: &#39;constant_1&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 2, &#39;max&#39;: 2}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}, {&#39;id&#39;: &#39;constant_2&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 3, &#39;max&#39;: 3}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}]}
+renamed: {&#39;type&#39;: &#39;Image&#39;, &#39;bands&#39;: [{&#39;id&#39;: &#39;band1&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 1, &#39;max&#39;: 1}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}, {&#39;id&#39;: &#39;band2&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 2, &#39;max&#39;: 2}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}, {&#39;id&#39;: &#39;band3&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 3, &#39;max&#39;: 3}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}]}
+image4: {&#39;type&#39;: &#39;Image&#39;, &#39;bands&#39;: [{&#39;id&#39;: &#39;constant&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 1, &#39;max&#39;: 1}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}, {&#39;id&#39;: &#39;constant_1&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 2, &#39;max&#39;: 2}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}, {&#39;id&#39;: &#39;constant_2&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 42, &#39;max&#39;: 42}, &#39;crs&#39;: &#39;EPSG:4326&#39;, &#39;crs_transform&#39;: [1, 0, 0, 0, 1, 0]}]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rgb-composites">
+<h2>RGB composites<a class="headerlink" href="#rgb-composites" title="Link to this heading">#</a></h2>
+<p>The following illustrates the use of parameters to style a Landsat 8 image as a false-color composite:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load an image.</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LC08/C02/T1_TOA/LC08_044034_20140318&#39;</span><span class="p">)</span>
+
+<span class="c1"># ANOTHER WAY TO DO IT</span>
+<span class="c1">#Define the visualization parameters.</span>
+<span class="c1">#vizParams = {&#39;min&#39;: 0,  &#39;max&#39;: 0.5,  &#39;gamma&#39;: [0.95, 1.1, 1]}</span>
+<span class="c1">#import ee.mapclient</span>
+<span class="c1">#ee.mapclient.centerMap(-122.1899, 37.5010, 9) # San Francisco Bay</span>
+<span class="c1">#ee.mapclient.addToMap(image.select(&#39;B5&#39;,&#39;B4&#39;,&#39;B3&#39;), vizParams, &#39;False colour composite&#39;)</span>
+
+<span class="c1"># Display the image normally.</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">({</span><span class="s1">&#39;bands&#39;</span><span class="p">:[</span><span class="s1">&#39;B5&#39;</span><span class="p">,</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">],</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span><span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">512</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1/projects/522364178051/thumbnails/6e863837d788c18002d0297ca4bda656-b26c3b2621a0d730b7372fa38116aa85:getPixels"/></div></div>
+</div>
+<p>In this example, band ‘B5’ (NIR) is assigned to red, ‘B4’ (Red) is assigned to green, and ‘B3’ (Green) is assigned to blue, creating the false colour composite.</p>
+<p>False color composites allow us to visualize the wavelengths the human eye does not see (near the infrared range). The use of bands, such as near infrared, increases spectral separation and can enhance the interpretability of data.</p>
+</section>
+<section id="colour-palettes">
+<h2>Colour palettes<a class="headerlink" href="#colour-palettes" title="Link to this heading">#</a></h2>
+<p>To display a single band of an image in colour, set the palette parameter with a colour ramp represented by a list of CSS-style color strings.</p>
+<p>The following example illustrates how to use colors from cyan (‘00FFFF’) to blue (‘0000FF’) to render a Normalized Difference Water Index (NDWI) image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an NDWI image from previous image, define visualization parameters and display</span>
+<span class="n">ndwi</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B5&#39;</span><span class="p">])</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ndwi</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">({</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;00FFFF&#39;</span><span class="p">,</span> <span class="s1">&#39;0000FF&#39;</span><span class="p">],</span><span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">512</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1/projects/522364178051/thumbnails/a92e7bcdeba1b20eed8f6e4229fdb97e-a75aa9e1bbf6512d4a3432e073a2e09e:getPixels"/></div></div>
+</div>
+<p>In this example, note that the min and max parameters indicate the range of pixel values to which the palette should be applied. Intermediate values are linearly stretched.</p>
+</section>
+<section id="masking">
+<h2>Masking<a class="headerlink" href="#masking" title="Link to this heading">#</a></h2>
+<p>You can use image.updateMask() to set the opacity of individual pixels based on where pixels in a mask image are non-zero. Pixels equal to zero in the mask are excluded from computations and the opacity is set to 0 for display. The following example uses an NDWI threshold to update the mask on the NDWI layer created previously:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mask the non-watery parts of the image, where NDWI &lt; 0.4</span>
+<span class="n">ndwiMasked</span> <span class="o">=</span> <span class="n">ndwi</span><span class="o">.</span><span class="n">updateMask</span><span class="p">(</span><span class="n">ndwi</span><span class="o">.</span><span class="n">gte</span><span class="p">(</span><span class="mf">0.4</span><span class="p">))</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ndwiMasked</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">({</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;00FFFF&#39;</span><span class="p">,</span> <span class="s1">&#39;0000FF&#39;</span><span class="p">],</span><span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">512</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1/projects/522364178051/thumbnails/6c138680b5c2f042fa4b98da55cf9cbf-86b5020991492ecdd3720f4e5341abf8:getPixels"/></div></div>
+</div>
+</section>
+<section id="mosaicking">
+<h2>Mosaicking<a class="headerlink" href="#mosaicking" title="Link to this heading">#</a></h2>
+<p>You can use masking and <code class="docutils literal notranslate"><span class="pre">imageCollection.mosaic()</span></code> to achieve various cartographic effects. The <code class="docutils literal notranslate"><span class="pre">mosaic()</span></code> method renders layers in the output image according to their order in the input collection. The following example uses <code class="docutils literal notranslate"><span class="pre">mosaic()</span></code> to combine the masked NDWI and the false color composite and obtain a new visualization:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mosaic the layers and display </span>
+<span class="c1"># Load the least cloudy image of 2015 image in Acra (Ghana)</span>
+<span class="nb">next</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2_SR&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span><span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2019-01-31&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>    
+
+<span class="n">mosaic</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">([</span><span class="n">first</span><span class="p">,</span> <span class="nb">next</span><span class="p">])</span><span class="o">.</span><span class="n">mosaic</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+<span class="c1">#!pip install geehydro # Life saver for plotting GEE stuff with Python!</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geehydro</span>
+
+
+<span class="c1"># Use folium to visualize the imagery.</span>
+<span class="nb">map</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mf">0.9</span><span class="p">],</span><span class="n">zoom_start</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="c1">#map.setOptions(&#39;HYBRID&#39;) # To see GE map underneath</span>
+
+<span class="nb">map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">mosaic</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;bands&#39;</span><span class="p">:[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]},</span> <span class="s1">&#39;mosaic&#39;</span><span class="p">)</span>
+
+<span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_d7f631dfd863b1c07ba7f188f762a621 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_d7f631dfd863b1c07ba7f188f762a621&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_d7f631dfd863b1c07ba7f188f762a621 = L.map(
+                &quot;map_d7f631dfd863b1c07ba7f188f762a621&quot;,
+                {
+                    center: [6.0, 0.9],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 9,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ec7980efcf2b181ea153d417c5051f4e = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_ec7980efcf2b181ea153d417c5051f4e.addTo(map_d7f631dfd863b1c07ba7f188f762a621);
+        
+    
+            var tile_layer_ddace468881fd9a561549efd4c333d69 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/d675a17e7e738a2d2a7c46fe4518b63a-788df93ac05684186d6fd115cf0bc578/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_ddace468881fd9a561549efd4c333d69.addTo(map_d7f631dfd863b1c07ba7f188f762a621);
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+</section>
+<section id="clipping">
+<h2>Clipping<a class="headerlink" href="#clipping" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">image.clip()</span></code> method is useful for achieving cartographic effects. The following example clips the mosaic built in the previous section to an arbitrary buffer zone:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a circle by drawing a 20,000 meter buffer around a point.</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Point</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">20000</span><span class="p">)</span>
+
+<span class="c1"># Display a clipped version of the mosaic.</span>
+<span class="nb">map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">mosaic</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">roi</span><span class="p">),{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;bands&#39;</span><span class="p">:[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]},</span><span class="s1">&#39;cropped&#39;</span><span class="p">)</span>
+<span class="c1"># Adding layer control to be able to activate/deactivate layers</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+<span class="c1"># Show me</span>
+<span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_d7f631dfd863b1c07ba7f188f762a621 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_d7f631dfd863b1c07ba7f188f762a621&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_d7f631dfd863b1c07ba7f188f762a621 = L.map(
+                &quot;map_d7f631dfd863b1c07ba7f188f762a621&quot;,
+                {
+                    center: [6.0, 0.9],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 9,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ec7980efcf2b181ea153d417c5051f4e = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_ec7980efcf2b181ea153d417c5051f4e.addTo(map_d7f631dfd863b1c07ba7f188f762a621);
+        
+    
+            var tile_layer_ddace468881fd9a561549efd4c333d69 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/d675a17e7e738a2d2a7c46fe4518b63a-788df93ac05684186d6fd115cf0bc578/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_ddace468881fd9a561549efd4c333d69.addTo(map_d7f631dfd863b1c07ba7f188f762a621);
+        
+    
+            tile_layer_ec7980efcf2b181ea153d417c5051f4e.addTo(map_d7f631dfd863b1c07ba7f188f762a621);
+        
+    
+            tile_layer_ddace468881fd9a561549efd4c333d69.addTo(map_d7f631dfd863b1c07ba7f188f762a621);
+        
+    
+            var tile_layer_45b1412504983597686fe3c658621f18 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/3b7baf6ce3dd50743249ac6fad4d9906-2d2afff191e6f9190ab7fb4b891ce9e8/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_45b1412504983597686fe3c658621f18.addTo(map_d7f631dfd863b1c07ba7f188f762a621);
+        
+    
+            var layer_control_2572269a6d9c075afb6900cf5356a94c_layers = {
+                base_layers : {
+                    &quot;openstreetmap&quot; : tile_layer_ec7980efcf2b181ea153d417c5051f4e,
+                },
+                overlays :  {
+                    &quot;mosaic&quot; : tile_layer_ddace468881fd9a561549efd4c333d69,
+                    &quot;cropped&quot; : tile_layer_45b1412504983597686fe3c658621f18,
+                },
+            };
+            let layer_control_2572269a6d9c075afb6900cf5356a94c = L.control.layers(
+                layer_control_2572269a6d9c075afb6900cf5356a94c_layers.base_layers,
+                layer_control_2572269a6d9c075afb6900cf5356a94c_layers.overlays,
+                {
+  &quot;position&quot;: &quot;topright&quot;,
+  &quot;collapsed&quot;: true,
+  &quot;autoZIndex&quot;: true,
+}
+            ).addTo(map_d7f631dfd863b1c07ba7f188f762a621);
+
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+</section>
+<section id="image-information-and-metadata">
+<h2>Image information and metadata<a class="headerlink" href="#image-information-and-metadata" title="Link to this heading">#</a></h2>
+<p>To explore image bands and properties in the Code Editor, print() the image and inspect the output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Get information about the bands as a list.</span>
+<span class="n">bandNames</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">bandNames</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Band names: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">bandNames</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()))</span> <span class="c1"># ee.List of band names</span>
+
+<span class="c1">#Get projection information from band 1.</span>
+<span class="n">b1proj</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">projection</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Band 1 projection: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b1proj</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()))</span> <span class="c1"># ee.Projection object</span>
+
+<span class="c1">#Get scale (in meters) information from band 1.</span>
+<span class="n">b1scale</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">projection</span><span class="p">()</span><span class="o">.</span><span class="n">nominalScale</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Band 1 scale: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b1scale</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()))</span> <span class="c1"># ee.Number</span>
+
+<span class="c1">#Note that different bands can have different projections and scale.</span>
+<span class="n">b8scale</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">projection</span><span class="p">()</span><span class="o">.</span><span class="n">nominalScale</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Band 8 scale: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b8scale</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()))</span> <span class="c1"># ee.Number</span>
+
+<span class="c1">#Get a list of all metadata properties.</span>
+<span class="n">properties</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">propertyNames</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Metadata properties: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()))</span> <span class="c1"># ee.List of metadata properties</span>
+
+<span class="c1">#Get a specific metadata property.</span>
+<span class="n">cloudiness</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;CLOUD_COVER&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CLOUD_COVER: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cloudiness</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()))</span> <span class="c1"># ee.Number</span>
+
+<span class="c1">#Get the timestamp and convert it to a date.</span>
+<span class="n">date</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;system:time_start&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Timestamp: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()))</span> <span class="c1"># ee.Date</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Band names: [&#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;, &#39;B4&#39;, &#39;B5&#39;, &#39;B6&#39;, &#39;B7&#39;, &#39;B8&#39;, &#39;B9&#39;, &#39;B10&#39;, &#39;B11&#39;, &#39;QA_PIXEL&#39;, &#39;QA_RADSAT&#39;, &#39;SAA&#39;, &#39;SZA&#39;, &#39;VAA&#39;, &#39;VZA&#39;]
+Band 1 projection: {&#39;type&#39;: &#39;Projection&#39;, &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;transform&#39;: [30, 0, 460785, 0, -30, 4264215]}
+Band 1 scale: 30
+Band 8 scale: 15
+Metadata properties: [&#39;system:version&#39;, &#39;system:id&#39;, &#39;RADIANCE_MULT_BAND_5&#39;, &#39;RADIANCE_MULT_BAND_6&#39;, &#39;RADIANCE_MULT_BAND_3&#39;, &#39;RADIANCE_MULT_BAND_4&#39;, &#39;RADIANCE_MULT_BAND_1&#39;, &#39;RADIANCE_MULT_BAND_2&#39;, &#39;WRS_TYPE&#39;, &#39;K2_CONSTANT_BAND_11&#39;, &#39;K2_CONSTANT_BAND_10&#39;, &#39;system:footprint&#39;, &#39;REFLECTIVE_SAMPLES&#39;, &#39;SUN_AZIMUTH&#39;, &#39;DATA_SOURCE_TIRS_STRAY_LIGHT_CORRECTION&#39;, &#39;DATE_ACQUIRED&#39;, &#39;ELLIPSOID&#39;, &#39;STATION_ID&#39;, &#39;RESAMPLING_OPTION&#39;, &#39;ORIENTATION&#39;, &#39;WRS_ROW&#39;, &#39;RADIANCE_MULT_BAND_9&#39;, &#39;TARGET_WRS_ROW&#39;, &#39;RADIANCE_MULT_BAND_7&#39;, &#39;RADIANCE_MULT_BAND_8&#39;, &#39;IMAGE_QUALITY_TIRS&#39;, &#39;TRUNCATION_OLI&#39;, &#39;CLOUD_COVER&#39;, &#39;GEOMETRIC_RMSE_VERIFY&#39;, &#39;COLLECTION_CATEGORY&#39;, &#39;GRID_CELL_SIZE_REFLECTIVE&#39;, &#39;CLOUD_COVER_LAND&#39;, &#39;GEOMETRIC_RMSE_MODEL&#39;, &#39;COLLECTION_NUMBER&#39;, &#39;IMAGE_QUALITY_OLI&#39;, &#39;LANDSAT_SCENE_ID&#39;, &#39;WRS_PATH&#39;, &#39;PANCHROMATIC_SAMPLES&#39;, &#39;PANCHROMATIC_LINES&#39;, &#39;GEOMETRIC_RMSE_MODEL_Y&#39;, &#39;REFLECTIVE_LINES&#39;, &#39;GEOMETRIC_RMSE_MODEL_X&#39;, &#39;system:asset_size&#39;, &#39;system:index&#39;, &#39;DATA_SOURCE_ELEVATION&#39;, &#39;REFLECTANCE_ADD_BAND_1&#39;, &#39;REFLECTANCE_ADD_BAND_2&#39;, &#39;DATUM&#39;, &#39;REFLECTANCE_ADD_BAND_3&#39;, &#39;REFLECTANCE_ADD_BAND_4&#39;, &#39;REFLECTANCE_ADD_BAND_5&#39;, &#39;REFLECTANCE_ADD_BAND_6&#39;, &#39;REFLECTANCE_ADD_BAND_7&#39;, &#39;REFLECTANCE_ADD_BAND_8&#39;, &#39;GROUND_CONTROL_POINTS_VERSION&#39;, &#39;UTM_ZONE&#39;, &#39;system:time_end&#39;, &#39;LANDSAT_PRODUCT_ID&#39;, &#39;REFLECTANCE_ADD_BAND_9&#39;, &#39;GRID_CELL_SIZE_PANCHROMATIC&#39;, &#39;RADIANCE_ADD_BAND_4&#39;, &#39;REFLECTANCE_MULT_BAND_7&#39;, &#39;system:time_start&#39;, &#39;RADIANCE_ADD_BAND_5&#39;, &#39;REFLECTANCE_MULT_BAND_6&#39;, &#39;RADIANCE_ADD_BAND_6&#39;, &#39;REFLECTANCE_MULT_BAND_9&#39;, &#39;PROCESSING_SOFTWARE_VERSION&#39;, &#39;RADIANCE_ADD_BAND_7&#39;, &#39;REFLECTANCE_MULT_BAND_8&#39;, &#39;RADIANCE_ADD_BAND_1&#39;, &#39;RADIANCE_ADD_BAND_2&#39;, &#39;RADIANCE_ADD_BAND_3&#39;, &#39;REFLECTANCE_MULT_BAND_1&#39;, &#39;RADIANCE_ADD_BAND_8&#39;, &#39;REFLECTANCE_MULT_BAND_3&#39;, &#39;RADIANCE_ADD_BAND_9&#39;, &#39;REFLECTANCE_MULT_BAND_2&#39;, &#39;REFLECTANCE_MULT_BAND_5&#39;, &#39;REFLECTANCE_MULT_BAND_4&#39;, &#39;THERMAL_LINES&#39;, &#39;TIRS_SSM_POSITION_STATUS&#39;, &#39;GRID_CELL_SIZE_THERMAL&#39;, &#39;NADIR_OFFNADIR&#39;, &#39;RADIANCE_ADD_BAND_11&#39;, &#39;REQUEST_ID&#39;, &#39;EARTH_SUN_DISTANCE&#39;, &#39;TIRS_SSM_MODEL&#39;, &#39;SCENE_CENTER_TIME&#39;, &#39;SUN_ELEVATION&#39;, &#39;RADIANCE_ADD_BAND_10&#39;, &#39;ROLL_ANGLE&#39;, &#39;DATE_PRODUCT_GENERATED&#39;, &#39;K1_CONSTANT_BAND_10&#39;, &#39;SATURATION_BAND_1&#39;, &#39;SATURATION_BAND_2&#39;, &#39;SATURATION_BAND_3&#39;, &#39;SATURATION_BAND_4&#39;, &#39;SATURATION_BAND_5&#39;, &#39;MAP_PROJECTION&#39;, &#39;SATURATION_BAND_6&#39;, &#39;SENSOR_ID&#39;, &#39;SATURATION_BAND_7&#39;, &#39;K1_CONSTANT_BAND_11&#39;, &#39;SATURATION_BAND_8&#39;, &#39;SATURATION_BAND_9&#39;, &#39;TARGET_WRS_PATH&#39;, &#39;PROCESSING_LEVEL&#39;, &#39;RADIANCE_MULT_BAND_11&#39;, &#39;RADIANCE_MULT_BAND_10&#39;, &#39;GROUND_CONTROL_POINTS_MODEL&#39;, &#39;SPACECRAFT_ID&#39;, &#39;THERMAL_SAMPLES&#39;, &#39;GROUND_CONTROL_POINTS_VERIFY&#39;, &#39;system:bands&#39;, &#39;system:band_names&#39;]
+CLOUD_COVER: 0.06
+Timestamp: {&#39;type&#39;: &#39;Date&#39;, &#39;value&#39;: 1395168392053}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mathematical-operators">
+<h2>Mathematical operators<a class="headerlink" href="#mathematical-operators" title="Link to this heading">#</a></h2>
+<p>Earth Engine supports many basic mathematical operators. They share some common features. Earth Engine performs math operations per pixel. When an operator is applied to an image, it’s applied to each unmasked pixel of each band. In the case of operations on two images, the operation is only applied at the locations where pixels in both images are unmasked. Earth Engine automatically matches bands between images. When an operator is applied to two images, the images are expected to have the same number of bands so they can be matched pairwise. However, if one of the images has only a single band, it is matched with all of the bands in the other image, essentially replicating that band enough times to match the other image.</p>
+<p>For a simple example, consider the task of creating the Normalized Difference Vegetation Index (NDVI) using Landsat imagery:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install pprint</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pprint</span>
+
+<span class="c1"># Configure the pretty printing output &amp; initialize earthengine.</span>
+<span class="n">pp</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">(</span><span class="n">depth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Load two 5-year Landsat 7 composites.</span>
+<span class="n">landsat1999</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LE7_TOA_5YEAR/1999_2003&#39;</span><span class="p">)</span>
+<span class="n">landsat2008</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LE7_TOA_5YEAR/2008_2012&#39;</span><span class="p">)</span>
+
+<span class="c1"># Compute NDVI the hard way.</span>
+<span class="n">ndvi1999</span> <span class="o">=</span> <span class="p">(</span><span class="n">landsat1999</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">landsat1999</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">landsat1999</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">landsat1999</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)))</span><span class="o">.</span><span class="n">rename</span><span class="p">([</span><span class="s1">&#39;NDVI&#39;</span><span class="p">]))</span>
+
+<span class="c1"># Compute NDVI the easy way.</span>
+<span class="n">ndvi2008</span> <span class="o">=</span> <span class="n">landsat2008</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">([</span><span class="s1">&#39;NDVI&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;NDVI 1999&#39;</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">ndvi1999</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;NDVI 2008&#39;</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">ndvi2008</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NDVI 1999
+{&#39;bands&#39;: [{&#39;crs&#39;: &#39;EPSG:4326&#39;,
+            &#39;crs_transform&#39;: [0.00026949456294719256,
+                              0,
+                              -180,
+                              0,
+                              -0.00026949456294719256,
+                              86.0000269494563],
+            &#39;data_type&#39;: {&#39;precision&#39;: &#39;float&#39;, &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;id&#39;: &#39;NDVI&#39;}],
+ &#39;type&#39;: &#39;Image&#39;}
+
+NDVI 2008
+{&#39;bands&#39;: [{&#39;crs&#39;: &#39;EPSG:4326&#39;,
+            &#39;crs_transform&#39;: [0.00026949456294719256,
+                              0,
+                              -180,
+                              0,
+                              -0.00026949456294719256,
+                              86.0000269494563],
+            &#39;data_type&#39;: {&#39;max&#39;: 1,
+                          &#39;min&#39;: -1,
+                          &#39;precision&#39;: &#39;float&#39;,
+                          &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;dimensions&#39;: [1335834, 638232],
+            &#39;id&#39;: &#39;NDVI&#39;}],
+ &#39;type&#39;: &#39;Image&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ndvi_diff</span> <span class="o">=</span> <span class="n">ndvi2008</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">ndvi1999</span><span class="p">)</span>
+<span class="n">map2</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
+<span class="n">map2</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">ndvi_diff</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ffffcc&#39;</span><span class="p">,</span> <span class="s1">&#39;800026&#39;</span><span class="p">],},</span> <span class="s1">&#39;ndvi_diff&#39;</span><span class="p">)</span> <span class="c1"># Palette code for YlOrRd_09: min=ffffcc, max= 800026</span>
+
+<span class="c1"># Colour map</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">branca.colormap</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cm</span>
+<span class="n">colormap</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">YlOrRd_09</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">colormap</span><span class="o">.</span><span class="n">caption</span> <span class="o">=</span> <span class="s1">&#39;NDVI Difference 2008 - 1999&#39;</span>
+<span class="n">map2</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">colormap</span><span class="p">)</span>
+<span class="n">map2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_eff857b92c629f2c8b4d8cfff6da1091 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_eff857b92c629f2c8b4d8cfff6da1091&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_eff857b92c629f2c8b4d8cfff6da1091 = L.map(
+                &quot;map_eff857b92c629f2c8b4d8cfff6da1091&quot;,
+                {
+                    center: [0.0, 0.0],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 1,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e9cdb5a08e6db1a57d4dee73a9808945 = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_e9cdb5a08e6db1a57d4dee73a9808945.addTo(map_eff857b92c629f2c8b4d8cfff6da1091);
+        
+    
+            var tile_layer_ff8d1a2f3844cb956ee8f72fb5b7fa30 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/f0074f1b2c5e62cf219a8d704f309db6-4b8c6ae73e2c933783bd9c37d5124e7d/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_ff8d1a2f3844cb956ee8f72fb5b7fa30.addTo(map_eff857b92c629f2c8b4d8cfff6da1091);
+        
+    
+    var color_map_1c4a4da6690de07d1c9677696979e8e3 = {};
+
+    
+    color_map_1c4a4da6690de07d1c9677696979e8e3.color = d3.scale.threshold()
+              .domain([-0.1, -0.0995991983967936, -0.09919839679358718, -0.09879759519038077, -0.09839679358717436, -0.09799599198396794, -0.09759519038076153, -0.09719438877755511, -0.0967935871743487, -0.0963927855711423, -0.09599198396793587, -0.09559118236472947, -0.09519038076152306, -0.09478957915831664, -0.09438877755511023, -0.09398797595190381, -0.0935871743486974, -0.09318637274549099, -0.09278557114228457, -0.09238476953907816, -0.09198396793587175, -0.09158316633266533, -0.09118236472945893, -0.0907815631262525, -0.0903807615230461, -0.08997995991983969, -0.08957915831663327, -0.08917835671342686, -0.08877755511022045, -0.08837675350701403, -0.08797595190380762, -0.0875751503006012, -0.0871743486973948, -0.08677354709418839, -0.08637274549098196, -0.08597194388777556, -0.08557114228456915, -0.08517034068136273, -0.08476953907815632, -0.08436873747494991, -0.08396793587174349, -0.08356713426853708, -0.08316633266533066, -0.08276553106212425, -0.08236472945891785, -0.08196392785571142, -0.08156312625250502, -0.0811623246492986, -0.08076152304609219, -0.08036072144288578, -0.07995991983967937, -0.07955911823647295, -0.07915831663326654, -0.07875751503006012, -0.07835671342685371, -0.0779559118236473, -0.07755511022044088, -0.07715430861723448, -0.07675350701402806, -0.07635270541082165, -0.07595190380761524, -0.07555110220440882, -0.07515030060120241, -0.07474949899799599, -0.07434869739478958, -0.07394789579158317, -0.07354709418837675, -0.07314629258517034, -0.07274549098196392, -0.07234468937875752, -0.07194388777555111, -0.0715430861723447, -0.07114228456913828, -0.07074148296593187, -0.07034068136272545, -0.06993987975951904, -0.06953907815631263, -0.06913827655310621, -0.0687374749498998, -0.06833667334669338, -0.06793587174348698, -0.06753507014028057, -0.06713426853707416, -0.06673346693386774, -0.06633266533066132, -0.06593186372745491, -0.0655310621242485, -0.0651302605210421, -0.06472945891783567, -0.06432865731462926, -0.06392785571142284, -0.06352705410821644, -0.06312625250501003, -0.06272545090180362, -0.0623246492985972, -0.061923847695390784, -0.06152304609218437, -0.061122244488977955, -0.06072144288577155, -0.06032064128256513, -0.059919839679358725, -0.0595190380761523, -0.059118236472945895, -0.05871743486973948, -0.05831663326653307, -0.05791583166332666, -0.05751503006012024, -0.05711422845691383, -0.056713426853707415, -0.05631262525050101, -0.05591182364729459, -0.05551102204408818, -0.05511022044088176, -0.054709418837675355, -0.05430861723446894, -0.05390781563126253, -0.05350701402805611, -0.053106212424849704, -0.05270541082164329, -0.052304609218436875, -0.05190380761523047, -0.051503006012024045, -0.05110220440881764, -0.05070140280561122, -0.050300601202404815, -0.0498997995991984, -0.049498997995991986, -0.04909819639278557, -0.048697394789579164, -0.04829659318637275, -0.04789579158316634, -0.04749498997995992, -0.047094188376753505, -0.0466933867735471, -0.04629258517034068, -0.045891783567134276, -0.045490981963927854, -0.045090180360721446, -0.04468937875751503, -0.044288577154308624, -0.04388777555110221, -0.043486973947895795, -0.04308617234468938, -0.042685370741482966, -0.04228456913827656, -0.04188376753507014, -0.04148296593186373, -0.041082164328657314, -0.040681362725450906, -0.04028056112224449, -0.039879759519038084, -0.03947895791583166, -0.039078156312625255, -0.03867735470941884, -0.038276553106212426, -0.03787575150300602, -0.0374749498997996, -0.03707414829659318, -0.036673346693386774, -0.036272545090180366, -0.03587174348697396, -0.03547094188376754, -0.03507014028056113, -0.03466933867735471, -0.0342685370741483, -0.03386773547094189, -0.03346693386773547, -0.03306613226452906, -0.03266533066132264, -0.032264529058116234, -0.031863727454909826, -0.031462925851703405, -0.031062124248496997, -0.03066132264529059, -0.030260521042084168, -0.02985971943887776, -0.02945891783567134, -0.029058116232464945, -0.028657314629258523, -0.028256513026052102, -0.027855711422845694, -0.027454909819639273, -0.02705410821643288, -0.026653306613226457, -0.026252505010020036, -0.025851703406813628, -0.02545090180360722, -0.025050100200400813, -0.02464929859719439, -0.02424849699398797, -0.023847695390781562, -0.023446893787575154, -0.023046092184368733, -0.022645290581162325, -0.022244488977955904, -0.02184368737474951, -0.021442885771543088, -0.021042084168336667, -0.02064128256513026, -0.02024048096192385, -0.019839679358717444, -0.019438877755511022, -0.0190380761523046, -0.018637274549098193, -0.018236472945891785, -0.017835671342685377, -0.017434869739478956, -0.017034068136272534, -0.01663326653306614, -0.01623246492985972, -0.01583166332665331, -0.01543086172344689, -0.015030060120240468, -0.014629258517034074, -0.014228456913827653, -0.013827655310621245, -0.013426853707414824, -0.013026052104208416, -0.012625250501002008, -0.012224448897795587, -0.011823647294589179, -0.011422845691382771, -0.01102204408817635, -0.010621242484969942, -0.01022044088176352, -0.009819639278557113, -0.009418837675350705, -0.009018036072144284, -0.008617234468937876, -0.008216432865731454, -0.00781563126252506, -0.007414829659318639, -0.007014028056112218, -0.00661322645290581, -0.006212424849699402, -0.0058116232464929946, -0.005410821643286573, -0.0050100200400801514, -0.004609218436873744, -0.004208416833667336, -0.0038076152304609284, -0.003406813627254507, -0.0030060120240480853, -0.0026052104208416915, -0.00220440881763527, -0.0018036072144288623, -0.0014028056112224407, -0.001002004008016033, -0.0006012024048096254, -0.00020040080160320384, 0.00020040080160320384, 0.0006012024048096254, 0.001002004008016033, 0.0014028056112224407, 0.0018036072144288623, 0.00220440881763527, 0.0026052104208416776, 0.003006012024048099, 0.003406813627254507, 0.0038076152304609284, 0.004208416833667322, 0.004609218436873744, 0.005010020040080165, 0.005410821643286573, 0.0058116232464929946, 0.006212424849699388, 0.00661322645290581, 0.0070140280561122315, 0.007414829659318639, 0.007815631262525047, 0.008216432865731454, 0.008617234468937876, 0.009018036072144298, 0.009418837675350705, 0.009819639278557113, 0.01022044088176352, 0.010621242484969942, 0.011022044088176364, 0.011422845691382758, 0.011823647294589179, 0.012224448897795587, 0.012625250501002008, 0.013026052104208416, 0.013426853707414824, 0.013827655310621245, 0.014228456913827653, 0.014629258517034074, 0.015030060120240482, 0.01543086172344689, 0.01583166332665331, 0.01623246492985972, 0.016633266533066127, 0.017034068136272548, 0.017434869739478956, 0.017835671342685377, 0.01823647294589177, 0.018637274549098193, 0.019038076152304614, 0.019438877755511022, 0.019839679358717444, 0.020240480961923837, 0.02064128256513026, 0.02104208416833668, 0.021442885771543088, 0.021843687374749496, 0.022244488977955904, 0.022645290581162325, 0.023046092184368747, 0.023446893787575154, 0.023847695390781562, 0.02424849699398797, 0.02464929859719439, 0.0250501002004008, 0.025450901803607207, 0.025851703406813642, 0.026252505010020022, 0.026653306613226457, 0.027054108216432865, 0.027454909819639273, 0.027855711422845708, 0.028256513026052088, 0.028657314629258523, 0.02905811623246493, 0.029458917835671367, 0.029859719438877746, 0.030260521042084154, 0.03066132264529059, 0.031062124248496997, 0.031462925851703405, 0.03186372745490981, 0.03226452905811622, 0.032665330661322656, 0.03306613226452906, 0.03346693386773547, 0.03386773547094188, 0.034268537074148286, 0.03466933867735472, 0.03507014028056113, 0.03547094188376754, 0.035871743486973945, 0.03627254509018035, 0.03667334669338676, 0.037074148296593196, 0.0374749498997996, 0.03787575150300601, 0.03827655310621242, 0.038677354709418826, 0.03907815631262526, 0.03947895791583167, 0.03987975951903808, 0.040280561122244485, 0.04068136272545089, 0.04108216432865733, 0.041482965931863736, 0.041883767535070116, 0.04228456913827655, 0.04268537074148296, 0.043086172344689394, 0.0434869739478958, 0.04388777555110218, 0.04428857715430862, 0.044689378757515025, 0.04509018036072146, 0.04549098196392787, 0.04589178356713425, 0.04629258517034068, 0.04669338677354709, 0.047094188376753526, 0.047494989979959934, 0.047895791583166314, 0.04829659318637275, 0.04869739478957916, 0.049098196392785565, 0.049498997995992, 0.04989979959919838, 0.050300601202404815, 0.05070140280561122, 0.05110220440881763, 0.051503006012024066, 0.051903807615230446, 0.05230460921843688, 0.05270541082164329, 0.0531062124248497, 0.05350701402805613, 0.05390781563126254, 0.05430861723446892, 0.054709418837675355, 0.05511022044088176, 0.0555110220440882, 0.055911823647294606, 0.056312625250500986, 0.05671342685370742, 0.05711422845691383, 0.057515030060120265, 0.05791583166332667, 0.05831663326653305, 0.05871743486973949, 0.059118236472945895, 0.0595190380761523, 0.05991983967935874, 0.06032064128256512, 0.060721442885771554, 0.06112224448897796, 0.06152304609218437, 0.061923847695390805, 0.062324649298597184, 0.06272545090180362, 0.06312625250501003, 0.06352705410821644, 0.06392785571142287, 0.06432865731462925, 0.06472945891783566, 0.0651302605210421, 0.0655310621242485, 0.06593186372745494, 0.06633266533066132, 0.06673346693386772, 0.06713426853707416, 0.06753507014028057, 0.067935871743487, 0.06833667334669338, 0.06873747494989979, 0.06913827655310623, 0.06953907815631263, 0.06993987975951907, 0.07034068136272545, 0.07074148296593186, 0.07114228456913829, 0.0715430861723447, 0.07194388777555111, 0.07234468937875752, 0.07274549098196392, 0.07314629258517036, 0.07354709418837677, 0.07394789579158317, 0.07434869739478958, 0.07474949899799599, 0.07515030060120242, 0.07555110220440883, 0.07595190380761524, 0.07635270541082165, 0.07675350701402806, 0.07715430861723446, 0.0775551102204409, 0.0779559118236473, 0.07835671342685371, 0.07875751503006012, 0.07915831663326653, 0.07955911823647296, 0.07995991983967937, 0.08036072144288578, 0.08076152304609219, 0.0811623246492986, 0.08156312625250503, 0.08196392785571144, 0.08236472945891782, 0.08276553106212425, 0.08316633266533066, 0.0835671342685371, 0.0839679358717435, 0.08436873747494988, 0.08476953907815632, 0.08517034068136273, 0.08557114228456916, 0.08597194388777557, 0.08637274549098195, 0.08677354709418839, 0.0871743486973948, 0.0875751503006012, 0.08797595190380764, 0.08837675350701402, 0.08877755511022045, 0.08917835671342686, 0.08957915831663327, 0.0899799599198397, 0.09038076152304608, 0.09078156312625252, 0.09118236472945893, 0.09158316633266533, 0.09198396793587177, 0.09238476953907815, 0.09278557114228456, 0.09318637274549099, 0.0935871743486974, 0.09398797595190383, 0.09438877755511021, 0.09478957915831662, 0.09519038076152306, 0.09559118236472947, 0.0959919839679359, 0.09639278557114228, 0.09679358717434869, 0.09719438877755512, 0.09759519038076153, 0.09799599198396794, 0.09839679358717435, 0.09879759519038075, 0.09919839679358719, 0.0995991983967936, 0.1])
+              .range([&#x27;#ffffccff&#x27;, &#x27;#ffffccff&#x27;, &#x27;#ffffcbff&#x27;, &#x27;#ffffcaff&#x27;, &#x27;#fffec9ff&#x27;, &#x27;#fffec9ff&#x27;, &#x27;#fffec8ff&#x27;, &#x27;#fffdc7ff&#x27;, &#x27;#fffdc7ff&#x27;, &#x27;#fffdc6ff&#x27;, &#x27;#fffdc5ff&#x27;, &#x27;#fffcc5ff&#x27;, &#x27;#fffcc4ff&#x27;, &#x27;#fffcc3ff&#x27;, &#x27;#fffbc2ff&#x27;, &#x27;#fffbc2ff&#x27;, &#x27;#fffbc1ff&#x27;, &#x27;#fffbc0ff&#x27;, &#x27;#fffac0ff&#x27;, &#x27;#fffabfff&#x27;, &#x27;#fffabeff&#x27;, &#x27;#fff9bdff&#x27;, &#x27;#fff9bdff&#x27;, &#x27;#fff9bcff&#x27;, &#x27;#fff9bbff&#x27;, &#x27;#fff8bbff&#x27;, &#x27;#fff8baff&#x27;, &#x27;#fff8b9ff&#x27;, &#x27;#fff7b8ff&#x27;, &#x27;#fff7b8ff&#x27;, &#x27;#fff7b7ff&#x27;, &#x27;#fff7b6ff&#x27;, &#x27;#fff6b6ff&#x27;, &#x27;#fff6b5ff&#x27;, &#x27;#fff6b4ff&#x27;, &#x27;#fff5b4ff&#x27;, &#x27;#fff5b3ff&#x27;, &#x27;#fff5b2ff&#x27;, &#x27;#fff4b1ff&#x27;, &#x27;#fff4b1ff&#x27;, &#x27;#fff4b0ff&#x27;, &#x27;#fff4afff&#x27;, &#x27;#fff3afff&#x27;, &#x27;#fff3aeff&#x27;, &#x27;#fff3adff&#x27;, &#x27;#fff2acff&#x27;, &#x27;#fff2acff&#x27;, &#x27;#fff2abff&#x27;, &#x27;#fff2aaff&#x27;, &#x27;#fff1aaff&#x27;, &#x27;#fff1a9ff&#x27;, &#x27;#fff1a8ff&#x27;, &#x27;#fff0a7ff&#x27;, &#x27;#fff0a7ff&#x27;, &#x27;#fff0a6ff&#x27;, &#x27;#fff0a5ff&#x27;, &#x27;#ffefa5ff&#x27;, &#x27;#ffefa4ff&#x27;, &#x27;#ffefa3ff&#x27;, &#x27;#ffeea3ff&#x27;, &#x27;#ffeea2ff&#x27;, &#x27;#ffeea1ff&#x27;, &#x27;#ffeea0ff&#x27;, &#x27;#ffeda0ff&#x27;, &#x27;#ffed9fff&#x27;, &#x27;#ffed9eff&#x27;, &#x27;#ffec9eff&#x27;, &#x27;#ffec9dff&#x27;, &#x27;#ffec9cff&#x27;, &#x27;#ffeb9cff&#x27;, &#x27;#ffeb9bff&#x27;, &#x27;#ffeb9aff&#x27;, &#x27;#ffea9aff&#x27;, &#x27;#ffea99ff&#x27;, &#x27;#ffea98ff&#x27;, &#x27;#ffe998ff&#x27;, &#x27;#ffe997ff&#x27;, &#x27;#ffe996ff&#x27;, &#x27;#ffe896ff&#x27;, &#x27;#ffe895ff&#x27;, &#x27;#ffe894ff&#x27;, &#x27;#ffe794ff&#x27;, &#x27;#ffe793ff&#x27;, &#x27;#ffe792ff&#x27;, &#x27;#ffe692ff&#x27;, &#x27;#ffe691ff&#x27;, &#x27;#ffe690ff&#x27;, &#x27;#ffe68fff&#x27;, &#x27;#ffe58fff&#x27;, &#x27;#ffe58eff&#x27;, &#x27;#ffe58dff&#x27;, &#x27;#ffe48dff&#x27;, &#x27;#ffe48cff&#x27;, &#x27;#ffe48bff&#x27;, &#x27;#ffe38bff&#x27;, &#x27;#ffe38aff&#x27;, &#x27;#ffe389ff&#x27;, &#x27;#ffe289ff&#x27;, &#x27;#ffe288ff&#x27;, &#x27;#ffe287ff&#x27;, &#x27;#ffe187ff&#x27;, &#x27;#ffe186ff&#x27;, &#x27;#ffe185ff&#x27;, &#x27;#ffe085ff&#x27;, &#x27;#ffe084ff&#x27;, &#x27;#ffe083ff&#x27;, &#x27;#ffdf83ff&#x27;, &#x27;#ffdf82ff&#x27;, &#x27;#ffdf81ff&#x27;, &#x27;#ffde81ff&#x27;, &#x27;#ffde80ff&#x27;, &#x27;#ffde7fff&#x27;, &#x27;#ffdd7fff&#x27;, &#x27;#ffdd7eff&#x27;, &#x27;#ffdd7dff&#x27;, &#x27;#ffdc7dff&#x27;, &#x27;#ffdc7cff&#x27;, &#x27;#ffdc7bff&#x27;, &#x27;#ffdc7bff&#x27;, &#x27;#ffdb7aff&#x27;, &#x27;#ffdb79ff&#x27;, &#x27;#ffdb78ff&#x27;, &#x27;#ffda78ff&#x27;, &#x27;#ffda77ff&#x27;, &#x27;#ffda76ff&#x27;, &#x27;#fed976ff&#x27;, &#x27;#fed975ff&#x27;, &#x27;#fed874ff&#x27;, &#x27;#fed774ff&#x27;, &#x27;#fed773ff&#x27;, &#x27;#fed672ff&#x27;, &#x27;#fed572ff&#x27;, &#x27;#fed571ff&#x27;, &#x27;#fed470ff&#x27;, &#x27;#fed470ff&#x27;, &#x27;#fed36fff&#x27;, &#x27;#fed26eff&#x27;, &#x27;#fed26eff&#x27;, &#x27;#fed16dff&#x27;, &#x27;#fed06cff&#x27;, &#x27;#fed06cff&#x27;, &#x27;#fecf6bff&#x27;, &#x27;#fecf6aff&#x27;, &#x27;#fece6aff&#x27;, &#x27;#fecd69ff&#x27;, &#x27;#fecd68ff&#x27;, &#x27;#fecc68ff&#x27;, &#x27;#fecb67ff&#x27;, &#x27;#fecb66ff&#x27;, &#x27;#feca66ff&#x27;, &#x27;#feca65ff&#x27;, &#x27;#fec964ff&#x27;, &#x27;#fec864ff&#x27;, &#x27;#fec863ff&#x27;, &#x27;#fec762ff&#x27;, &#x27;#fec662ff&#x27;, &#x27;#fec661ff&#x27;, &#x27;#fec560ff&#x27;, &#x27;#fec45fff&#x27;, &#x27;#fec45fff&#x27;, &#x27;#fec35eff&#x27;, &#x27;#fec35dff&#x27;, &#x27;#fec25dff&#x27;, &#x27;#fec15cff&#x27;, &#x27;#fec15bff&#x27;, &#x27;#fec05bff&#x27;, &#x27;#febf5aff&#x27;, &#x27;#febf59ff&#x27;, &#x27;#febe59ff&#x27;, &#x27;#febe58ff&#x27;, &#x27;#febd57ff&#x27;, &#x27;#febc57ff&#x27;, &#x27;#febc56ff&#x27;, &#x27;#febb55ff&#x27;, &#x27;#feba55ff&#x27;, &#x27;#feba54ff&#x27;, &#x27;#feb953ff&#x27;, &#x27;#feb953ff&#x27;, &#x27;#feb852ff&#x27;, &#x27;#feb751ff&#x27;, &#x27;#feb751ff&#x27;, &#x27;#feb650ff&#x27;, &#x27;#feb54fff&#x27;, &#x27;#feb54fff&#x27;, &#x27;#feb44eff&#x27;, &#x27;#feb44dff&#x27;, &#x27;#feb34dff&#x27;, &#x27;#feb24cff&#x27;, &#x27;#feb24cff&#x27;, &#x27;#feb14bff&#x27;, &#x27;#feb04bff&#x27;, &#x27;#feb04bff&#x27;, &#x27;#feaf4bff&#x27;, &#x27;#feaf4aff&#x27;, &#x27;#feae4aff&#x27;, &#x27;#feae4aff&#x27;, &#x27;#fead4aff&#x27;, &#x27;#feac49ff&#x27;, &#x27;#feac49ff&#x27;, &#x27;#feab49ff&#x27;, &#x27;#feab48ff&#x27;, &#x27;#feaa48ff&#x27;, &#x27;#fea948ff&#x27;, &#x27;#fea948ff&#x27;, &#x27;#fea847ff&#x27;, &#x27;#fea847ff&#x27;, &#x27;#fea747ff&#x27;, &#x27;#fea647ff&#x27;, &#x27;#fea646ff&#x27;, &#x27;#fea546ff&#x27;, &#x27;#fea546ff&#x27;, &#x27;#fea446ff&#x27;, &#x27;#fea345ff&#x27;, &#x27;#fea345ff&#x27;, &#x27;#fea245ff&#x27;, &#x27;#fea245ff&#x27;, &#x27;#fea144ff&#x27;, &#x27;#fea044ff&#x27;, &#x27;#fea044ff&#x27;, &#x27;#fe9f44ff&#x27;, &#x27;#fe9f43ff&#x27;, &#x27;#fe9e43ff&#x27;, &#x27;#fe9d43ff&#x27;, &#x27;#fe9d43ff&#x27;, &#x27;#fe9c42ff&#x27;, &#x27;#fe9c42ff&#x27;, &#x27;#fe9b42ff&#x27;, &#x27;#fe9a42ff&#x27;, &#x27;#fe9a41ff&#x27;, &#x27;#fe9941ff&#x27;, &#x27;#fe9941ff&#x27;, &#x27;#fe9840ff&#x27;, &#x27;#fe9740ff&#x27;, &#x27;#fe9740ff&#x27;, &#x27;#fe9640ff&#x27;, &#x27;#fe963fff&#x27;, &#x27;#fe953fff&#x27;, &#x27;#fe943fff&#x27;, &#x27;#fe943fff&#x27;, &#x27;#fe933eff&#x27;, &#x27;#fe933eff&#x27;, &#x27;#fe923eff&#x27;, &#x27;#fe923eff&#x27;, &#x27;#fe913dff&#x27;, &#x27;#fe903dff&#x27;, &#x27;#fe903dff&#x27;, &#x27;#fe8f3dff&#x27;, &#x27;#fe8f3cff&#x27;, &#x27;#fe8e3cff&#x27;, &#x27;#fe8d3cff&#x27;, &#x27;#fd8d3cff&#x27;, &#x27;#fd8c3bff&#x27;, &#x27;#fd8b3bff&#x27;, &#x27;#fd8a3bff&#x27;, &#x27;#fd883aff&#x27;, &#x27;#fd873aff&#x27;, &#x27;#fd863aff&#x27;, &#x27;#fd853aff&#x27;, &#x27;#fd8439ff&#x27;, &#x27;#fd8339ff&#x27;, &#x27;#fd8239ff&#x27;, &#x27;#fd8138ff&#x27;, &#x27;#fd8038ff&#x27;, &#x27;#fd7f38ff&#x27;, &#x27;#fd7e38ff&#x27;, &#x27;#fd7d37ff&#x27;, &#x27;#fd7c37ff&#x27;, &#x27;#fd7b37ff&#x27;, &#x27;#fd7a36ff&#x27;, &#x27;#fd7936ff&#x27;, &#x27;#fd7836ff&#x27;, &#x27;#fd7736ff&#x27;, &#x27;#fd7635ff&#x27;, &#x27;#fd7535ff&#x27;, &#x27;#fd7435ff&#x27;, &#x27;#fd7334ff&#x27;, &#x27;#fd7234ff&#x27;, &#x27;#fd7134ff&#x27;, &#x27;#fd7033ff&#x27;, &#x27;#fd6f33ff&#x27;, &#x27;#fd6e33ff&#x27;, &#x27;#fd6d33ff&#x27;, &#x27;#fd6c32ff&#x27;, &#x27;#fd6b32ff&#x27;, &#x27;#fd6a32ff&#x27;, &#x27;#fd6931ff&#x27;, &#x27;#fd6831ff&#x27;, &#x27;#fd6731ff&#x27;, &#x27;#fd6631ff&#x27;, &#x27;#fd6530ff&#x27;, &#x27;#fd6430ff&#x27;, &#x27;#fd6330ff&#x27;, &#x27;#fd622fff&#x27;, &#x27;#fd612fff&#x27;, &#x27;#fd602fff&#x27;, &#x27;#fd5f2fff&#x27;, &#x27;#fd5e2eff&#x27;, &#x27;#fd5d2eff&#x27;, &#x27;#fd5c2eff&#x27;, &#x27;#fd5b2dff&#x27;, &#x27;#fd5a2dff&#x27;, &#x27;#fd592dff&#x27;, &#x27;#fd582dff&#x27;, &#x27;#fd572cff&#x27;, &#x27;#fd562cff&#x27;, &#x27;#fd552cff&#x27;, &#x27;#fd542bff&#x27;, &#x27;#fd532bff&#x27;, &#x27;#fd522bff&#x27;, &#x27;#fd512aff&#x27;, &#x27;#fd502aff&#x27;, &#x27;#fd4f2aff&#x27;, &#x27;#fc4e2aff&#x27;, &#x27;#fc4d29ff&#x27;, &#x27;#fc4c29ff&#x27;, &#x27;#fb4b29ff&#x27;, &#x27;#fb4a29ff&#x27;, &#x27;#fa4a29ff&#x27;, &#x27;#fa4928ff&#x27;, &#x27;#fa4828ff&#x27;, &#x27;#f94728ff&#x27;, &#x27;#f94628ff&#x27;, &#x27;#f84527ff&#x27;, &#x27;#f84427ff&#x27;, &#x27;#f84427ff&#x27;, &#x27;#f74327ff&#x27;, &#x27;#f74226ff&#x27;, &#x27;#f64126ff&#x27;, &#x27;#f64026ff&#x27;, &#x27;#f63f26ff&#x27;, &#x27;#f53f26ff&#x27;, &#x27;#f53e25ff&#x27;, &#x27;#f43d25ff&#x27;, &#x27;#f43c25ff&#x27;, &#x27;#f43b25ff&#x27;, &#x27;#f33a24ff&#x27;, &#x27;#f33a24ff&#x27;, &#x27;#f23924ff&#x27;, &#x27;#f23824ff&#x27;, &#x27;#f23724ff&#x27;, &#x27;#f13623ff&#x27;, &#x27;#f13523ff&#x27;, &#x27;#f03523ff&#x27;, &#x27;#f03423ff&#x27;, &#x27;#f03322ff&#x27;, &#x27;#ef3222ff&#x27;, &#x27;#ef3122ff&#x27;, &#x27;#ee3022ff&#x27;, &#x27;#ee3022ff&#x27;, &#x27;#ee2f21ff&#x27;, &#x27;#ed2e21ff&#x27;, &#x27;#ed2d21ff&#x27;, &#x27;#ec2c21ff&#x27;, &#x27;#ec2b20ff&#x27;, &#x27;#ec2b20ff&#x27;, &#x27;#eb2a20ff&#x27;, &#x27;#eb2920ff&#x27;, &#x27;#ea281fff&#x27;, &#x27;#ea271fff&#x27;, &#x27;#ea261fff&#x27;, &#x27;#e9261fff&#x27;, &#x27;#e9251fff&#x27;, &#x27;#e8241eff&#x27;, &#x27;#e8231eff&#x27;, &#x27;#e8221eff&#x27;, &#x27;#e7211eff&#x27;, &#x27;#e7211dff&#x27;, &#x27;#e6201dff&#x27;, &#x27;#e61f1dff&#x27;, &#x27;#e61e1dff&#x27;, &#x27;#e51d1dff&#x27;, &#x27;#e51c1cff&#x27;, &#x27;#e41b1cff&#x27;, &#x27;#e41b1cff&#x27;, &#x27;#e31a1cff&#x27;, &#x27;#e3191cff&#x27;, &#x27;#e2191cff&#x27;, &#x27;#e2181cff&#x27;, &#x27;#e1181cff&#x27;, &#x27;#e0181cff&#x27;, &#x27;#e0171dff&#x27;, &#x27;#df171dff&#x27;, &#x27;#df161dff&#x27;, &#x27;#de161dff&#x27;, &#x27;#dd161dff&#x27;, &#x27;#dd151dff&#x27;, &#x27;#dc151eff&#x27;, &#x27;#dc141eff&#x27;, &#x27;#db141eff&#x27;, &#x27;#da131eff&#x27;, &#x27;#da131eff&#x27;, &#x27;#d9131eff&#x27;, &#x27;#d9121eff&#x27;, &#x27;#d8121fff&#x27;, &#x27;#d7111fff&#x27;, &#x27;#d7111fff&#x27;, &#x27;#d6111fff&#x27;, &#x27;#d5101fff&#x27;, &#x27;#d5101fff&#x27;, &#x27;#d40f20ff&#x27;, &#x27;#d40f20ff&#x27;, &#x27;#d30e20ff&#x27;, &#x27;#d20e20ff&#x27;, &#x27;#d20e20ff&#x27;, &#x27;#d10d20ff&#x27;, &#x27;#d10d21ff&#x27;, &#x27;#d00c21ff&#x27;, &#x27;#cf0c21ff&#x27;, &#x27;#cf0b21ff&#x27;, &#x27;#ce0b21ff&#x27;, &#x27;#ce0b21ff&#x27;, &#x27;#cd0a22ff&#x27;, &#x27;#cc0a22ff&#x27;, &#x27;#cc0922ff&#x27;, &#x27;#cb0922ff&#x27;, &#x27;#ca0922ff&#x27;, &#x27;#ca0822ff&#x27;, &#x27;#c90822ff&#x27;, &#x27;#c90723ff&#x27;, &#x27;#c80723ff&#x27;, &#x27;#c70623ff&#x27;, &#x27;#c70623ff&#x27;, &#x27;#c60623ff&#x27;, &#x27;#c60523ff&#x27;, &#x27;#c50524ff&#x27;, &#x27;#c40424ff&#x27;, &#x27;#c40424ff&#x27;, &#x27;#c30424ff&#x27;, &#x27;#c30324ff&#x27;, &#x27;#c20324ff&#x27;, &#x27;#c10225ff&#x27;, &#x27;#c10225ff&#x27;, &#x27;#c00125ff&#x27;, &#x27;#bf0125ff&#x27;, &#x27;#bf0125ff&#x27;, &#x27;#be0025ff&#x27;, &#x27;#be0026ff&#x27;, &#x27;#bd0026ff&#x27;, &#x27;#bc0026ff&#x27;, &#x27;#bb0026ff&#x27;, &#x27;#ba0026ff&#x27;, &#x27;#b90026ff&#x27;, &#x27;#b80026ff&#x27;, &#x27;#b70026ff&#x27;, &#x27;#b60026ff&#x27;, &#x27;#b50026ff&#x27;, &#x27;#b40026ff&#x27;, &#x27;#b30026ff&#x27;, &#x27;#b20026ff&#x27;, &#x27;#b10026ff&#x27;, &#x27;#b00026ff&#x27;, &#x27;#af0026ff&#x27;, &#x27;#ae0026ff&#x27;, &#x27;#ad0026ff&#x27;, &#x27;#ac0026ff&#x27;, &#x27;#ab0026ff&#x27;, &#x27;#aa0026ff&#x27;, &#x27;#a90026ff&#x27;, &#x27;#a80026ff&#x27;, &#x27;#a70026ff&#x27;, &#x27;#a60026ff&#x27;, &#x27;#a50026ff&#x27;, &#x27;#a40026ff&#x27;, &#x27;#a30026ff&#x27;, &#x27;#a20026ff&#x27;, &#x27;#a10026ff&#x27;, &#x27;#a00026ff&#x27;, &#x27;#9f0026ff&#x27;, &#x27;#9e0026ff&#x27;, &#x27;#9d0026ff&#x27;, &#x27;#9c0026ff&#x27;, &#x27;#9b0026ff&#x27;, &#x27;#9b0026ff&#x27;, &#x27;#9a0026ff&#x27;, &#x27;#990026ff&#x27;, &#x27;#980026ff&#x27;, &#x27;#970026ff&#x27;, &#x27;#960026ff&#x27;, &#x27;#950026ff&#x27;, &#x27;#940026ff&#x27;, &#x27;#930026ff&#x27;, &#x27;#920026ff&#x27;, &#x27;#910026ff&#x27;, &#x27;#900026ff&#x27;, &#x27;#8f0026ff&#x27;, &#x27;#8e0026ff&#x27;, &#x27;#8d0026ff&#x27;, &#x27;#8c0026ff&#x27;, &#x27;#8b0026ff&#x27;, &#x27;#8a0026ff&#x27;, &#x27;#890026ff&#x27;, &#x27;#880026ff&#x27;, &#x27;#870026ff&#x27;, &#x27;#860026ff&#x27;, &#x27;#850026ff&#x27;, &#x27;#840026ff&#x27;, &#x27;#830026ff&#x27;, &#x27;#820026ff&#x27;, &#x27;#810026ff&#x27;, &#x27;#800026ff&#x27;]);
+    
+
+    color_map_1c4a4da6690de07d1c9677696979e8e3.x = d3.scale.linear()
+              .domain([-0.1, 0.1])
+              .range([0, 450 - 50]);
+
+    color_map_1c4a4da6690de07d1c9677696979e8e3.legend = L.control({position: &#x27;topright&#x27;});
+    color_map_1c4a4da6690de07d1c9677696979e8e3.legend.onAdd = function (map) {var div = L.DomUtil.create(&#x27;div&#x27;, &#x27;legend&#x27;); return div};
+    color_map_1c4a4da6690de07d1c9677696979e8e3.legend.addTo(map_eff857b92c629f2c8b4d8cfff6da1091);
+
+    color_map_1c4a4da6690de07d1c9677696979e8e3.xAxis = d3.svg.axis()
+        .scale(color_map_1c4a4da6690de07d1c9677696979e8e3.x)
+        .orient(&quot;top&quot;)
+        .tickSize(1)
+        .tickValues([-0.1, -0.07500000000000001, -0.05, -0.024999999999999994, 0.0, 0.024999999999999994, 0.05000000000000002, 0.07500000000000001, 0.1]);
+
+    color_map_1c4a4da6690de07d1c9677696979e8e3.svg = d3.select(&quot;.legend.leaflet-control&quot;).append(&quot;svg&quot;)
+        .attr(&quot;id&quot;, &#x27;legend&#x27;)
+        .attr(&quot;width&quot;, 450)
+        .attr(&quot;height&quot;, 40);
+
+    color_map_1c4a4da6690de07d1c9677696979e8e3.g = color_map_1c4a4da6690de07d1c9677696979e8e3.svg.append(&quot;g&quot;)
+        .attr(&quot;class&quot;, &quot;key&quot;)
+        .attr(&quot;fill&quot;, &quot;black&quot;)
+        .attr(&quot;transform&quot;, &quot;translate(25,16)&quot;);
+
+    color_map_1c4a4da6690de07d1c9677696979e8e3.g.selectAll(&quot;rect&quot;)
+        .data(color_map_1c4a4da6690de07d1c9677696979e8e3.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_1c4a4da6690de07d1c9677696979e8e3.x(color_map_1c4a4da6690de07d1c9677696979e8e3.color.domain()[i - 1]) : color_map_1c4a4da6690de07d1c9677696979e8e3.x.range()[0],
+            x1: i &lt; color_map_1c4a4da6690de07d1c9677696979e8e3.color.domain().length ? color_map_1c4a4da6690de07d1c9677696979e8e3.x(color_map_1c4a4da6690de07d1c9677696979e8e3.color.domain()[i]) : color_map_1c4a4da6690de07d1c9677696979e8e3.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append(&quot;rect&quot;)
+        .attr(&quot;height&quot;, 40 - 30)
+        .attr(&quot;x&quot;, function(d) { return d.x0; })
+        .attr(&quot;width&quot;, function(d) { return d.x1 - d.x0; })
+        .style(&quot;fill&quot;, function(d) { return d.z; });
+
+    color_map_1c4a4da6690de07d1c9677696979e8e3.g.call(color_map_1c4a4da6690de07d1c9677696979e8e3.xAxis).append(&quot;text&quot;)
+        .attr(&quot;class&quot;, &quot;caption&quot;)
+        .attr(&quot;y&quot;, 21)
+        .attr(&quot;fill&quot;, &quot;black&quot;)
+        .text(&quot;NDVI Difference 2008 - 1999&quot;);
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+<p>Mathematical operators perform basic arithmetic operations on image bands. The normalized difference operation is so common in remote sensing, Earth Engine provides a shortcut method, as shown in the second part of the example. Subtracting the images in this example results in a “change vector” for each pixel. Bands are matched automatically to perform the difference:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load two 5-year Landsat 7 composites get only 3bands from them</span>
+<span class="n">landsat1999</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LE7_TOA_5YEAR/1999_2003&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">])</span>
+<span class="n">landsat2008</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LE7_TOA_5YEAR/2008_2012&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">])</span>
+
+<span class="c1"># Compute the multi-band difference image.</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">landsat2008</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">landsat1999</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Difference&#39;</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+
+
+<span class="c1"># Compute the squared difference in each band.</span>
+<span class="n">squaredDifference</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;Squared Difference&#39;</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">squaredDifference</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Difference
+{&#39;bands&#39;: [{&#39;crs&#39;: &#39;EPSG:4326&#39;,
+            &#39;crs_transform&#39;: [0.00026949456294719256,
+                              0,
+                              -180,
+                              0,
+                              -0.00026949456294719256,
+                              86.0000269494563],
+            &#39;data_type&#39;: {&#39;max&#39;: 255,
+                          &#39;min&#39;: -255,
+                          &#39;precision&#39;: &#39;int&#39;,
+                          &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;id&#39;: &#39;B4&#39;},
+           {&#39;crs&#39;: &#39;EPSG:4326&#39;,
+            &#39;crs_transform&#39;: [0.00026949456294719256,
+                              0,
+                              -180,
+                              0,
+                              -0.00026949456294719256,
+                              86.0000269494563],
+            &#39;data_type&#39;: {&#39;max&#39;: 255,
+                          &#39;min&#39;: -255,
+                          &#39;precision&#39;: &#39;int&#39;,
+                          &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;id&#39;: &#39;B3&#39;},
+           {&#39;crs&#39;: &#39;EPSG:4326&#39;,
+            &#39;crs_transform&#39;: [0.00026949456294719256,
+                              0,
+                              -180,
+                              0,
+                              -0.00026949456294719256,
+                              86.0000269494563],
+            &#39;data_type&#39;: {&#39;max&#39;: 255,
+                          &#39;min&#39;: -255,
+                          &#39;precision&#39;: &#39;int&#39;,
+                          &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;id&#39;: &#39;B2&#39;}],
+ &#39;type&#39;: &#39;Image&#39;}
+
+Squared Difference
+{&#39;bands&#39;: [{&#39;crs&#39;: &#39;EPSG:4326&#39;,
+            &#39;crs_transform&#39;: [0.00026949456294719256,
+                              0,
+                              -180,
+                              0,
+                              -0.00026949456294719256,
+                              86.0000269494563],
+            &#39;data_type&#39;: {&#39;precision&#39;: &#39;float&#39;, &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;id&#39;: &#39;B4&#39;},
+           {&#39;crs&#39;: &#39;EPSG:4326&#39;,
+            &#39;crs_transform&#39;: [0.00026949456294719256,
+                              0,
+                              -180,
+                              0,
+                              -0.00026949456294719256,
+                              86.0000269494563],
+            &#39;data_type&#39;: {&#39;precision&#39;: &#39;float&#39;, &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;id&#39;: &#39;B3&#39;},
+           {&#39;crs&#39;: &#39;EPSG:4326&#39;,
+            &#39;crs_transform&#39;: [0.00026949456294719256,
+                              0,
+                              -180,
+                              0,
+                              -0.00026949456294719256,
+                              86.0000269494563],
+            &#39;data_type&#39;: {&#39;precision&#39;: &#39;float&#39;, &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;id&#39;: &#39;B2&#39;}],
+ &#39;type&#39;: &#39;Image&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="expressions">
+<h2>Expressions<a class="headerlink" href="#expressions" title="Link to this heading">#</a></h2>
+<p>To implement more complex mathematical expressions, consider using image.<code class="docutils literal notranslate"><span class="pre">expression()</span></code>, which parses a text representation of a math operation. The following example uses <code class="docutils literal notranslate"><span class="pre">expression()</span></code> to compute the Enhanced Vegetation Index (EVI):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a Landsat 8 image.</span>
+<span class="n">image5</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LC08/C02/T1_TOA/LC08_044034_20200505&#39;</span><span class="p">);</span>
+
+<span class="c1"># Compute the EVI using an expression.</span>
+<span class="n">evi</span> <span class="o">=</span> <span class="n">image5</span><span class="o">.</span><span class="n">expression</span><span class="p">(</span>
+    <span class="s1">&#39;2.5 * ((NIR - RED) / (NIR + 6 * RED - 7.5 * BLUE + 1))&#39;</span><span class="p">,</span> <span class="p">{</span>
+      <span class="s1">&#39;NIR&#39;</span><span class="p">:</span> <span class="n">image5</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B5&#39;</span><span class="p">),</span>
+      <span class="s1">&#39;RED&#39;</span><span class="p">:</span> <span class="n">image5</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">),</span>
+      <span class="s1">&#39;BLUE&#39;</span><span class="p">:</span> <span class="n">image5</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B2&#39;</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">evi</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">({</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;FF0000&#39;</span><span class="p">,</span> <span class="s1">&#39;00FF00&#39;</span><span class="p">],</span><span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">512</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1/projects/522364178051/thumbnails/107bd9f6d64477db60f3c9bdfa9990b4-059c7375fa71e86cfb90ad09b627aeac:getPixels"/></div></div>
+</div>
+</section>
+<section id="relational-conditional-and-boolean-operations">
+<h2>Relational, conditional and Boolean operations<a class="headerlink" href="#relational-conditional-and-boolean-operations" title="Link to this heading">#</a></h2>
+<p>To perform per-pixel comparisons between images, use relational operators. To extract urbanized areas in an image, this example uses relational operators to threshold spectral indices, combining the thresholds with and():</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create NDVI and NDWI spectral indices.</span>
+<span class="n">ndvi</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B5&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">])</span>
+<span class="n">ndwi</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B5&#39;</span><span class="p">])</span>
+
+<span class="c1"># Create a binary layer using logical operations.</span>
+<span class="n">bare</span> <span class="o">=</span> <span class="n">ndvi</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ndwi</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bare&#39;</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">bare</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bare
+{&#39;bands&#39;: [{&#39;crs&#39;: &#39;EPSG:32610&#39;,
+            &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215],
+            &#39;data_type&#39;: {&#39;max&#39;: 1,
+                          &#39;min&#39;: 0,
+                          &#39;precision&#39;: &#39;int&#39;,
+                          &#39;type&#39;: &#39;PixelType&#39;},
+            &#39;dimensions&#39;: [7661, 7801],
+            &#39;id&#39;: &#39;nd&#39;}],
+ &#39;properties&#39;: {&#39;system:footprint&#39;: {&#39;coordinates&#39;: [[...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...],
+                                                     [...]],
+                                     &#39;type&#39;: &#39;LinearRing&#39;}},
+ &#39;type&#39;: &#39;Image&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">bare</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">({</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;C0C0C0&#39;</span><span class="p">,</span> <span class="s1">&#39;000000&#39;</span><span class="p">],</span><span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">512</span><span class="p">}))</span> <span class="c1"># Min is silver, max is black</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1/projects/522364178051/thumbnails/bc3ee4ff06086e057f6fc1936f66a24f-18d4330bf680027606ffaa2eca9d2ea4:getPixels"/></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mask the image with itslef to obtain only the land (pixels with value==1 (or TRUE))</span>
+<span class="n">map3</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">37.5010</span><span class="p">,</span><span class="o">-</span><span class="mf">122.1899</span><span class="p">],</span><span class="n">zoom_start</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">newbare</span> <span class="o">=</span> <span class="n">bare</span><span class="o">.</span><span class="n">updateMask</span><span class="p">(</span><span class="n">bare</span><span class="p">)</span>
+<span class="n">map3</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">newbare</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FF0000&#39;</span><span class="p">,</span> <span class="s1">&#39;00FF00&#39;</span><span class="p">]},</span> <span class="s1">&#39;Water vs land&#39;</span><span class="p">)</span> 
+<span class="n">map3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_1b5ec1c9fbf597e694bce2f18a1483e3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_1b5ec1c9fbf597e694bce2f18a1483e3&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_1b5ec1c9fbf597e694bce2f18a1483e3 = L.map(
+                &quot;map_1b5ec1c9fbf597e694bce2f18a1483e3&quot;,
+                {
+                    center: [37.501, -122.1899],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 8,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_50b2ae48b5e59ae34a7a4827cc318079 = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_50b2ae48b5e59ae34a7a4827cc318079.addTo(map_1b5ec1c9fbf597e694bce2f18a1483e3);
+        
+    
+            var tile_layer_5f1384c64e13b7576de4ceb711beefe7 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/014d3c408052d3ceab9570fd8453642b-29797225943a70bc1aaea4df4263e4f8/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_5f1384c64e13b7576de4ceb711beefe7.addTo(map_1b5ec1c9fbf597e694bce2f18a1483e3);
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mask the image with pixels with value==0 </span>
+<span class="n">map4</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">37.5010</span><span class="p">,</span><span class="o">-</span><span class="mf">122.1899</span><span class="p">],</span><span class="n">zoom_start</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">opp_bare</span> <span class="o">=</span> <span class="n">bare</span><span class="o">.</span><span class="n">updateMask</span><span class="p">(</span><span class="n">bare</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">map4</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">opp_bare</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FF0000&#39;</span><span class="p">,</span> <span class="s1">&#39;00FF00&#39;</span><span class="p">]},</span> <span class="s1">&#39;Water vs land&#39;</span><span class="p">)</span> 
+<span class="n">map4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_974b58e2c2fe54a14be4f7107386ea51 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_974b58e2c2fe54a14be4f7107386ea51&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_974b58e2c2fe54a14be4f7107386ea51 = L.map(
+                &quot;map_974b58e2c2fe54a14be4f7107386ea51&quot;,
+                {
+                    center: [37.501, -122.1899],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 8,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e6a2582f4d013d383897896afadd2c04 = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_e6a2582f4d013d383897896afadd2c04.addTo(map_974b58e2c2fe54a14be4f7107386ea51);
+        
+    
+            var tile_layer_9fd2a3e35fa0394364bbde8e3221d0a4 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/1acc049c2e18d63e26e2e182a5df6e21-ec9c7014c20988c19b55fec6bf76dcd3/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_9fd2a3e35fa0394364bbde8e3221d0a4.addTo(map_974b58e2c2fe54a14be4f7107386ea51);
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/2_geo_python/3_gee_python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="0_First_steps.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Linking Google Colab to your GitHub page</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2_Time_series.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ImageCollection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Google Earth Engine: JavaScript, but Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maps-warning"><code class="docutils literal notranslate"><span class="pre">Maps</span></code> warning!</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#some-basic-gee-concepts">Some basic GEE concepts</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-constructor-ee-image">Image constructor: ee.Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-images-and-image-bands">Visualising images and image bands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-an-ee-image-from-an-ee-imagecollection">Get an ee.Image from an ee.ImageCollection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#display-static-image">Display static image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-images">Constant images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rgb-composites">RGB composites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colour-palettes">Colour palettes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#masking">Masking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mosaicking">Mosaicking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clipping">Clipping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-information-and-metadata">Image information and metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-operators">Mathematical operators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expressions">Expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relational-conditional-and-boolean-operations">Relational, conditional and Boolean operations</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By SENSE CDT
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

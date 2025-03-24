@@ -1,0 +1,1092 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.2 Jupyter Notebooks &#8212; SENSE Training Resources</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/1_python_zero2hero/1_intro/02-Jupyter-Notebook';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="1.3 Python Language Syntax" href="03-Basic-Python-Syntax.html" />
+    <link rel="prev" title="1.1 How to Run Python Code" href="01-How-to-Run-Python-Code.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-light" alt="SENSE Training Resources - Home"/>
+    <script>document.write(`<img src="../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-dark" alt="SENSE Training Resources - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 1 - Python Software Carpentry</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book1_overview.html">0 - Overview</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../1_intro.html">1 - Intro to Python</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00-Introduction.html">1.0 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-How-to-Run-Python-Code.html">1.1 How to Run Python Code</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2 Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Basic-Python-Syntax.html">1.3 Python Language Syntax</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_python_basics.html">2 - Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/01-Semantics-Variables.html">2.1 Variables and Objects in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/02-Semantics-Operators.html">2.2 Basic Python Semantics: Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/03-Built-in-Scalar-Types.html">2.3 Built-In Types: Simple Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/04-Built-in-Data-Structures.html">2.4 Built-In Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/05-Ex-Try-Python-Basics.html">Exercise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/06-Control-Flow-Statements.html">2.5 Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/07-Defining-Functions.html">2.6 Defining and Using Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/09-Modules-and-Packages.html">Modules and Packages</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_data_analysis_visualisation.html">3 - Plotting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_data_analysis_visualisation/01-Numpy-Intro.html"> Introduction to NumPy</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../3_data_analysis_visualisation/02-Matplotlib.html">Matplotlib - Intro</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../3_data_analysis_visualisation/03-Working-with-datetime.html">Working with dates and times</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_data_analysis_visualisation/04-Pandas-Intro.html">Introduction to pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_data_analysis_visualisation/05-Plotting-with-Seaborn.html">Statistical plotting with Seaborn</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 2 - GeoPython</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/book2_overview.html">0 - Overview</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/cartopy.html">Cartopy</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/geopandas.html">GeoPandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/rasterio.html">Rasterio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/rioxarray.html">Rioxarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/xarray.html">Xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/20-Xarray-NetCDF-Intro.html">Working with NetCDF files</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/2_eo_data.html">2 - EO data</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/3_gee_python.html">3 - GEE Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">Google Earth Engine: JavaScript, but Python</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">ImageCollection</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 3 - Machine Learning for EO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro.html">2 - Classical ML with satellite data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/1_linear_regression.html">Practical 1: Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/2_classification.html">Practical 2: Classification</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/3_kalman_filter.html">Practical 3: Kalman Filter</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep.html">3 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/00_intro.html">Satellite image deep learning with PyTorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/4_embeddings.html">4 - Embeddings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/1a_Use_PCA_analysis_to_study_tile_embeddings.html">Use PCA analysis on tile embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/1b_Exploring_embedding_space_with_clustering_methods.html">How are the study tiles clustered in the embedding space?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/2_Working_with_your_own_data.html">Working with your own input data</a></li>
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/book/1_python_zero2hero/1_intro/02-Jupyter-Notebook.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fbook/1_python_zero2hero/1_intro/02-Jupyter-Notebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/1_python_zero2hero/1_intro/02-Jupyter-Notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.2 Jupyter Notebooks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#showcase-2017-nobel-prize-in-physics">Showcase: 2017 Nobel Prize in Physics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-cells">Notebook Cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modes">Modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-shortcuts">Some shortcuts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nice-errors">1. Nice Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-documentation">2. Inline Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tab-completion-predictive-and-helpful">3. Tab Completion (predictive and helpful!)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-shell-commands-with">4. Run Shell Commands with “!”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-operations">5. Remote Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embed-images-or-videos">6. Embed Images or Videos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-remote-code-this-is-very-cool-and-helpful">7. Load Remote Code - This is Very Cool and helpful!</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharing-notebooks">Sharing Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="jupyter-notebooks">
+<h1>1.2 Jupyter Notebooks<a class="headerlink" href="#jupyter-notebooks" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>The Jupyter Notebook is an interactive environment for writing and running code.</p></li>
+</ul>
+<ul class="simple">
+<li><p>The notebook is capable of running code in a wide range of languages.</p></li>
+</ul>
+<ul class="simple">
+<li><p>However, each notebook is associated with a single kernel. This notebook is associated with the IPython kernel, therefore it runs Python code.</p></li>
+</ul>
+<section id="showcase-2017-nobel-prize-in-physics">
+<h2>Showcase: 2017 Nobel Prize in Physics<a class="headerlink" href="#showcase-2017-nobel-prize-in-physics" title="Link to this heading">#</a></h2>
+<p>[…] to three leaders of the decades-long project “for decisive contributions to the LIGO detector and the observation of gravitational</p>
+<p>To communicate to the broader community, the LIGO/VIRGO Collaboration has created tutorials with Jupyter Notebooks that describe how to use LIGO/VIRGO data and reproduce analyses related to their academic publications. Most notably, they published a tutorial for working with Binary Black Hole Data.</p>
+<p><a class="reference external" href="https://losc.ligo.org/s/events/GW150914/GW150914_tutorial.html">https://losc.ligo.org/s/events/GW150914/GW150914_tutorial.html</a></p>
+</section>
+<section id="notebook-cells">
+<h2>Notebook Cells<a class="headerlink" href="#notebook-cells" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>An Notebook is a series of “cells”.</p></li>
+<li><p>The active cell has an outline around it.</p></li>
+<li><p>Navigate to different cells with the arrow keys.</p></li>
+<li><p>A cell can be either be code, markdown, or “raw”.</p>
+<ul>
+<li><p>Code</p>
+<ul>
+<li><p>Python</p></li>
+<li><p>R</p></li>
+<li><p>Julia</p></li>
+<li><p><a class="reference external" href="https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages">Many Others</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Create cells from the Notebook menu or using keyboard shortcuts.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">h</span></code>: Bring up keyboard shortcuts screen.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="modes">
+<h2>Modes<a class="headerlink" href="#modes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Edit mode</p></th>
+<th class="head"><p>Command mode</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>How to enter</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Enter</span></code>,<br> or double-click</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Esc</span></code> or <code class="docutils literal notranslate"><span class="pre">Ctrl-m</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Cell border</p></td>
+<td><p>Green</p></td>
+<td><p>Blue</p></td>
+</tr>
+<tr class="row-even"><td><p>Action</p></td>
+<td><p>Type code or text</p></td>
+<td><p>Notebook-level actions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="some-shortcuts">
+<h2>Some shortcuts<a class="headerlink" href="#some-shortcuts" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span></code>-<code class="docutils literal notranslate"><span class="pre">Enter</span></code>: Run Cell</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shift</span></code>-<code class="docutils literal notranslate"><span class="pre">Enter</span></code>: Run cell, select cell below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Alt</span></code>-<code class="docutils literal notranslate"><span class="pre">Enter</span></code>: Run Cell, insert below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> : Insert cell (above)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b</span></code> : Insert cell (below)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dd</span></code> : Delete cell (the same as VIM)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span></code>-<code class="docutils literal notranslate"><span class="pre">s</span></code>: Save Notebook</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code>: Interrupt kernel (press twice).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: Restart kernel (press twice).</p></li>
+</ul>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<section id="nice-errors">
+<h3>1. Nice Errors<a class="headerlink" href="#nice-errors" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="n">foos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">foos</span>
+
+<span class="ne">NameError</span>: name &#39;foos&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inline-documentation">
+<h3>2. Inline Documentation<a class="headerlink" href="#inline-documentation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>open<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">Signature:</span>
+open(
+    file,
+    mode=<span class=" -Color -Color-Yellow">&#39;r&#39;</span>,
+    buffering=-<span class=" -Color -Color-Green">1</span>,
+    encoding=<span class=" -Color -Color-Bold -Color-Bold-C28">None</span>,
+    errors=<span class=" -Color -Color-Bold -Color-Bold-C28">None</span>,
+    newline=<span class=" -Color -Color-Bold -Color-Bold-C28">None</span>,
+    closefd=<span class=" -Color -Color-Bold -Color-Bold-C28">True</span>,
+    opener=<span class=" -Color -Color-Bold -Color-Bold-C28">None</span>,
+)
+<span class=" -Color -Color-Red">Docstring:</span>
+Open file and return a stream.  Raise OSError upon failure.
+
+file is either a text or byte string giving the name (and the path
+if the file isn&#39;t in the current working directory) of the file to
+be opened or an integer file descriptor of the file to be
+wrapped. (If a file descriptor is given, it is closed when the
+returned I/O object is closed, unless closefd is set to False.)
+
+mode is an optional string that specifies the mode in which the file
+is opened. It defaults to &#39;r&#39; which means open for reading in text
+mode.  Other common values are &#39;w&#39; for writing (truncating the file if
+it already exists), &#39;x&#39; for creating and writing to a new file, and
+&#39;a&#39; for appending (which on some Unix systems, means that all writes
+append to the end of the file regardless of the current seek position).
+In text mode, if encoding is not specified the encoding used is platform
+dependent: locale.getencoding() is called to get the current locale encoding.
+(For reading and writing raw bytes use binary mode and leave encoding
+unspecified.) The available modes are:
+
+========= ===============================================================
+Character Meaning
+--------- ---------------------------------------------------------------
+&#39;r&#39;       open for reading (default)
+&#39;w&#39;       open for writing, truncating the file first
+&#39;x&#39;       create a new file and open it for writing
+&#39;a&#39;       open for writing, appending to the end of the file if it exists
+&#39;b&#39;       binary mode
+&#39;t&#39;       text mode (default)
+&#39;+&#39;       open a disk file for updating (reading and writing)
+========= ===============================================================
+
+The default mode is &#39;rt&#39; (open for reading text). For binary random
+access, the mode &#39;w+b&#39; opens and truncates the file to 0 bytes, while
+&#39;r+b&#39; opens the file without truncation. The &#39;x&#39; mode implies &#39;w&#39; and
+raises an `FileExistsError` if the file already exists.
+
+Python distinguishes between files opened in binary and text modes,
+even when the underlying operating system doesn&#39;t. Files opened in
+binary mode (appending &#39;b&#39; to the mode argument) return contents as
+bytes objects without any decoding. In text mode (the default, or when
+&#39;t&#39; is appended to the mode argument), the contents of the file are
+returned as strings, the bytes having been first decoded using a
+platform-dependent encoding or using the specified encoding if given.
+
+buffering is an optional integer used to set the buffering policy.
+Pass 0 to switch buffering off (only allowed in binary mode), 1 to select
+line buffering (only usable in text mode), and an integer &gt; 1 to indicate
+the size of a fixed-size chunk buffer.  When no buffering argument is
+given, the default buffering policy works as follows:
+
+* Binary files are buffered in fixed-size chunks; the size of the buffer
+  is chosen using a heuristic trying to determine the underlying device&#39;s
+  &quot;block size&quot; and falling back on `io.DEFAULT_BUFFER_SIZE`.
+  On many systems, the buffer will typically be 4096 or 8192 bytes long.
+
+* &quot;Interactive&quot; text files (files for which isatty() returns True)
+  use line buffering.  Other text files use the policy described above
+  for binary files.
+
+encoding is the name of the encoding used to decode or encode the
+file. This should only be used in text mode. The default encoding is
+platform dependent, but any encoding supported by Python can be
+passed.  See the codecs module for the list of supported encodings.
+
+errors is an optional string that specifies how encoding errors are to
+be handled---this argument should not be used in binary mode. Pass
+&#39;strict&#39; to raise a ValueError exception if there is an encoding error
+(the default of None has the same effect), or pass &#39;ignore&#39; to ignore
+errors. (Note that ignoring encoding errors can lead to data loss.)
+See the documentation for codecs.register or run &#39;help(codecs.Codec)&#39;
+for a list of the permitted encoding error strings.
+
+newline controls how universal newlines works (it only applies to text
+mode). It can be None, &#39;&#39;, &#39;\n&#39;, &#39;\r&#39;, and &#39;\r\n&#39;.  It works as
+follows:
+
+* On input, if newline is None, universal newlines mode is
+  enabled. Lines in the input can end in &#39;\n&#39;, &#39;\r&#39;, or &#39;\r\n&#39;, and
+  these are translated into &#39;\n&#39; before being returned to the
+  caller. If it is &#39;&#39;, universal newline mode is enabled, but line
+  endings are returned to the caller untranslated. If it has any of
+  the other legal values, input lines are only terminated by the given
+  string, and the line ending is returned to the caller untranslated.
+
+* On output, if newline is None, any &#39;\n&#39; characters written are
+  translated to the system default line separator, os.linesep. If
+  newline is &#39;&#39; or &#39;\n&#39;, no translation takes place. If newline is any
+  of the other legal values, any &#39;\n&#39; characters written are translated
+  to the given string.
+
+If closefd is False, the underlying file descriptor will be kept open
+when the file is closed. This does not work when a file name is given
+and must be True in that case.
+
+A custom opener can be used by passing a callable as *opener*. The
+underlying file descriptor for the file object is then obtained by
+calling *opener* with (*file*, *flags*). *opener* must return an open
+file descriptor (passing os.open as *opener* results in functionality
+similar to passing None).
+
+open() returns a file object whose type depends on the mode, and
+through which the standard file operations such as reading and writing
+are performed. When open() is used to open a file in a text mode (&#39;w&#39;,
+&#39;r&#39;, &#39;wt&#39;, &#39;rt&#39;, etc.), it returns a TextIOWrapper. When used to open
+a file in a binary mode, the returned class varies: in read binary
+mode, it returns a BufferedReader; in write binary and append binary
+modes, it returns a BufferedWriter, and in read/write mode, it returns
+a BufferedRandom.
+
+It is also possible to use a string or bytearray as a file for both
+reading and writing. For strings StringIO can be used like a file
+opened in a text mode, and for bytes a BytesIO can be used like a file
+opened in a binary mode.
+<span class=" -Color -Color-Red">Type:</span>      function
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tab-completion-predictive-and-helpful">
+<h3>3. Tab Completion (predictive and helpful!)<a class="headerlink" href="#tab-completion-predictive-and-helpful" title="Link to this heading">#</a></h3>
+<p>Type <code class="docutils literal notranslate"><span class="pre">o</span></code> then <code class="docutils literal notranslate"><span class="pre">tab</span></code> and you should see a drop-down menu of choices.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">o</span>   <span class="c1"># Always press the tab! Tab is the same as Unix. It works a little like predictive text messaging if you are unfamilar with it. </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-shell-commands-with">
+<h3>4. Run Shell Commands with “!”<a class="headerlink" href="#run-shell-commands-with" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pwd
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/r/sense_cpd/sense_book/book/1_python_zero2hero/1_intro
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls<span class="w"> </span>
+<span class="c1"># ls is a Unix command for list. Here we are listing all files within out current Jupyternotebook directory. </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>00-Introduction.ipynb
+01-How-to-Run-Python-Code.ipynb
+02-Jupyter-Notebook.ipynb
+03-Basic-Python-Syntax.ipynb
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="remote-operations">
+<h3>5. Remote Operations<a class="headerlink" href="#remote-operations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>You can run code both locally and remotely.</p></li>
+<li><p>For example, you can connect to HPC via SSH protocol and run your code there.</p></li>
+</ul>
+</section>
+<section id="embed-images-or-videos">
+<h3>6. Embed Images or Videos<a class="headerlink" href="#embed-images-or-videos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.core.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span> 
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://python.org/images/python-logo.gif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="http://python.org/images/python-logo.gif"/></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://upload.wikimedia.org/wikipedia/commons/3/38/Jupyter_logo.svg&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Jupyter_logo.svg" width="200"/></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.lib.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
+<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;7qym7b-qvkE&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/7qym7b-qvkE"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="load-remote-code-this-is-very-cool-and-helpful">
+<h3>7. Load Remote Code - This is Very Cool and helpful!<a class="headerlink" href="#load-remote-code-this-is-very-cool-and-helpful" title="Link to this heading">#</a></h3>
+<p>You can pull up remote code using <code class="docutils literal notranslate"><span class="pre">loadpy</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loadpy</span> <span class="n">loadpy</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">_downloads</span><span class="o">/</span><span class="mf">3958e02</span><span class="n">c30f3c9f9ed7a1cf34bfcf4ad</span><span class="o">/</span><span class="n">cohere</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load https://matplotlib.org/_downloads/3958e02c30f3c9f9ed7a1cf34bfcf4ad/cohere.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">=====================================</span>
+<span class="sd">Plotting the coherence of two signals</span>
+<span class="sd">=====================================</span>
+
+<span class="sd">An example showing how to plot the coherence of two signals.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Fixing random state for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">nse1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>                 <span class="c1"># white noise 1</span>
+<span class="n">nse2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>                 <span class="c1"># white noise 2</span>
+
+<span class="c1"># Two signals with a coherent part at 10Hz and a random part</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">nse1</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">nse2</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;s1 and s2&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">cxy</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">cohere</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">dt</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;coherence&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\s2112771\AppData\Local\Temp\ipykernel_20444\2731044583.py:31: MatplotlibDeprecationWarning: Passing the NFFT parameter of cohere() positionally is deprecated since Matplotlib 3.9; the parameter will become keyword-only in 3.11.
+  cxy, f = axs[1].cohere(s1, s2, 256, 1. / dt)
+</pre></div>
+</div>
+<img alt="../../../_images/e0b14364629ae7446d581901651ff422ba1a146f860791e556bd2a4994fdaa1b.png" src="../../../_images/e0b14364629ae7446d581901651ff422ba1a146f860791e556bd2a4994fdaa1b.png" />
+</div>
+</div>
+<p>You can also notice that probably the best feature of the notebook is inline figures.</p>
+</section>
+</section>
+<section id="sharing-notebooks">
+<h2>Sharing Notebooks<a class="headerlink" href="#sharing-notebooks" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The file itself is simply a <code class="docutils literal notranslate"><span class="pre">JSON</span></code> file which can be shared the same as any other file.</p></li>
+</ul>
+<ul class="simple">
+<li><p>It is possible to save a notebook in various formats via the <code class="docutils literal notranslate"><span class="pre">File-&gt;Download</span> <span class="pre">As</span></code> menu.</p>
+<ul>
+<li><p>HTML</p></li>
+<li><p>Markdown</p></li>
+<li><p>Python script</p></li>
+<li><p>PDF</p></li>
+<li><p>etc.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><a class="reference external" href="http://nbviewer.jupyter.org/">NBviewer</a> - view (but not execute) Jupyter Notebooks</p></li>
+</ul>
+<ul class="simple">
+<li><p>Cloud services:</p>
+<ul>
+<li><p><a class="reference external" href="http://wakari.io">Wakari</a></p></li>
+<li><p><a class="reference external" href="http://www.mybinder.org/">Binder</a></p></li>
+<li><p><a class="reference external" href="https://cloud.sagemath.com/">SageMath</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>This Notebook was build upon materials from the Unidata Python Workshop <a class="github reference external" href="https://github.com/Unidata/unidata-python-workshop">Unidata/unidata-python-workshop</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/1_python_zero2hero/1_intro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01-How-to-Run-Python-Code.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1.1 How to Run Python Code</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03-Basic-Python-Syntax.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1.3 Python Language Syntax</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#showcase-2017-nobel-prize-in-physics">Showcase: 2017 Nobel Prize in Physics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-cells">Notebook Cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modes">Modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-shortcuts">Some shortcuts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nice-errors">1. Nice Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-documentation">2. Inline Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tab-completion-predictive-and-helpful">3. Tab Completion (predictive and helpful!)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-shell-commands-with">4. Run Shell Commands with “!”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-operations">5. Remote Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embed-images-or-videos">6. Embed Images or Videos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-remote-code-this-is-very-cool-and-helpful">7. Load Remote Code - This is Very Cool and helpful!</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharing-notebooks">Sharing Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By SENSE CDT
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
