@@ -1,3 +1,12 @@
+.*.sw*
+.DS_Store
+*.nc
+lightning_logs/
+Nx256_s200000.0_N500study_pretrained*
+.ipynb_checkpoints/
+notebooks/data/
+notebooks/random_waves/
+
 # data files
 sense_ae_data/
 sense_ae.zip
@@ -5,8 +14,6 @@ experiments/
 dubai_segmentation/
 data/
 *.ckpt
-lightning_logs/
-book/2_geo_python/4_putting_it_together/data/*.nc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -182,4 +189,3 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-book/2_geo_python/4_putting_it_together/data/*.nc
