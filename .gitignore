@@ -6,7 +6,7 @@ dubai_segmentation/
 data/
 *.ckpt
 lightning_logs/
-
+book/2_geo_python/4_putting_it_together/data/*.nc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -182,3 +182,4 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+book/2_geo_python/4_putting_it_together/data/*.nc
