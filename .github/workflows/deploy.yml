@@ -40,11 +40,11 @@ concurrency:
 #       - name: Build the book
 #         run: jupyter-book build sense_book
 
-#       # Upload the book's HTML as an artifact
-#       - name: Upload artifact
-#         uses: actions/upload-pages-artifact@v3
-#         with:
-#           path: "sense_book/_build/html"
+      # # Upload the book's HTML as an artifact
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     path: "sense_book/_build/html"
 
 #       # Deploy the book's HTML to GitHub Pages
 #       - name: Deploy to GitHub Pages
@@ -63,6 +63,14 @@ jobs:
         with:
           repository: 'leamhowe/sense-jb'
           token: ${{ secrets.GITHUB_TOKEN }}  # Add this line
+
+      # Upload the book's HTML as an artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "sense_book/_build/html"          
+
+      
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
