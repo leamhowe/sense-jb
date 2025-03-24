@@ -1,3 +1,12 @@
+# data files
+sense_ae_data/
+sense_ae.zip
+experiments/
+dubai_segmentation/
+data/
+*.ckpt
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
