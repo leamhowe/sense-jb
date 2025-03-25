@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extract a time series &#8212; SENSE Training Resources</title>
+    <title>3.2 - Time Series &#8212; SENSE Training Resources</title>
   
   
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/2_geo_python/3_gee_python/2_Time_series';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Machine learning in Earth Engine" href="3_Classification.html" />
+    <link rel="next" title="3.3 - Classifiers in Earth Engine" href="3_Classification.html" />
     <link rel="prev" title="3.1 - Open and Display" href="1_Open_and_display.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -222,7 +222,6 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/cartopy.html">Cartopy</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/geopandas.html">GeoPandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/rasterio.html">Rasterio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/rioxarray.html">Rioxarray</a></li>
@@ -244,8 +243,8 @@
 <li class="toctree-l2"><a class="reference internal" href="0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1_Open_and_display.html">3.1 - Open and Display</a></li>
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Extract a time series</a></li>
-<li class="toctree-l2"><a class="reference internal" href="3_Classification.html">Machine learning in Earth Engine</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.2 - Time Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_Classification.html">3.3 - Classifiers in Earth Engine</a></li>
 </ul>
 </details></li>
 </ul>
@@ -269,7 +268,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep.html">3 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/00_intro.html">Satellite image deep learning with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Segmentation</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/03_autoencoders.html">Autoencoders</a></li>
 
@@ -505,7 +504,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Extract a time series</h1>
+    <h1>3.2 - Time Series</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -533,8 +532,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="extract-a-time-series">
-<h1>Extract a time series<a class="headerlink" href="#extract-a-time-series" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="time-series">
+<h1>3.2 - Time Series<a class="headerlink" href="#time-series" title="Link to this heading">#</a></h1>
 <section id="imagecollection">
 <h2>ImageCollection<a class="headerlink" href="#imagecollection" title="Link to this heading">#</a></h2>
 <p>An ImageCollection is a stack or time series of images. In addition to loading an ImageCollection using an Earth Engine collection ID, Earth Engine has methods to create image collections. The constructor <code class="docutils literal notranslate"><span class="pre">ee.ImageCollection()</span></code> or the convenience method <code class="docutils literal notranslate"><span class="pre">ee.ImageCollection.fromImages()</span></code> create image collections from lists of images. While single images are great to do quick analytics, the true power of the Earth Engine environment comes with the possibility of looking at really large and heavy image collections and to be able to push analysis towards the data, rather than the need for the data to travel at all. In the GEE environment image collections have their own characteristic setup and are composted with single images that we discussed earlier. They can often have the same or different band structure but generally share a similar metadata structure for filtering and querying.</p>
@@ -12549,7 +12548,7 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/MODIS_00
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Machine learning in Earth Engine</p>
+        <p class="prev-next-title">3.3 - Classifiers in Earth Engine</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

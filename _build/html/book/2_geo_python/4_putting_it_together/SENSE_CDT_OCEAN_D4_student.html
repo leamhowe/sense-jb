@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction &#8212; SENSE Training Resources</title>
+    <title>Exploring the sea surface with Xarray &#8212; SENSE Training Resources</title>
   
   
   
@@ -220,7 +220,6 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/cartopy.html">Cartopy</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/geopandas.html">GeoPandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/rasterio.html">Rasterio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_spatial_data_tools/rioxarray.html">Rioxarray</a></li>
@@ -242,8 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../3_gee_python/0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_gee_python/1_Open_and_display.html">3.1 - Open and Display</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../3_gee_python/2_Time_series.html">Extract a time series</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_gee_python/3_Classification.html">Machine learning in Earth Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_gee_python/2_Time_series.html">3.2 - Time Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_gee_python/3_Classification.html">3.3 - Classifiers in Earth Engine</a></li>
 </ul>
 </details></li>
 </ul>
@@ -267,7 +266,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep.html">3 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/00_intro.html">Satellite image deep learning with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Segmentation</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/03_autoencoders.html">Autoencoders</a></li>
 
@@ -503,7 +502,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction</h1>
+    <h1>Exploring the sea surface with Xarray</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -513,30 +512,29 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-temperature">Sea Surface Temperature</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">load data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-data">Plot data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">Data analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#averaging">Averaging</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle">Seasonal cycle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interannual-variability">Interannual variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-temperature">Sea Surface Temperature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">load data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-data">Plot data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">Data analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#averaging">Averaging</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle">Seasonal cycle</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interannual-variability">Interannual variability</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-salinity">Sea Surface Salinity</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">load data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-salinity">Sea Surface Salinity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">load data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data analysis</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-level">Sea Level</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">load data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-level">Sea Level</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">load data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Data analysis</a></li>
 </ul>
 </li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -547,8 +545,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="exploring-the-sea-surface-with-xarray">
+<h1>Exploring the sea surface with Xarray<a class="headerlink" href="#exploring-the-sea-surface-with-xarray" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>In this notebooks we will explore the spatio-temporal variability of key oceanic variables
 that we can measure from space, i.e. Sea Surface Temperature (SST), Sea Surface Salinity (SSS) and Sea Level (SL).
 We will start with the SST and we will follow a step by step approach.
@@ -580,8 +580,8 @@ You’re expected to follow the same approach for SSS and SL.</p>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="sea-surface-temperature">
-<h1>Sea Surface Temperature<a class="headerlink" href="#sea-surface-temperature" title="Link to this heading">#</a></h1>
+<section id="sea-surface-temperature">
+<h2>Sea Surface Temperature<a class="headerlink" href="#sea-surface-temperature" title="Link to this heading">#</a></h2>
 <p>Nowadays, most global european datasets for the ocean are available on the Copernicus Marine Service (CMES) platform:</p>
 <p><a class="reference external" href="https://resources.marine.copernicus.eu/products">https://resources.marine.copernicus.eu/products</a></p>
 <p>If you search for sea surface temperature and specify the “Regional domain” to be “Global Ocean”, you should see 9 ocean products.
@@ -592,7 +592,7 @@ Among the “Observation” there are Level-4 (L4) and Level-3 (L3) products, wi
 using in-situ and satellite data from both infrared and microwave radiometers.</p>
 <p><a class="reference external" href="https://doi.org/10.48670/moi-00165">https://doi.org/10.48670/moi-00165</a></p>
 <section id="load-data">
-<h2>load data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h2>
+<h3>load data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h3>
 <p>The data have already been compiled in a single file <code class="docutils literal notranslate"><span class="pre">OSITAMonthly_sub3.nc</span></code> that you downloaded from Google Drive (and subsetted for practical purposes).</p>
 <p>You need to update the variable <code class="docutils literal notranslate"><span class="pre">fname</span></code> in order to correspond to the path of your file from the path of your notebook.</p>
 <div class="cell docutils container">
@@ -1158,7 +1158,7 @@ Attributes: (12/46)
 </div>
 </section>
 <section id="plot-data">
-<h2>Plot data<a class="headerlink" href="#plot-data" title="Link to this heading">#</a></h2>
+<h3>Plot data<a class="headerlink" href="#plot-data" title="Link to this heading">#</a></h3>
 <p>We will start by selecting a date by using either a label (as below) with the <code class="docutils literal notranslate"><span class="pre">.sel</span></code> method, or by using a numerical index using the <code class="docutils literal notranslate"><span class="pre">.isel</span></code> method.</p>
 <p>We will then plot the <code class="docutils literal notranslate"><span class="pre">analysed_sst</span></code> field with all labels and title already filled in thanks to xarray and the attributes completed in the NetCDF file.</p>
 <div class="cell docutils container">
@@ -1250,7 +1250,7 @@ The latter is more suitable if we plan to reuse it often, as it will be our case
 </div>
 </section>
 <section id="data-analysis">
-<h2>Data analysis<a class="headerlink" href="#data-analysis" title="Link to this heading">#</a></h2>
+<h3>Data analysis<a class="headerlink" href="#data-analysis" title="Link to this heading">#</a></h3>
 <p>We have started to learn how to use xarray, manipulate the data and plot it.
 In this section, we will do some data analysis to study spatio-temporal variability.</p>
 <p>We will start by looking at the histogram of SST using the method <code class="docutils literal notranslate"><span class="pre">.plot.hist</span></code>. You can take the default but also define the <code class="docutils literal notranslate"><span class="pre">bins</span></code> either with an array, or with a number of bins.</p>
@@ -1284,7 +1284,7 @@ In this section, we will do some data analysis to study spatio-temporal variabil
 </div>
 </div>
 <section id="averaging">
-<h3>Averaging<a class="headerlink" href="#averaging" title="Link to this heading">#</a></h3>
+<h4>Averaging<a class="headerlink" href="#averaging" title="Link to this heading">#</a></h4>
 <p>Plot the average (<code class="docutils literal notranslate"><span class="pre">.mean</span></code>, …) in <code class="docutils literal notranslate"><span class="pre">'time'</span></code></p>
 <p><em>What do you see?</em>
 <em>Can you notice any particular differences around coasts?</em></p>
@@ -1347,7 +1347,7 @@ In this section, we will do some data analysis to study spatio-temporal variabil
 </div>
 </section>
 <section id="seasonal-cycle">
-<h3>Seasonal cycle<a class="headerlink" href="#seasonal-cycle" title="Link to this heading">#</a></h3>
+<h4>Seasonal cycle<a class="headerlink" href="#seasonal-cycle" title="Link to this heading">#</a></h4>
 <p>Plot the climatology of SST below for each month using <code class="docutils literal notranslate"><span class="pre">groupby</span></code> and <code class="docutils literal notranslate"><span class="pre">'time.month'</span></code>.
 Then, do the same with <code class="docutils literal notranslate"><span class="pre">'time.season'</span></code>.
 In order to see the climatology, plot the climatology anomaly to the mean (e.g. temporal mean).</p>
@@ -1933,7 +1933,7 @@ Attributes:
 </div>
 </section>
 <section id="interannual-variability">
-<h3>Interannual variability<a class="headerlink" href="#interannual-variability" title="Link to this heading">#</a></h3>
+<h4>Interannual variability<a class="headerlink" href="#interannual-variability" title="Link to this heading">#</a></h4>
 <p>The interannual variability will be assessed here by looking at the anomaly to the climatology.
 We will do it for the seasons (<code class="docutils literal notranslate"><span class="pre">time.season</span></code>), but it can be done with any period (e.g. monthly).
 The specific methods to use are <code class="docutils literal notranslate"><span class="pre">resample</span></code> in addition to the previous <code class="docutils literal notranslate"><span class="pre">groupby</span></code>.
@@ -5115,15 +5115,15 @@ Coordinates:
 </section>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="sea-surface-salinity">
-<h1>Sea Surface Salinity<a class="headerlink" href="#sea-surface-salinity" title="Link to this heading">#</a></h1>
+<section id="sea-surface-salinity">
+<h2>Sea Surface Salinity<a class="headerlink" href="#sea-surface-salinity" title="Link to this heading">#</a></h2>
 <p>In the previous section we did a quick preanalysis of SST variability. We do the same for other variables, here SSS.</p>
 <p>The Sea Surface Salinity product proposed here is taken from
 the ESA Climate Change Initiative for Sea Surface Salinity:
 <a class="reference external" href="https://climate.esa.int/en/projects/sea-surface-salinity/">https://climate.esa.int/en/projects/sea-surface-salinity/</a></p>
 <p>It is a Level-4 product which combines SMOS, Aquarius and SMAP data.</p>
 <section id="id1">
-<h2>load data<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h3>load data<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>The data have already been compiled in a single file <code class="docutils literal notranslate"><span class="pre">CCISSSv3_sub3.nc</span></code> that you downloaded from Google Drive  (and subsetted for practical purposes).</p>
 <p>You need to update the variable <code class="docutils literal notranslate"><span class="pre">fname</span></code> in order to correspond to the path of your file from the path of your notebook.</p>
 <div class="cell docutils container">
@@ -5138,7 +5138,7 @@ the ESA Climate Change Initiative for Sea Surface Salinity:
 before diving into a preliminary data analysis. Look at the variables, grid, quality control (QC) flag, …</p>
 </section>
 <section id="id2">
-<h2>Data analysis<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h3>Data analysis<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>For this preliminary data analysis, you can follow the same steps as for SST, i.e. looking at the distribution; mean/std in time and/or longitude; anomaly to the means; seasonal variability; interannual variability; …</p>
 <p>For each step, interpret what are the obvious features (maxima, minima) and suggest some hypothesis for the underlying processes.</p>
 <p>Keep in mind, sea surface salinity is a tracer of the freshwater cycle (evaporation, precipitation, runoff) and of water mass circulation (ocean current). You can base your interpretation on the knowledge you have of the freshwater cycle
@@ -5825,8 +5825,8 @@ Attributes: (12/42)
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="sea-level">
-<h1>Sea Level<a class="headerlink" href="#sea-level" title="Link to this heading">#</a></h1>
+<section id="sea-level">
+<h2>Sea Level<a class="headerlink" href="#sea-level" title="Link to this heading">#</a></h2>
 <p>The Mean Sea Level Anomaly product proposed here is a Global Sea Level (Sea Surface Heights) gridded Level-4 Monthly products taken from:</p>
 <p><a class="reference external" href="https://resources.marine.copernicus.eu/product-detail/SEALEVEL_GLO_PHY_L4_MY_008_047/INFORMATION">https://resources.marine.copernicus.eu/product-detail/SEALEVEL_GLO_PHY_L4_MY_008_047/INFORMATION</a></p>
 <p><a class="reference external" href="https://doi.org/10.48670/moi-00148">https://doi.org/10.48670/moi-00148</a></p>
@@ -5834,7 +5834,7 @@ Attributes: (12/42)
 <p><em>What can you observe in terms of long term change in sea level?</em></p>
 <p><em>Do yo you notice any similarities in year-to-year variability in sea level and SST/SSS?</em></p>
 <section id="id3">
-<h2>load data<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h3>load data<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>The data have already been compiled in a single file <code class="docutils literal notranslate"><span class="pre">AvisoMonthly_all.nc</span></code> that you downloaded from Google Drive.</p>
 <p>You need to update the variable <code class="docutils literal notranslate"><span class="pre">fname</span></code> in order to correspond to the path of your file from the path of your notebook.</p>
 <div class="cell docutils container">
@@ -5849,7 +5849,7 @@ Attributes: (12/42)
 before diving into a preliminary data analysis. Question yourself about variables, grid, quality control (QC) flag, …</p>
 </section>
 <section id="id4">
-<h2>Data analysis<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<h3>Data analysis<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>For this preliminary data analysis, you can follow the same steps as for SST/SSS, i.e. looking at the distribution; mean in time and/or longitude; anomaly to the means; seasonal variability; interannual variability; …</p>
 <p>For each step, interpret what are the obvious features and suggest some hypothesis for the underlying processes.</p>
 <p>Keep in mind, sea level is linked to steric height and ocean circulation (including eddies).</p>
@@ -5920,6 +5920,7 @@ before diving into a preliminary data analysis. Question yourself about variable
 </div>
 </section>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -5967,30 +5968,29 @@ before diving into a preliminary data analysis. Question yourself about variable
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-temperature">Sea Surface Temperature</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">load data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-data">Plot data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">Data analysis</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#averaging">Averaging</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle">Seasonal cycle</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interannual-variability">Interannual variability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-temperature">Sea Surface Temperature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">load data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-data">Plot data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analysis">Data analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#averaging">Averaging</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-cycle">Seasonal cycle</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interannual-variability">Interannual variability</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-salinity">Sea Surface Salinity</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">load data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-surface-salinity">Sea Surface Salinity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">load data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Data analysis</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-level">Sea Level</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">load data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Data analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-level">Sea Level</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">load data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Data analysis</a></li>
 </ul>
 </li>
 </ul>
-
   </nav></div>
 
 </div></div>

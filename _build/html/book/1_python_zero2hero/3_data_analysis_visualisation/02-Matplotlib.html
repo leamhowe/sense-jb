@@ -222,7 +222,6 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/cartopy.html">Cartopy</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/geopandas.html">GeoPandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/rasterio.html">Rasterio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/rioxarray.html">Rioxarray</a></li>
@@ -244,8 +243,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">3.1 - Open and Display</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">Extract a time series</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/3_Classification.html">Machine learning in Earth Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">3.2 - Time Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/3_Classification.html">3.3 - Classifiers in Earth Engine</a></li>
 </ul>
 </details></li>
 </ul>
@@ -269,7 +268,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep.html">3 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/00_intro.html">Satellite image deep learning with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Segmentation</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/03_autoencoders.html">Autoencoders</a></li>
 
@@ -533,18 +532,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-sequantial-and-diverging-colormaps">Default sequantial and diverging colormaps</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#public-service-announcement">Public service announcement</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#countour-and-countourf-plots">Countour and countourf plots</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-colorbar">How to add a colorbar?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-save-a-figure">How to save a figure?</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#countour-and-countourf-plots">Countour and countourf plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-colorbar">Add a colorbar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-save-a-figure">How to save a figure?</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-figures">Combined figures</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-matplotlib-exercise-40-mins">Final matplotlib exercise (40 mins)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-styles-with-matplotlib">Bonus: styles with matplotlib</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-matplotlib-exercise-40-mins">Final matplotlib exercise (40 mins)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-styles-with-matplotlib">Bonus: styles with matplotlib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References:</a></li>
 </ul>
             </nav>
@@ -1152,8 +1149,9 @@ document.write(`
 <h3>Public service announcement<a class="headerlink" href="#public-service-announcement" title="Link to this heading">#</a></h3>
 <p><strong>Jet has no place in the 21st century</strong>. Also referred to as rainbow, jet is an <a class="reference external" href="http://medvis.org/2012/08/21/rainbow-colormaps-what-are-they-good-for-absolutely-nothing/">awful colormap</a> that promotes <a class="reference external" href="https://blogs.egu.eu/divisions/gd/2017/08/23/the-rainbow-colour-map/">bad science</a>. The distortions caused by these colour maps has been <a class="reference internal" href="#www.fabiocrameri.ch/resources/PosterScientificColourMaps_Crameri.pdf"><span class="xref myst">widely</span></a> <a class="reference external" href="https://academic.oup.com/icesjms/article/77/2/826/5684813">documented</a>. Python ships with great perceptually uniform default colormaps (shown above). If they’re not quite what you want, check out these great custom colourmaps crafted for <a class="reference external" href="https://matplotlib.org/cmocean/">oceanography</a> and <a class="reference external" href="http://www.fabiocrameri.ch/colourmaps.php">geophysics</a>.</p>
 </section>
+</section>
 <section id="countour-and-countourf-plots">
-<h3>Countour and countourf plots<a class="headerlink" href="#countour-and-countourf-plots" title="Link to this heading">#</a></h3>
+<h2>Countour and countourf plots<a class="headerlink" href="#countour-and-countourf-plots" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">contour()</span></code> and <code class="docutils literal notranslate"><span class="pre">contourf()</span></code> draw contour lines and filled contours, respectively</p></li>
 <li><p>good for 2D gridded data</p></li>
@@ -1193,8 +1191,8 @@ document.write(`
 <img alt="../../../_images/7d04e5def1eed51af4b64c14ab62776ae0c17d92efda79b0c3cd1239e7e0ffef.png" src="../../../_images/7d04e5def1eed51af4b64c14ab62776ae0c17d92efda79b0c3cd1239e7e0ffef.png" />
 </div>
 </div>
-<section id="how-to-add-a-colorbar">
-<h4>How to add a colorbar?<a class="headerlink" href="#how-to-add-a-colorbar" title="Link to this heading">#</a></h4>
+<section id="add-a-colorbar">
+<h3>Add a colorbar<a class="headerlink" href="#add-a-colorbar" title="Link to this heading">#</a></h3>
 <p>The <strong>colorbar</strong> has to have its own <strong>Axes</strong>!</p>
 <p>This is created by adding a colorbar to the figure, telling matplotlib which plotted values to use for the colorbar content with <code class="docutils literal notranslate"><span class="pre">fig.colorbar(mappable,</span> <span class="pre">ax=ax_no)</span></code></p>
 <div class="cell docutils container">
@@ -1219,7 +1217,7 @@ document.write(`
 </div>
 </section>
 <section id="how-to-save-a-figure">
-<h4>How to save a figure?<a class="headerlink" href="#how-to-save-a-figure" title="Link to this heading">#</a></h4>
+<h3>How to save a figure?<a class="headerlink" href="#how-to-save-a-figure" title="Link to this heading">#</a></h3>
 <p>Use <code class="docutils literal notranslate"><span class="pre">fig.savefig(fname,</span> <span class="pre">dpi=,</span> <span class="pre">facecolor=,</span> <span class="pre">bbox_inches='tight',</span> <span class="pre">**kwargs)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1242,7 +1240,6 @@ document.write(`
 <img alt="../../../_images/4ceae952b4ad10ec2d16be05ef425e121ef653e4a0c2defbce3ecfd66d87d839.png" src="../../../_images/4ceae952b4ad10ec2d16be05ef425e121ef653e4a0c2defbce3ecfd66d87d839.png" />
 </div>
 </div>
-</section>
 </section>
 </section>
 <section id="combined-figures">
@@ -1400,9 +1397,10 @@ document.write(`
 <img alt="../../../_images/61e81d78d001c54559c043b584265793c0efbe01958d90738d8a820317b1b18a.png" src="../../../_images/61e81d78d001c54559c043b584265793c0efbe01958d90738d8a820317b1b18a.png" />
 </div>
 </div>
+</section>
 <hr class="docutils" />
 <section id="bonus-styles-with-matplotlib">
-<h3>Bonus: styles with matplotlib<a class="headerlink" href="#bonus-styles-with-matplotlib" title="Link to this heading">#</a></h3>
+<h2>Bonus: styles with matplotlib<a class="headerlink" href="#bonus-styles-with-matplotlib" title="Link to this heading">#</a></h2>
 <p>Matplotlib has a number of predefined styles that affect default colours, backgrounds, linewidths, font sizes etc.</p>
 <p>You can display all available default styles with the following code</p>
 <div class="cell docutils container">
@@ -1659,7 +1657,6 @@ findfont: Font family &#39;Comic Neue&#39; not found.
 </div>
 </div>
 </section>
-</section>
 <section id="references">
 <h2>References:<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <p>General matplotlib</p>
@@ -1762,18 +1759,16 @@ findfont: Font family &#39;Comic Neue&#39; not found.
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-sequantial-and-diverging-colormaps">Default sequantial and diverging colormaps</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#public-service-announcement">Public service announcement</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#countour-and-countourf-plots">Countour and countourf plots</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-colorbar">How to add a colorbar?</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-save-a-figure">How to save a figure?</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#countour-and-countourf-plots">Countour and countourf plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-colorbar">Add a colorbar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-save-a-figure">How to save a figure?</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-figures">Combined figures</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-matplotlib-exercise-40-mins">Final matplotlib exercise (40 mins)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-styles-with-matplotlib">Bonus: styles with matplotlib</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-matplotlib-exercise-40-mins">Final matplotlib exercise (40 mins)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-styles-with-matplotlib">Bonus: styles with matplotlib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References:</a></li>
 </ul>
   </nav></div>

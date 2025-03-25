@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Semantic segmentation of Aerial Imaginary with U-Net-like architectures &#8212; SENSE Training Resources</title>
+    <title>Segmentation &#8212; SENSE Training Resources</title>
   
   
   
@@ -207,7 +207,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/01-Numpy-Intro.html"> Introduction to NumPy</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/02-Matplotlib.html">Matplotlib - Intro</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/03-Working-with-datetime.html">Working with dates and times</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/04-Pandas-Intro.html">Introduction to pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/05-Plotting-with-Seaborn.html">Statistical plotting with Seaborn</a></li>
@@ -221,7 +220,6 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/cartopy.html">Cartopy</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/geopandas.html">GeoPandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/rasterio.html">Rasterio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/rioxarray.html">Rioxarray</a></li>
@@ -239,10 +237,12 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/2_eo_data.html">2 - EO data</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/3_gee_python.html">3 - GEE Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/ee_api_colab_setup.html">Earth Engine Python API Colab Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">Google Earth Engine: JavaScript, but Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">3.1 - Open and Display</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">ImageCollection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">3.2 - Time Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/3_Classification.html">3.3 - Classifiers in Earth Engine</a></li>
 </ul>
 </details></li>
 </ul>
@@ -266,7 +266,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../3_sat_ml_deep.html">3 - Deep Learning with PyTorch</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="00_intro.html">Satellite image deep learning with PyTorch</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Segmentation</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="03_autoencoders.html">Autoencoders</a></li>
 
@@ -502,7 +502,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Semantic segmentation of Aerial Imaginary with U-Net-like architectures</h1>
+    <h1>Segmentation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -512,15 +512,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-on-gpu">Run on GPU</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Segmentation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-segmentation-of-aerial-imaginary-with-u-net-like-architectures">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-nongeodatasets">Custom NonGeoDatasets</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-nongeodatasets">Custom NonGeoDatasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataloaders">Dataloaders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-batch">Visualise Batch</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation-model">Segmentation Model</a></li>
@@ -547,6 +542,9 @@ document.write(`
                   
   <p>Written by: Leam Howe <br />
 Adapted from work by David Hogg, Fangjun Li, Fengming Lin available at <a class="github reference external" href="https://github.com/lfj95/SENSE2023/tree/main">lfj95/SENSE2023</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="segmentation">
+<h1>Segmentation<a class="headerlink" href="#segmentation" title="Link to this heading">#</a></h1>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="semantic-segmentation-of-aerial-imaginary-with-u-net-like-architectures">
 <h1>Semantic segmentation of Aerial Imaginary with U-Net-like architectures<a class="headerlink" href="#semantic-segmentation-of-aerial-imaginary-with-u-net-like-architectures" title="Link to this heading">#</a></h1>
 <p>This notebook is a simple semantic segmentation program. The goal is to build and train a model which is able to automatically label each pixel in an aerial image with its semantic category.</p>
@@ -561,13 +559,10 @@ Adapted from work by David Hogg, Fangjun Li, Fengming Lin available at <a class=
 </ul>
 <p>U-Net is a convolutional neural network architecture originally developed for the segmentation of medical images (<a class="reference external" href="https://arxiv.org/abs/1505.04597">Ronneberger et al., 2015</a>), but is now widely used outside this domain. There is more information on U-Net <a class="reference external" href="https://towardsdatascience.com/u-net-b229b32b4a71">here</a>.</p>
 <p><img alt="Diagram of U-Net architecture" src="../../../_images/u-net_architecture.png" /></p>
-<!-- ![Diagram of U-Net architecture](https://www.researchgate.net/profile/Alan-Jackson-2/publication/323597886/figure/fig2/AS:601386504957959@1520393124691/Convolutional-neural-network-CNN-architecture-based-on-UNET-Ronneberger-et-al.png) --><section id="run-on-gpu">
-<h2>Run on GPU<a class="headerlink" href="#run-on-gpu" title="Link to this heading">#</a></h2>
+<p><font size="5"><strong>Run on GPU</strong></font></p>
 <p>For model runtime speed, check Collab is running on GPU.</p>
 <p>Click the “<strong>Runtime</strong>” dropdown menu. Select “<strong>Change runtime type</strong>”. Now select ‘<strong>GPU</strong>’ in the “<strong>Hardware accelerator</strong>” dropdown menu.</p>
-</section>
-<section id="environment">
-<h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">#</a></h2>
+<p><font size="5"><strong>Environment</strong></font></p>
 <p>We need to install some extract packages before we start</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -576,9 +571,7 @@ Adapted from work by David Hogg, Fangjun Li, Fengming Lin available at <a class=
 </div>
 </div>
 </div>
-</section>
-<section id="imports">
-<h2>Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
+<p><font size="6"><strong>Imports</strong></font></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
@@ -626,32 +619,8 @@ Adapted from work by David Hogg, Fangjun Li, Fengming Lin available at <a class=
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tmp_path = &#39;~/tmp/surface_water/&#39;</span>
-<span class="c1"># utils.download_and_extract_archive(</span>
-<span class="c1">#     &#39;https://hf.co/datasets/cordmaur/earth_surface_water/resolve/main/earth_surface_water.zip&#39;,</span>
-<span class="c1">#     tmp_path,</span>
-<span class="c1"># )</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Loading a dataset</p></li>
-<li><p>Creating a RasterDataset, DataLoaders and Samplers</p></li>
-<li><p>Normalising the data</p></li>
-<li><p>Spectral indicies</p></li>
-<li><p>define a unet model</p></li>
-<li><p>loss function and metrics</p></li>
-<li><p>training loop</p></li>
-</ul>
-</section>
-<section id="id1">
-<h2>Overview<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Loading a dataset</p></li>
 <li><p>Creating a custom NonGeoDataset</p></li>
@@ -665,9 +634,8 @@ Adapted from work by David Hogg, Fangjun Li, Fengming Lin available at <a class=
 <li><p>Try using pretrained weights</p></li>
 </ol>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="custom-nongeodatasets">
-<h1>Custom NonGeoDatasets<a class="headerlink" href="#custom-nongeodatasets" title="Link to this heading">#</a></h1>
+<section id="custom-nongeodatasets">
+<h2>Custom NonGeoDatasets<a class="headerlink" href="#custom-nongeodatasets" title="Link to this heading">#</a></h2>
 <p>Previously we have seen examples of loading datasets that TorchGeo has made available and easy to integrate, a list of these are available <a class="reference external" href="https://torchgeo.readthedocs.io/en/latest/api/datasets.html">here</a>. But what happens if you want to use another dataset or you have created your own…</p>
 <p>TorchGeo has the functionality to build your own custom Dataset. More details on this can be found here: <a class="reference external" href="https://torchgeo.readthedocs.io/en/latest/api/datasets.html">https://torchgeo.readthedocs.io/en/latest/api/datasets.html</a></p>
 <p>Let’s create our own custom NonGeoDataset (a dataset without georeferencing) class that will take take our dataset and prepare it for training our U-Net model.</p>
@@ -799,6 +767,7 @@ Adapted from work by David Hogg, Fangjun Li, Fengming Lin available at <a class=
 </div>
 </div>
 </div>
+</section>
 <section id="dataloaders">
 <h2>Dataloaders<a class="headerlink" href="#dataloaders" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -2035,15 +2004,10 @@ test_MulticlassJaccardIndex    0.7286378741264343
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-on-gpu">Run on GPU</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Segmentation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-segmentation-of-aerial-imaginary-with-u-net-like-architectures">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-nongeodatasets">Custom NonGeoDatasets</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-nongeodatasets">Custom NonGeoDatasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataloaders">Dataloaders</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-batch">Visualise Batch</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation-model">Segmentation Model</a></li>
