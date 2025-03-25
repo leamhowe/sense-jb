@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ImageCollection &#8212; SENSE Training Resources</title>
+    <title>Extract a time series &#8212; SENSE Training Resources</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/2_geo_python/3_gee_python/2_Time_series';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="0 - Overview" href="../../3_ml4eo/book3_overview.html" />
-    <link rel="prev" title="Google Earth Engine: JavaScript, but Python" href="1_Open_and_display.html" />
+    <link rel="next" title="Machine learning in Earth Engine" href="3_Classification.html" />
+    <link rel="prev" title="3.1 - Open and Display" href="1_Open_and_display.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -209,7 +209,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/01-Numpy-Intro.html"> Introduction to NumPy</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/02-Matplotlib.html">Matplotlib - Intro</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/03-Working-with-datetime.html">Working with dates and times</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/04-Pandas-Intro.html">Introduction to pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/05-Plotting-with-Seaborn.html">Statistical plotting with Seaborn</a></li>
@@ -241,10 +240,12 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../2_eo_data.html">2 - EO data</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../3_gee_python.html">3 - GEE Python</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ee_api_colab_setup.html">Earth Engine Python API Colab Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
-<li class="toctree-l2"><a class="reference internal" href="1_Open_and_display.html">Google Earth Engine: JavaScript, but Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_Open_and_display.html">3.1 - Open and Display</a></li>
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">ImageCollection</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Extract a time series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_Classification.html">Machine learning in Earth Engine</a></li>
 </ul>
 </details></li>
 </ul>
@@ -504,7 +505,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>ImageCollection</h1>
+    <h1>Extract a time series</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -514,6 +515,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagecollection">ImageCollection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-collection-metadata-and-information">Image Collection metadata and information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-an-imagecollection">Filtering an ImageCollection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-over-an-imagecollection">Mapping over an ImageCollection</a></li>
@@ -531,8 +533,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="imagecollection">
-<h1>ImageCollection<a class="headerlink" href="#imagecollection" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="extract-a-time-series">
+<h1>Extract a time series<a class="headerlink" href="#extract-a-time-series" title="Link to this heading">#</a></h1>
+<section id="imagecollection">
+<h2>ImageCollection<a class="headerlink" href="#imagecollection" title="Link to this heading">#</a></h2>
 <p>An ImageCollection is a stack or time series of images. In addition to loading an ImageCollection using an Earth Engine collection ID, Earth Engine has methods to create image collections. The constructor <code class="docutils literal notranslate"><span class="pre">ee.ImageCollection()</span></code> or the convenience method <code class="docutils literal notranslate"><span class="pre">ee.ImageCollection.fromImages()</span></code> create image collections from lists of images. While single images are great to do quick analytics, the true power of the Earth Engine environment comes with the possibility of looking at really large and heavy image collections and to be able to push analysis towards the data, rather than the need for the data to travel at all. In the GEE environment image collections have their own characteristic setup and are composted with single images that we discussed earlier. They can often have the same or different band structure but generally share a similar metadata structure for filtering and querying.</p>
 <p>Large scale image collections such as Landsat and Sentinel image collections are ingested on the fly and are actively maintained till there imagery and processing pipelines feeds are maintained byt he agencies supplying the imagery. Images as well as image collections can be moved into GEE environment to allow you to use both your data and the GEE catalog data within the same platform.</p>
 <p>These image collection as well as individual images again have defined data type,scales and projections along with some default properties such as an index and ID among other system properties. To have a look at all of the raster catalog you can find them listed <a class="reference external" href="https://developers.google.com/earth-engine/datasets/catalog/">here</a>.</p>
@@ -576,6 +580,7 @@ mergedCollection:  {&#39;type&#39;: &#39;ImageCollection&#39;, &#39;bands&#39;: 
 </div>
 </div>
 </div>
+</section>
 <section id="image-collection-metadata-and-information">
 <h2>Image Collection metadata and information<a class="headerlink" href="#image-collection-metadata-and-information" title="Link to this heading">#</a></h2>
 <p>As with Images, there are a variety of ways to get information about an ImageCollection. The collection can be printed directly to the console, but the console printout is limited to 5000 elements. Collections larger than 5000 images will need to be filtered before printing. Printing a large collection will be correspondingly slower. The following example shows various ways of getting information about image collections programmatically:</p>
@@ -629,7 +634,7 @@ Date range:  {&#39;type&#39;: &#39;Date&#39;, &#39;value&#39;: 1395168392053} {&
  &quot;&#39;total_count&#39;: 9, &#39;total_sd&#39;: 6.837066800129478, &#39;total_var&#39;: &quot;
  &quot;46.74548242943274, &#39;valid_count&#39;: 9, &#39;weight_sum&#39;: 9, &#39;weighted_sum&#39;: &quot;
  &#39;549.17985903}\n&#39;)
-Least cloudy image:  {&#39;type&#39;: &#39;Image&#39;, &#39;bands&#39;: [{&#39;id&#39;: &#39;B1&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B2&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B3&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B4&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B5&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B6&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B7&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B8&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [15321, 15601], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [15, 0, 460792.5, 0, -15, 4264207.5]}, {&#39;id&#39;: &#39;B9&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B10&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B11&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;QA_PIXEL&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 0, &#39;max&#39;: 65535}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;QA_RADSAT&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 0, &#39;max&#39;: 65535}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;SAA&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: -32768, &#39;max&#39;: 32767}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;SZA&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: -32768, &#39;max&#39;: 32767}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;VAA&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: -32768, &#39;max&#39;: 32767}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;VZA&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: -32768, &#39;max&#39;: 32767}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}], &#39;version&#39;: 1742119024832367, &#39;id&#39;: &#39;LANDSAT/LC08/C02/T1_TOA/LC08_044034_20140318&#39;, &#39;properties&#39;: {&#39;RADIANCE_MULT_BAND_5&#39;: 0.0061709, &#39;RADIANCE_MULT_BAND_6&#39;: 0.0015346, &#39;RADIANCE_MULT_BAND_3&#39;: 0.011958, &#39;RADIANCE_MULT_BAND_4&#39;: 0.010084, &#39;RADIANCE_MULT_BAND_1&#39;: 0.012673, &#39;RADIANCE_MULT_BAND_2&#39;: 0.012977, &#39;WRS_TYPE&#39;: 2, &#39;K2_CONSTANT_BAND_11&#39;: 1201.1442, &#39;K2_CONSTANT_BAND_10&#39;: 1321.0789, &#39;system:footprint&#39;: {&#39;type&#39;: &#39;LinearRing&#39;, &#39;coordinates&#39;: [[-120.82829120245813, 38.12674271231532], [-120.82825562226986, 38.12794465488719], [-122.94816146043102, 38.52557438907335], [-122.95017392636679, 38.525575241513984], [-122.95103687833704, 38.52422133103557], [-122.9569591344694, 38.504384836247866], [-123.43819639576931, 36.8067677093856], [-123.43818715731503, 36.80515197239888], [-122.59741883356627, 36.649103679754695], [-121.7447578273677, 36.484155023486586], [-121.36447420897477, 36.40841783077398], [-121.36356258609048, 36.41050956687825], [-121.35090897088811, 36.4518793824831], [-121.22967745029597, 36.84643051692306], [-121.09562084223639, 37.277564669766534], [-121.00627382820008, 37.56277728852005], [-120.9878871097224, 37.62126918546582], [-120.94877799584778, 37.74550067322107], [-120.89582540976387, 37.913151863362316], [-120.87857939052793, 37.967699972528294], [-120.85488075181219, 38.04269503040254], [-120.82829120245813, 38.12674271231532]]}, &#39;REFLECTIVE_SAMPLES&#39;: 7661, &#39;SUN_AZIMUTH&#39;: 146.2395763, &#39;DATA_SOURCE_TIRS_STRAY_LIGHT_CORRECTION&#39;: &#39;TIRS&#39;, &#39;DATE_ACQUIRED&#39;: &#39;2014-03-18&#39;, &#39;ELLIPSOID&#39;: &#39;WGS84&#39;, &#39;STATION_ID&#39;: &#39;LGN&#39;, &#39;RESAMPLING_OPTION&#39;: &#39;CUBIC_CONVOLUTION&#39;, &#39;ORIENTATION&#39;: &#39;NORTH_UP&#39;, &#39;WRS_ROW&#39;: 34, &#39;RADIANCE_MULT_BAND_9&#39;: 0.0024117, &#39;TARGET_WRS_ROW&#39;: 34, &#39;RADIANCE_MULT_BAND_7&#39;: 0.00051725, &#39;RADIANCE_MULT_BAND_8&#39;: 0.011412, &#39;IMAGE_QUALITY_TIRS&#39;: 9, &#39;TRUNCATION_OLI&#39;: &#39;UPPER&#39;, &#39;CLOUD_COVER&#39;: 0.06, &#39;GEOMETRIC_RMSE_VERIFY&#39;: 2.215, &#39;COLLECTION_CATEGORY&#39;: &#39;T1&#39;, &#39;GRID_CELL_SIZE_REFLECTIVE&#39;: 30, &#39;CLOUD_COVER_LAND&#39;: 0.1, &#39;GEOMETRIC_RMSE_MODEL&#39;: 5.02, &#39;COLLECTION_NUMBER&#39;: 2, &#39;IMAGE_QUALITY_OLI&#39;: 9, &#39;LANDSAT_SCENE_ID&#39;: &#39;LC80440342014077LGN01&#39;, &#39;WRS_PATH&#39;: 44, &#39;PANCHROMATIC_SAMPLES&#39;: 15321, &#39;PANCHROMATIC_LINES&#39;: 15601, &#39;GEOMETRIC_RMSE_MODEL_Y&#39;: 3.711, &#39;REFLECTIVE_LINES&#39;: 7801, &#39;GEOMETRIC_RMSE_MODEL_X&#39;: 3.38, &#39;system:asset_size&#39;: 1118765383, &#39;system:index&#39;: &#39;LC08_044034_20140318&#39;, &#39;DATA_SOURCE_ELEVATION&#39;: &#39;GLS2000&#39;, &#39;REFLECTANCE_ADD_BAND_1&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_2&#39;: -0.1, &#39;DATUM&#39;: &#39;WGS84&#39;, &#39;REFLECTANCE_ADD_BAND_3&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_4&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_5&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_6&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_7&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_8&#39;: -0.1, &#39;GROUND_CONTROL_POINTS_VERSION&#39;: 5, &#39;UTM_ZONE&#39;: 10, &#39;system:time_end&#39;: 1395168392053, &#39;LANDSAT_PRODUCT_ID&#39;: &#39;LC08_L1TP_044034_20140318_20200911_02_T1&#39;, &#39;REFLECTANCE_ADD_BAND_9&#39;: -0.1, &#39;GRID_CELL_SIZE_PANCHROMATIC&#39;: 15, &#39;RADIANCE_ADD_BAND_4&#39;: -50.41956, &#39;REFLECTANCE_MULT_BAND_7&#39;: 2e-05, &#39;system:time_start&#39;: 1395168392053, &#39;RADIANCE_ADD_BAND_5&#39;: -30.85425, &#39;REFLECTANCE_MULT_BAND_6&#39;: 2e-05, &#39;RADIANCE_ADD_BAND_6&#39;: -7.67317, &#39;REFLECTANCE_MULT_BAND_9&#39;: 2e-05, &#39;PROCESSING_SOFTWARE_VERSION&#39;: &#39;LPGS_15.3.1c&#39;, &#39;RADIANCE_ADD_BAND_7&#39;: -2.58627, &#39;REFLECTANCE_MULT_BAND_8&#39;: 2e-05, &#39;RADIANCE_ADD_BAND_1&#39;: -63.36405, &#39;RADIANCE_ADD_BAND_2&#39;: -64.88556, &#39;RADIANCE_ADD_BAND_3&#39;: -59.79149, &#39;REFLECTANCE_MULT_BAND_1&#39;: 2e-05, &#39;RADIANCE_ADD_BAND_8&#39;: -57.06106, &#39;REFLECTANCE_MULT_BAND_3&#39;: 2e-05, &#39;RADIANCE_ADD_BAND_9&#39;: -12.05854, &#39;REFLECTANCE_MULT_BAND_2&#39;: 2e-05, &#39;REFLECTANCE_MULT_BAND_5&#39;: 2e-05, &#39;REFLECTANCE_MULT_BAND_4&#39;: 2e-05, &#39;THERMAL_LINES&#39;: 7801, &#39;TIRS_SSM_POSITION_STATUS&#39;: &#39;NOMINAL&#39;, &#39;GRID_CELL_SIZE_THERMAL&#39;: 30, &#39;NADIR_OFFNADIR&#39;: &#39;NADIR&#39;, &#39;RADIANCE_ADD_BAND_11&#39;: 0.1, &#39;REQUEST_ID&#39;: &#39;L2&#39;, &#39;EARTH_SUN_DISTANCE&#39;: 0.9953709, &#39;TIRS_SSM_MODEL&#39;: &#39;ACTUAL&#39;, &#39;SCENE_CENTER_TIME&#39;: &#39;18:46:32.0535800Z&#39;, &#39;SUN_ELEVATION&#39;: 46.47106522, &#39;RADIANCE_ADD_BAND_10&#39;: 0.1, &#39;ROLL_ANGLE&#39;: -0.001, &#39;DATE_PRODUCT_GENERATED&#39;: 1599866504000, &#39;K1_CONSTANT_BAND_10&#39;: 774.8853, &#39;SATURATION_BAND_1&#39;: &#39;Y&#39;, &#39;SATURATION_BAND_2&#39;: &#39;Y&#39;, &#39;SATURATION_BAND_3&#39;: &#39;Y&#39;, &#39;SATURATION_BAND_4&#39;: &#39;Y&#39;, &#39;SATURATION_BAND_5&#39;: &#39;Y&#39;, &#39;MAP_PROJECTION&#39;: &#39;UTM&#39;, &#39;SATURATION_BAND_6&#39;: &#39;Y&#39;, &#39;SENSOR_ID&#39;: &#39;OLI_TIRS&#39;, &#39;SATURATION_BAND_7&#39;: &#39;Y&#39;, &#39;K1_CONSTANT_BAND_11&#39;: 480.8883, &#39;SATURATION_BAND_8&#39;: &#39;N&#39;, &#39;SATURATION_BAND_9&#39;: &#39;N&#39;, &#39;TARGET_WRS_PATH&#39;: 44, &#39;PROCESSING_LEVEL&#39;: &#39;L1TP&#39;, &#39;RADIANCE_MULT_BAND_11&#39;: 0.0003342, &#39;RADIANCE_MULT_BAND_10&#39;: 0.0003342, &#39;GROUND_CONTROL_POINTS_MODEL&#39;: 1078, &#39;SPACECRAFT_ID&#39;: &#39;LANDSAT_8&#39;, &#39;THERMAL_SAMPLES&#39;: 7661, &#39;GROUND_CONTROL_POINTS_VERIFY&#39;: 307}}
+Least cloudy image:  {&#39;type&#39;: &#39;Image&#39;, &#39;bands&#39;: [{&#39;id&#39;: &#39;B1&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B2&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B3&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B4&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B5&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B6&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B7&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B8&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [15321, 15601], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [15, 0, 460792.5, 0, -15, 4264207.5]}, {&#39;id&#39;: &#39;B9&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B10&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;B11&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;float&#39;}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;QA_PIXEL&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 0, &#39;max&#39;: 65535}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;QA_RADSAT&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: 0, &#39;max&#39;: 65535}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;SAA&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: -32768, &#39;max&#39;: 32767}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;SZA&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: -32768, &#39;max&#39;: 32767}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;VAA&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: -32768, &#39;max&#39;: 32767}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}, {&#39;id&#39;: &#39;VZA&#39;, &#39;data_type&#39;: {&#39;type&#39;: &#39;PixelType&#39;, &#39;precision&#39;: &#39;int&#39;, &#39;min&#39;: -32768, &#39;max&#39;: 32767}, &#39;dimensions&#39;: [7661, 7801], &#39;crs&#39;: &#39;EPSG:32610&#39;, &#39;crs_transform&#39;: [30, 0, 460785, 0, -30, 4264215]}], &#39;version&#39;: 1742759744720687, &#39;id&#39;: &#39;LANDSAT/LC08/C02/T1_TOA/LC08_044034_20140318&#39;, &#39;properties&#39;: {&#39;RADIANCE_MULT_BAND_5&#39;: 0.0061709, &#39;RADIANCE_MULT_BAND_6&#39;: 0.0015346, &#39;RADIANCE_MULT_BAND_3&#39;: 0.011958, &#39;RADIANCE_MULT_BAND_4&#39;: 0.010084, &#39;RADIANCE_MULT_BAND_1&#39;: 0.012673, &#39;RADIANCE_MULT_BAND_2&#39;: 0.012977, &#39;WRS_TYPE&#39;: 2, &#39;K2_CONSTANT_BAND_11&#39;: 1201.1442, &#39;K2_CONSTANT_BAND_10&#39;: 1321.0789, &#39;system:footprint&#39;: {&#39;type&#39;: &#39;LinearRing&#39;, &#39;coordinates&#39;: [[-120.82829120245813, 38.12674271231532], [-120.82825562226986, 38.12794465488719], [-122.94816146043102, 38.52557438907335], [-122.95017392636679, 38.525575241513984], [-122.95103687833704, 38.52422133103557], [-122.9569591344694, 38.504384836247866], [-123.43819639576931, 36.8067677093856], [-123.43818715731503, 36.80515197239888], [-122.59741883356627, 36.649103679754695], [-121.7447578273677, 36.484155023486586], [-121.36447420897477, 36.40841783077398], [-121.36356258609048, 36.41050956687825], [-121.35090897088811, 36.4518793824831], [-121.22967745029597, 36.84643051692306], [-121.09562084223639, 37.277564669766534], [-121.00627382820008, 37.56277728852005], [-120.9878871097224, 37.62126918546582], [-120.94877799584778, 37.74550067322107], [-120.89582540976387, 37.913151863362316], [-120.87857939052793, 37.967699972528294], [-120.85488075181219, 38.04269503040254], [-120.82829120245813, 38.12674271231532]]}, &#39;REFLECTIVE_SAMPLES&#39;: 7661, &#39;SUN_AZIMUTH&#39;: 146.2395763, &#39;DATA_SOURCE_TIRS_STRAY_LIGHT_CORRECTION&#39;: &#39;TIRS&#39;, &#39;DATE_ACQUIRED&#39;: &#39;2014-03-18&#39;, &#39;ELLIPSOID&#39;: &#39;WGS84&#39;, &#39;STATION_ID&#39;: &#39;LGN&#39;, &#39;RESAMPLING_OPTION&#39;: &#39;CUBIC_CONVOLUTION&#39;, &#39;ORIENTATION&#39;: &#39;NORTH_UP&#39;, &#39;WRS_ROW&#39;: 34, &#39;RADIANCE_MULT_BAND_9&#39;: 0.0024117, &#39;TARGET_WRS_ROW&#39;: 34, &#39;RADIANCE_MULT_BAND_7&#39;: 0.00051725, &#39;RADIANCE_MULT_BAND_8&#39;: 0.011412, &#39;IMAGE_QUALITY_TIRS&#39;: 9, &#39;TRUNCATION_OLI&#39;: &#39;UPPER&#39;, &#39;CLOUD_COVER&#39;: 0.06, &#39;GEOMETRIC_RMSE_VERIFY&#39;: 2.215, &#39;COLLECTION_CATEGORY&#39;: &#39;T1&#39;, &#39;GRID_CELL_SIZE_REFLECTIVE&#39;: 30, &#39;CLOUD_COVER_LAND&#39;: 0.1, &#39;GEOMETRIC_RMSE_MODEL&#39;: 5.02, &#39;COLLECTION_NUMBER&#39;: 2, &#39;IMAGE_QUALITY_OLI&#39;: 9, &#39;LANDSAT_SCENE_ID&#39;: &#39;LC80440342014077LGN01&#39;, &#39;WRS_PATH&#39;: 44, &#39;PANCHROMATIC_SAMPLES&#39;: 15321, &#39;PANCHROMATIC_LINES&#39;: 15601, &#39;GEOMETRIC_RMSE_MODEL_Y&#39;: 3.711, &#39;REFLECTIVE_LINES&#39;: 7801, &#39;GEOMETRIC_RMSE_MODEL_X&#39;: 3.38, &#39;system:asset_size&#39;: 1118765383, &#39;system:index&#39;: &#39;LC08_044034_20140318&#39;, &#39;DATA_SOURCE_ELEVATION&#39;: &#39;GLS2000&#39;, &#39;REFLECTANCE_ADD_BAND_1&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_2&#39;: -0.1, &#39;DATUM&#39;: &#39;WGS84&#39;, &#39;REFLECTANCE_ADD_BAND_3&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_4&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_5&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_6&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_7&#39;: -0.1, &#39;REFLECTANCE_ADD_BAND_8&#39;: -0.1, &#39;GROUND_CONTROL_POINTS_VERSION&#39;: 5, &#39;UTM_ZONE&#39;: 10, &#39;system:time_end&#39;: 1395168392053, &#39;LANDSAT_PRODUCT_ID&#39;: &#39;LC08_L1TP_044034_20140318_20200911_02_T1&#39;, &#39;REFLECTANCE_ADD_BAND_9&#39;: -0.1, &#39;GRID_CELL_SIZE_PANCHROMATIC&#39;: 15, &#39;RADIANCE_ADD_BAND_4&#39;: -50.41956, &#39;REFLECTANCE_MULT_BAND_7&#39;: 2e-05, &#39;system:time_start&#39;: 1395168392053, &#39;RADIANCE_ADD_BAND_5&#39;: -30.85425, &#39;REFLECTANCE_MULT_BAND_6&#39;: 2e-05, &#39;RADIANCE_ADD_BAND_6&#39;: -7.67317, &#39;REFLECTANCE_MULT_BAND_9&#39;: 2e-05, &#39;PROCESSING_SOFTWARE_VERSION&#39;: &#39;LPGS_15.3.1c&#39;, &#39;RADIANCE_ADD_BAND_7&#39;: -2.58627, &#39;REFLECTANCE_MULT_BAND_8&#39;: 2e-05, &#39;RADIANCE_ADD_BAND_1&#39;: -63.36405, &#39;RADIANCE_ADD_BAND_2&#39;: -64.88556, &#39;RADIANCE_ADD_BAND_3&#39;: -59.79149, &#39;REFLECTANCE_MULT_BAND_1&#39;: 2e-05, &#39;RADIANCE_ADD_BAND_8&#39;: -57.06106, &#39;REFLECTANCE_MULT_BAND_3&#39;: 2e-05, &#39;RADIANCE_ADD_BAND_9&#39;: -12.05854, &#39;REFLECTANCE_MULT_BAND_2&#39;: 2e-05, &#39;REFLECTANCE_MULT_BAND_5&#39;: 2e-05, &#39;REFLECTANCE_MULT_BAND_4&#39;: 2e-05, &#39;THERMAL_LINES&#39;: 7801, &#39;TIRS_SSM_POSITION_STATUS&#39;: &#39;NOMINAL&#39;, &#39;GRID_CELL_SIZE_THERMAL&#39;: 30, &#39;NADIR_OFFNADIR&#39;: &#39;NADIR&#39;, &#39;RADIANCE_ADD_BAND_11&#39;: 0.1, &#39;REQUEST_ID&#39;: &#39;L2&#39;, &#39;EARTH_SUN_DISTANCE&#39;: 0.9953709, &#39;TIRS_SSM_MODEL&#39;: &#39;ACTUAL&#39;, &#39;SCENE_CENTER_TIME&#39;: &#39;18:46:32.0535800Z&#39;, &#39;SUN_ELEVATION&#39;: 46.47106522, &#39;RADIANCE_ADD_BAND_10&#39;: 0.1, &#39;ROLL_ANGLE&#39;: -0.001, &#39;DATE_PRODUCT_GENERATED&#39;: 1599866504000, &#39;K1_CONSTANT_BAND_10&#39;: 774.8853, &#39;SATURATION_BAND_1&#39;: &#39;Y&#39;, &#39;SATURATION_BAND_2&#39;: &#39;Y&#39;, &#39;SATURATION_BAND_3&#39;: &#39;Y&#39;, &#39;SATURATION_BAND_4&#39;: &#39;Y&#39;, &#39;SATURATION_BAND_5&#39;: &#39;Y&#39;, &#39;MAP_PROJECTION&#39;: &#39;UTM&#39;, &#39;SATURATION_BAND_6&#39;: &#39;Y&#39;, &#39;SENSOR_ID&#39;: &#39;OLI_TIRS&#39;, &#39;SATURATION_BAND_7&#39;: &#39;Y&#39;, &#39;K1_CONSTANT_BAND_11&#39;: 480.8883, &#39;SATURATION_BAND_8&#39;: &#39;N&#39;, &#39;SATURATION_BAND_9&#39;: &#39;N&#39;, &#39;TARGET_WRS_PATH&#39;: 44, &#39;PROCESSING_LEVEL&#39;: &#39;L1TP&#39;, &#39;RADIANCE_MULT_BAND_11&#39;: 0.0003342, &#39;RADIANCE_MULT_BAND_10&#39;: 0.0003342, &#39;GROUND_CONTROL_POINTS_MODEL&#39;: 1078, &#39;SPACECRAFT_ID&#39;: &#39;LANDSAT_8&#39;, &#39;THERMAL_SAMPLES&#39;: 7661, &#39;GROUND_CONTROL_POINTS_VERIFY&#39;: 307}}
 
 Total size of Collection with 5 most recent images : 6369281283
 </pre></div>
@@ -701,7 +706,7 @@ Total size of Collection with 5 most recent images : 6369281283
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_37f428f355c27d0d6285015451d49a55 {
+                #map_c6015e6e07a0878aba7f7775cd824993 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -715,14 +720,14 @@ Total size of Collection with 5 most recent images : 6369281283
 &lt;body&gt;
     
     
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_37f428f355c27d0d6285015451d49a55&quot; &gt;&lt;/div&gt;
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_c6015e6e07a0878aba7f7775cd824993&quot; &gt;&lt;/div&gt;
         
 &lt;/body&gt;
 &lt;script&gt;
     
     
-            var map_37f428f355c27d0d6285015451d49a55 = L.map(
-                &quot;map_37f428f355c27d0d6285015451d49a55&quot;,
+            var map_c6015e6e07a0878aba7f7775cd824993 = L.map(
+                &quot;map_c6015e6e07a0878aba7f7775cd824993&quot;,
                 {
                     center: [-18.08874, 25.8544],
                     crs: L.CRS.EPSG3857,
@@ -739,7 +744,7 @@ Total size of Collection with 5 most recent images : 6369281283
 
         
     
-            var tile_layer_e8a0e609e6f1c451197f0437626d7e51 = L.tileLayer(
+            var tile_layer_fc5a0e5fe1fe0fca71bce0130e83d229 = L.tileLayer(
                 &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {
   &quot;minZoom&quot;: 0,
@@ -756,11 +761,11 @@ Total size of Collection with 5 most recent images : 6369281283
             );
         
     
-            tile_layer_e8a0e609e6f1c451197f0437626d7e51.addTo(map_37f428f355c27d0d6285015451d49a55);
+            tile_layer_fc5a0e5fe1fe0fca71bce0130e83d229.addTo(map_c6015e6e07a0878aba7f7775cd824993);
         
     
-            var tile_layer_0bb0eef2daae7c600da6755cc9ef68d1 = L.tileLayer(
-                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/8a193715a67182aa1cd2d579e7522518-a979b4b0f7e3de41970d6188c95ab916/tiles/{z}/{x}/{y}&quot;,
+            var tile_layer_922dd5026698c0632930a1eafeac8e43 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/8a193715a67182aa1cd2d579e7522518-5d104b568b96c8dd3e12d5620c01b7b7/tiles/{z}/{x}/{y}&quot;,
                 {
   &quot;minZoom&quot;: 0,
   &quot;maxZoom&quot;: 18,
@@ -776,11 +781,11 @@ Total size of Collection with 5 most recent images : 6369281283
             );
         
     
-            tile_layer_0bb0eef2daae7c600da6755cc9ef68d1.addTo(map_37f428f355c27d0d6285015451d49a55);
+            tile_layer_922dd5026698c0632930a1eafeac8e43.addTo(map_c6015e6e07a0878aba7f7775cd824993);
         
     
-            var tile_layer_52031f9479cfefc53e5260820053a157 = L.tileLayer(
-                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/19c8d8c3ffebf92f98345c77de934aed-624af813a1a6ed9f1d2d5f33aeb33950/tiles/{z}/{x}/{y}&quot;,
+            var tile_layer_27c0e0c77b0cad3c053d493025ef56ad = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/19c8d8c3ffebf92f98345c77de934aed-23167dd5bfbaa800fc18dc61f8dc89ea/tiles/{z}/{x}/{y}&quot;,
                 {
   &quot;minZoom&quot;: 0,
   &quot;maxZoom&quot;: 18,
@@ -796,27 +801,27 @@ Total size of Collection with 5 most recent images : 6369281283
             );
         
     
-            tile_layer_52031f9479cfefc53e5260820053a157.addTo(map_37f428f355c27d0d6285015451d49a55);
+            tile_layer_27c0e0c77b0cad3c053d493025ef56ad.addTo(map_c6015e6e07a0878aba7f7775cd824993);
         
     
-            var layer_control_ddfd9e45eb4f951cedf264daf05fce61_layers = {
+            var layer_control_7bffeb6df17b6513ebac0b7ef1b54e76_layers = {
                 base_layers : {
-                    &quot;openstreetmap&quot; : tile_layer_e8a0e609e6f1c451197f0437626d7e51,
+                    &quot;openstreetmap&quot; : tile_layer_fc5a0e5fe1fe0fca71bce0130e83d229,
                 },
                 overlays :  {
-                    &quot;good composite&quot; : tile_layer_0bb0eef2daae7c600da6755cc9ef68d1,
-                    &quot;bad composite&quot; : tile_layer_52031f9479cfefc53e5260820053a157,
+                    &quot;good composite&quot; : tile_layer_922dd5026698c0632930a1eafeac8e43,
+                    &quot;bad composite&quot; : tile_layer_27c0e0c77b0cad3c053d493025ef56ad,
                 },
             };
-            let layer_control_ddfd9e45eb4f951cedf264daf05fce61 = L.control.layers(
-                layer_control_ddfd9e45eb4f951cedf264daf05fce61_layers.base_layers,
-                layer_control_ddfd9e45eb4f951cedf264daf05fce61_layers.overlays,
+            let layer_control_7bffeb6df17b6513ebac0b7ef1b54e76 = L.control.layers(
+                layer_control_7bffeb6df17b6513ebac0b7ef1b54e76_layers.base_layers,
+                layer_control_7bffeb6df17b6513ebac0b7ef1b54e76_layers.overlays,
                 {
   &quot;position&quot;: &quot;topright&quot;,
   &quot;collapsed&quot;: true,
   &quot;autoZIndex&quot;: true,
 }
-            ).addTo(map_37f428f355c27d0d6285015451d49a55);
+            ).addTo(map_c6015e6e07a0878aba7f7775cd824993);
 
         
 &lt;/script&gt;
@@ -836,99 +841,8 @@ Total size of Collection with 5 most recent images : 6369281283
     <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">addBands</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="s1">&#39;system:time_start&#39;</span><span class="p">))</span>
 
 <span class="c1"># Map the function over the collection and display the result.</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">addTime</span><span class="p">))</span>
+<span class="c1"># print(collection.map(addTime))</span>
     
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ee.ImageCollection({
-  &quot;functionInvocationValue&quot;: {
-    &quot;functionName&quot;: &quot;Collection.map&quot;,
-    &quot;arguments&quot;: {
-      &quot;baseAlgorithm&quot;: {
-        &quot;functionDefinitionValue&quot;: {
-          &quot;argumentNames&quot;: [
-            &quot;_MAPPING_VAR_0_0&quot;
-          ],
-          &quot;body&quot;: {
-            &quot;functionInvocationValue&quot;: {
-              &quot;functionName&quot;: &quot;Image.addBands&quot;,
-              &quot;arguments&quot;: {
-                &quot;dstImg&quot;: {
-                  &quot;argumentReference&quot;: &quot;_MAPPING_VAR_0_0&quot;
-                },
-                &quot;srcImg&quot;: {
-                  &quot;functionInvocationValue&quot;: {
-                    &quot;functionName&quot;: &quot;Image.metadata&quot;,
-                    &quot;arguments&quot;: {
-                      &quot;image&quot;: {
-                        &quot;argumentReference&quot;: &quot;_MAPPING_VAR_0_0&quot;
-                      },
-                      &quot;property&quot;: {
-                        &quot;constantValue&quot;: &quot;system:time_start&quot;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      &quot;collection&quot;: {
-        &quot;functionInvocationValue&quot;: {
-          &quot;functionName&quot;: &quot;Collection.filter&quot;,
-          &quot;arguments&quot;: {
-            &quot;collection&quot;: {
-              &quot;functionInvocationValue&quot;: {
-                &quot;functionName&quot;: &quot;Collection.filter&quot;,
-                &quot;arguments&quot;: {
-                  &quot;collection&quot;: {
-                    &quot;functionInvocationValue&quot;: {
-                      &quot;functionName&quot;: &quot;ImageCollection.load&quot;,
-                      &quot;arguments&quot;: {
-                        &quot;id&quot;: {
-                          &quot;constantValue&quot;: &quot;LANDSAT/LC08/C02/T1_TOA&quot;
-                        }
-                      }
-                    }
-                  },
-                  &quot;filter&quot;: {
-                    &quot;functionInvocationValue&quot;: {
-                      &quot;functionName&quot;: &quot;Filter.equals&quot;,
-                      &quot;arguments&quot;: {
-                        &quot;leftField&quot;: {
-                          &quot;constantValue&quot;: &quot;WRS_PATH&quot;
-                        },
-                        &quot;rightValue&quot;: {
-                          &quot;constantValue&quot;: 44
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            &quot;filter&quot;: {
-              &quot;functionInvocationValue&quot;: {
-                &quot;functionName&quot;: &quot;Filter.equals&quot;,
-                &quot;arguments&quot;: {
-                  &quot;leftField&quot;: {
-                    &quot;constantValue&quot;: &quot;WRS_ROW&quot;
-                  },
-                  &quot;rightValue&quot;: {
-                    &quot;constantValue&quot;: 34
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-})
 </pre></div>
 </div>
 </div>
@@ -1096,7 +1010,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1370285287578,
                               &#39;system:time_start&#39;: 1370285287578},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -1228,7 +1142,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1371667680461,
                               &#39;system:time_start&#39;: 1371667680461},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -1360,7 +1274,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1373050083920,
                               &#39;system:time_start&#39;: 1373050083920},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -1492,7 +1406,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1374432481856,
                               &#39;system:time_start&#39;: 1374432481856},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -1624,7 +1538,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1375814885410,
                               &#39;system:time_start&#39;: 1375814885410},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20130822&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -1801,7 +1715,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1399315542791,
                               &#39;system:time_start&#39;: 1399315542791},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -1933,7 +1847,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1400697934827,
                               &#39;system:time_start&#39;: 1400697934827},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -2065,7 +1979,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1402080344243,
                               &#39;system:time_start&#39;: 1402080344243},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -2197,7 +2111,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1403462747538,
                               &#39;system:time_start&#39;: 1403462747538},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -2329,7 +2243,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1404845155333,
                               &#39;system:time_start&#39;: 1404845155333},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -2461,7 +2375,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1406227557219,
                               &#39;system:time_start&#39;: 1406227557219},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -2593,7 +2507,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1407609967080,
                               &#39;system:time_start&#39;: 1407609967080},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20140825&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -2770,7 +2684,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1431110709981,
                               &#39;system:time_start&#39;: 1431110709981},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -2902,7 +2816,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1432493108476,
                               &#39;system:time_start&#39;: 1432493108476},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -3034,7 +2948,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1433875518948,
                               &#39;system:time_start&#39;: 1433875518948},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -3166,7 +3080,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1435257924080,
                               &#39;system:time_start&#39;: 1435257924080},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -3298,7 +3212,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1436640335858,
                               &#39;system:time_start&#39;: 1436640335858},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -3430,7 +3344,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1438022741256,
                               &#39;system:time_start&#39;: 1438022741256},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -3562,7 +3476,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1439405145957,
                               &#39;system:time_start&#39;: 1439405145957},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20150828&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -3739,7 +3653,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1462905937622,
                               &#39;system:time_start&#39;: 1462905937622},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -3871,7 +3785,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1464288342828,
                               &#39;system:time_start&#39;: 1464288342828},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -4003,7 +3917,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1465670746253,
                               &#39;system:time_start&#39;: 1465670746253},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -4135,7 +4049,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1467053153631,
                               &#39;system:time_start&#39;: 1467053153631},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -4267,7 +4181,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1468435561324,
                               &#39;system:time_start&#39;: 1468435561324},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -4399,7 +4313,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1469817965439,
                               &#39;system:time_start&#39;: 1469817965439},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20160814&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -4576,7 +4490,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1493318723348,
                               &#39;system:time_start&#39;: 1493318723348},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -4708,7 +4622,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1494701129533,
                               &#39;system:time_start&#39;: 1494701129533},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -4840,7 +4754,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1496083539760,
                               &#39;system:time_start&#39;: 1496083539760},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -4972,7 +4886,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1497465946873,
                               &#39;system:time_start&#39;: 1497465946873},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -5104,7 +5018,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1498848351335,
                               &#39;system:time_start&#39;: 1498848351335},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -5236,7 +5150,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1500230754988,
                               &#39;system:time_start&#39;: 1500230754988},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -5368,7 +5282,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1501613162800,
                               &#39;system:time_start&#39;: 1501613162800},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20170817&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -5540,7 +5454,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1525113915022,
                               &#39;system:time_start&#39;: 1525113915022},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -5670,7 +5584,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1526496304534,
                               &#39;system:time_start&#39;: 1526496304534},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -5802,7 +5716,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1527878691919,
                               &#39;system:time_start&#39;: 1527878691919},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -5934,7 +5848,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1529261099906,
                               &#39;system:time_start&#39;: 1529261099906},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -6066,7 +5980,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1530643509411,
                               &#39;system:time_start&#39;: 1530643509411},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -6198,7 +6112,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1532025916612,
                               &#39;system:time_start&#39;: 1532025916612},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -6330,7 +6244,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1533408324784,
                               &#39;system:time_start&#39;: 1533408324784},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20180820&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -6507,7 +6421,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1556909131153,
                               &#39;system:time_start&#39;: 1556909131153},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -6637,7 +6551,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1558291541775,
                               &#39;system:time_start&#39;: 1558291541775},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -6769,7 +6683,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1559673950059,
                               &#39;system:time_start&#39;: 1559673950059},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -6901,7 +6815,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1561056356100,
                               &#39;system:time_start&#39;: 1561056356100},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -7033,7 +6947,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1562438760138,
                               &#39;system:time_start&#39;: 1562438760138},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -7165,7 +7079,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1563821163782,
                               &#39;system:time_start&#39;: 1563821163782},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -7297,7 +7211,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1565203570387,
                               &#39;system:time_start&#39;: 1565203570387},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20190823&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -7474,7 +7388,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1588704329834,
                               &#39;system:time_start&#39;: 1588704329834},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -7606,7 +7520,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1590086731163,
                               &#39;system:time_start&#39;: 1590086731163},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -7738,7 +7652,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1591469138406,
                               &#39;system:time_start&#39;: 1591469138406},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -7870,7 +7784,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1592851547571,
                               &#39;system:time_start&#39;: 1592851547571},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -8002,7 +7916,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1594233954720,
                               &#39;system:time_start&#39;: 1594233954720},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -8134,7 +8048,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1595616359891,
                               &#39;system:time_start&#39;: 1595616359891},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -8266,7 +8180,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1596998763031,
                               &#39;system:time_start&#39;: 1596998763031},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20200825&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -8443,7 +8357,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1620499535196,
                               &#39;system:time_start&#39;: 1620499535196},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -8575,7 +8489,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1621881945637,
                               &#39;system:time_start&#39;: 1621881945637},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -8707,7 +8621,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1623264353029,
                               &#39;system:time_start&#39;: 1623264353029},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -8839,7 +8753,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1624646757581,
                               &#39;system:time_start&#39;: 1624646757581},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -8971,7 +8885,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1626029159263,
                               &#39;system:time_start&#39;: 1626029159263},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -9103,7 +9017,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1627411566066,
                               &#39;system:time_start&#39;: 1627411566066},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -9235,7 +9149,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1628793972683,
                               &#39;system:time_start&#39;: 1628793972683},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20210828&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -9415,7 +9329,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1652294759032,
                               &#39;system:time_start&#39;: 1652294759032},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -9547,7 +9461,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1653677159923,
                               &#39;system:time_start&#39;: 1653677159923},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -9679,7 +9593,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1655059573624,
                               &#39;system:time_start&#39;: 1655059573624},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -9811,7 +9725,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1656441979201,
                               &#39;system:time_start&#39;: 1656441979201},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -9943,7 +9857,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1657824377725,
                               &#39;system:time_start&#39;: 1657824377725},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -10075,7 +9989,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1659206789390,
                               &#39;system:time_start&#39;: 1659206789390},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20220815&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -10255,7 +10169,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1682707534539,
                               &#39;system:time_start&#39;: 1682707534539},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -10387,7 +10301,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1684089921507,
                               &#39;system:time_start&#39;: 1684089921507},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -10519,7 +10433,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1685472323326,
                               &#39;system:time_start&#39;: 1685472323326},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -10651,7 +10565,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1686854732416,
                               &#39;system:time_start&#39;: 1686854732416},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -10783,7 +10697,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1688237141684,
                               &#39;system:time_start&#39;: 1688237141684},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -10915,7 +10829,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1689619546961,
                               &#39;system:time_start&#39;: 1689619546961},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -11047,7 +10961,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1691001955771,
                               &#39;system:time_start&#39;: 1691001955771},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20230818&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -11227,7 +11141,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1714502725801,
                               &#39;system:time_start&#39;: 1714502725801},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -11359,7 +11273,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1715885111918,
                               &#39;system:time_start&#39;: 1715885111918},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -11491,7 +11405,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1717267508278,
                               &#39;system:time_start&#39;: 1717267508278},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -11623,7 +11537,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1718649914911,
                               &#39;system:time_start&#39;: 1718649914911},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -11755,7 +11669,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1720032323109,
                               &#39;system:time_start&#39;: 1720032323109},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -11887,7 +11801,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1721414738792,
                               &#39;system:time_start&#39;: 1721414738792},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...},
                          {...},
                          {...},
@@ -12019,7 +11933,7 @@ Total size of Collection with 5 most recent images : 6369281283
                               &#39;system:time_end&#39;: 1722797139290,
                               &#39;system:time_start&#39;: 1722797139290},
                &#39;type&#39;: &#39;Image&#39;,
-               &#39;version&#39;: 1742119024832367},
+               &#39;version&#39;: 1742759744720687},
               {&#39;bands&#39;: [{...}],
                &#39;properties&#39;: {&#39;system:index&#39;: &#39;LC08_044034_20240820&#39;},
                &#39;type&#39;: &#39;Image&#39;},
@@ -12061,7 +11975,7 @@ Total size of Collection with 5 most recent images : 6369281283
                &#39;type&#39;: &#39;Image&#39;}],
  &#39;id&#39;: &#39;LANDSAT/LC08/C02/T1_TOA&#39;,
  &#39;type&#39;: &#39;ImageCollection&#39;,
- &#39;version&#39;: 1742119024832367}
+ &#39;version&#39;: 1742759744720687}
 </pre></div>
 </div>
 </div>
@@ -12114,7 +12028,7 @@ Total size of Collection with 5 most recent images : 6369281283
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_97cba9d3557efa65827898ed6a91a25e {
+                #map_5714d251455fbd00e4831b2a63ef34f4 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -12128,14 +12042,14 @@ Total size of Collection with 5 most recent images : 6369281283
 &lt;body&gt;
     
     
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_97cba9d3557efa65827898ed6a91a25e&quot; &gt;&lt;/div&gt;
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_5714d251455fbd00e4831b2a63ef34f4&quot; &gt;&lt;/div&gt;
         
 &lt;/body&gt;
 &lt;script&gt;
     
     
-            var map_97cba9d3557efa65827898ed6a91a25e = L.map(
-                &quot;map_97cba9d3557efa65827898ed6a91a25e&quot;,
+            var map_5714d251455fbd00e4831b2a63ef34f4 = L.map(
+                &quot;map_5714d251455fbd00e4831b2a63ef34f4&quot;,
                 {
                     center: [37.7726, -122.3578],
                     crs: L.CRS.EPSG3857,
@@ -12152,7 +12066,7 @@ Total size of Collection with 5 most recent images : 6369281283
 
         
     
-            var tile_layer_76769f81806e90966060e052dfe26152 = L.tileLayer(
+            var tile_layer_8d3e643ec08ab2f832df4a4fa77afe47 = L.tileLayer(
                 &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {
   &quot;minZoom&quot;: 0,
@@ -12169,11 +12083,11 @@ Total size of Collection with 5 most recent images : 6369281283
             );
         
     
-            tile_layer_76769f81806e90966060e052dfe26152.addTo(map_97cba9d3557efa65827898ed6a91a25e);
+            tile_layer_8d3e643ec08ab2f832df4a4fa77afe47.addTo(map_5714d251455fbd00e4831b2a63ef34f4);
         
     
-            var tile_layer_273f5b190e7caf75f4483ed09a19a076 = L.tileLayer(
-                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/96ef8bb9b2bc8c75e7b579c4ac9c6a38-69bd14624da9c80a9e5d8c518ed22ce5/tiles/{z}/{x}/{y}&quot;,
+            var tile_layer_baf5984172759b9ebf08cd2e36767bbb = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/bc0403c10ed89768fd04b609072f4d8a-eea2e1ef4235433a062176df2b80113a/tiles/{z}/{x}/{y}&quot;,
                 {
   &quot;minZoom&quot;: 0,
   &quot;maxZoom&quot;: 18,
@@ -12189,7 +12103,7 @@ Total size of Collection with 5 most recent images : 6369281283
             );
         
     
-            tile_layer_273f5b190e7caf75f4483ed09a19a076.addTo(map_97cba9d3557efa65827898ed6a91a25e);
+            tile_layer_baf5984172759b9ebf08cd2e36767bbb.addTo(map_5714d251455fbd00e4831b2a63ef34f4);
         
 &lt;/script&gt;
 &lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
@@ -12235,7 +12149,7 @@ Total size of Collection with 5 most recent images : 6369281283
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_97cba9d3557efa65827898ed6a91a25e {
+                #map_5714d251455fbd00e4831b2a63ef34f4 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -12249,14 +12163,14 @@ Total size of Collection with 5 most recent images : 6369281283
 &lt;body&gt;
     
     
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_97cba9d3557efa65827898ed6a91a25e&quot; &gt;&lt;/div&gt;
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_5714d251455fbd00e4831b2a63ef34f4&quot; &gt;&lt;/div&gt;
         
 &lt;/body&gt;
 &lt;script&gt;
     
     
-            var map_97cba9d3557efa65827898ed6a91a25e = L.map(
-                &quot;map_97cba9d3557efa65827898ed6a91a25e&quot;,
+            var map_5714d251455fbd00e4831b2a63ef34f4 = L.map(
+                &quot;map_5714d251455fbd00e4831b2a63ef34f4&quot;,
                 {
                     center: [37.7726, -122.3578],
                     crs: L.CRS.EPSG3857,
@@ -12273,7 +12187,7 @@ Total size of Collection with 5 most recent images : 6369281283
 
         
     
-            var tile_layer_76769f81806e90966060e052dfe26152 = L.tileLayer(
+            var tile_layer_8d3e643ec08ab2f832df4a4fa77afe47 = L.tileLayer(
                 &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {
   &quot;minZoom&quot;: 0,
@@ -12290,11 +12204,11 @@ Total size of Collection with 5 most recent images : 6369281283
             );
         
     
-            tile_layer_76769f81806e90966060e052dfe26152.addTo(map_97cba9d3557efa65827898ed6a91a25e);
+            tile_layer_8d3e643ec08ab2f832df4a4fa77afe47.addTo(map_5714d251455fbd00e4831b2a63ef34f4);
         
     
-            var tile_layer_273f5b190e7caf75f4483ed09a19a076 = L.tileLayer(
-                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/96ef8bb9b2bc8c75e7b579c4ac9c6a38-69bd14624da9c80a9e5d8c518ed22ce5/tiles/{z}/{x}/{y}&quot;,
+            var tile_layer_baf5984172759b9ebf08cd2e36767bbb = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/bc0403c10ed89768fd04b609072f4d8a-eea2e1ef4235433a062176df2b80113a/tiles/{z}/{x}/{y}&quot;,
                 {
   &quot;minZoom&quot;: 0,
   &quot;maxZoom&quot;: 18,
@@ -12310,17 +12224,17 @@ Total size of Collection with 5 most recent images : 6369281283
             );
         
     
-            tile_layer_273f5b190e7caf75f4483ed09a19a076.addTo(map_97cba9d3557efa65827898ed6a91a25e);
+            tile_layer_baf5984172759b9ebf08cd2e36767bbb.addTo(map_5714d251455fbd00e4831b2a63ef34f4);
         
     
-            tile_layer_76769f81806e90966060e052dfe26152.addTo(map_97cba9d3557efa65827898ed6a91a25e);
+            tile_layer_8d3e643ec08ab2f832df4a4fa77afe47.addTo(map_5714d251455fbd00e4831b2a63ef34f4);
         
     
-            tile_layer_273f5b190e7caf75f4483ed09a19a076.addTo(map_97cba9d3557efa65827898ed6a91a25e);
+            tile_layer_baf5984172759b9ebf08cd2e36767bbb.addTo(map_5714d251455fbd00e4831b2a63ef34f4);
         
     
-            var tile_layer_9e350d8ac65d1aafcdca6d946b4f9e7e = L.tileLayer(
-                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/ea8748600b8b47b4c24162918661b3b3-f13138cc71470fe5f63c2b20148ccf3c/tiles/{z}/{x}/{y}&quot;,
+            var tile_layer_797ae1f63f29c93029ad0f2ef531a2e3 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/bb850e6f47175abe7bfae15200f8e25a-4f788d33bd4a2153be8fb0a82f3eae84/tiles/{z}/{x}/{y}&quot;,
                 {
   &quot;minZoom&quot;: 0,
   &quot;maxZoom&quot;: 18,
@@ -12336,27 +12250,27 @@ Total size of Collection with 5 most recent images : 6369281283
             );
         
     
-            tile_layer_9e350d8ac65d1aafcdca6d946b4f9e7e.addTo(map_97cba9d3557efa65827898ed6a91a25e);
+            tile_layer_797ae1f63f29c93029ad0f2ef531a2e3.addTo(map_5714d251455fbd00e4831b2a63ef34f4);
         
     
-            var layer_control_31872f24f923f420b7ff084daf475797_layers = {
+            var layer_control_c46792dede0f05024a31c796b0057c3f_layers = {
                 base_layers : {
-                    &quot;openstreetmap&quot; : tile_layer_76769f81806e90966060e052dfe26152,
+                    &quot;openstreetmap&quot; : tile_layer_8d3e643ec08ab2f832df4a4fa77afe47,
                 },
                 overlays :  {
-                    &quot;median&quot; : tile_layer_273f5b190e7caf75f4483ed09a19a076,
-                    &quot;median_bis&quot; : tile_layer_9e350d8ac65d1aafcdca6d946b4f9e7e,
+                    &quot;median&quot; : tile_layer_baf5984172759b9ebf08cd2e36767bbb,
+                    &quot;median_bis&quot; : tile_layer_797ae1f63f29c93029ad0f2ef531a2e3,
                 },
             };
-            let layer_control_31872f24f923f420b7ff084daf475797 = L.control.layers(
-                layer_control_31872f24f923f420b7ff084daf475797_layers.base_layers,
-                layer_control_31872f24f923f420b7ff084daf475797_layers.overlays,
+            let layer_control_c46792dede0f05024a31c796b0057c3f = L.control.layers(
+                layer_control_c46792dede0f05024a31c796b0057c3f_layers.base_layers,
+                layer_control_c46792dede0f05024a31c796b0057c3f_layers.overlays,
                 {
   &quot;position&quot;: &quot;topright&quot;,
   &quot;collapsed&quot;: true,
   &quot;autoZIndex&quot;: true,
 }
-            ).addTo(map_97cba9d3557efa65827898ed6a91a25e);
+            ).addTo(map_5714d251455fbd00e4831b2a63ef34f4);
 
         
 &lt;/script&gt;
@@ -12439,7 +12353,7 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/MODIS_00
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_06086ea137a605a71c6a691e26b95289 {
+                #map_316638f12efd916073510dfd7b44a9da {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -12453,14 +12367,14 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/MODIS_00
 &lt;body&gt;
     
     
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_06086ea137a605a71c6a691e26b95289&quot; &gt;&lt;/div&gt;
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_316638f12efd916073510dfd7b44a9da&quot; &gt;&lt;/div&gt;
         
 &lt;/body&gt;
 &lt;script&gt;
     
     
-            var map_06086ea137a605a71c6a691e26b95289 = L.map(
-                &quot;map_06086ea137a605a71c6a691e26b95289&quot;,
+            var map_316638f12efd916073510dfd7b44a9da = L.map(
+                &quot;map_316638f12efd916073510dfd7b44a9da&quot;,
                 {
                     center: [40.2, -100.811],
                     crs: L.CRS.EPSG3857,
@@ -12477,7 +12391,7 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/MODIS_00
 
         
     
-            var tile_layer_4febaa7523a7d201b31aa69bd28cb252 = L.tileLayer(
+            var tile_layer_475e4d557c8661dc38d7e7614c1a8271 = L.tileLayer(
                 &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {
   &quot;minZoom&quot;: 0,
@@ -12494,11 +12408,11 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/MODIS_00
             );
         
     
-            tile_layer_4febaa7523a7d201b31aa69bd28cb252.addTo(map_06086ea137a605a71c6a691e26b95289);
+            tile_layer_475e4d557c8661dc38d7e7614c1a8271.addTo(map_316638f12efd916073510dfd7b44a9da);
         
     
-            var tile_layer_386edb1ca953615f03dc754c8b20a4af = L.tileLayer(
-                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/c8e214a7a8045c234fe4a72b2ca308cb-7d1f3a76d389b249182cb4c79568ff5a/tiles/{z}/{x}/{y}&quot;,
+            var tile_layer_0833f7893a434a541feb4dad0a436142 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/c8e214a7a8045c234fe4a72b2ca308cb-90b3e544df8a6a017cff193cda738485/tiles/{z}/{x}/{y}&quot;,
                 {
   &quot;minZoom&quot;: 0,
   &quot;maxZoom&quot;: 18,
@@ -12514,7 +12428,7 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/MODIS_00
             );
         
     
-            tile_layer_386edb1ca953615f03dc754c8b20a4af.addTo(map_06086ea137a605a71c6a691e26b95289);
+            tile_layer_0833f7893a434a541feb4dad0a436142.addTo(map_316638f12efd916073510dfd7b44a9da);
         
 &lt;/script&gt;
 &lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
@@ -12627,15 +12541,15 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/MODIS_00
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Google Earth Engine: JavaScript, but Python</p>
+        <p class="prev-next-title">3.1 - Open and Display</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../3_ml4eo/book3_overview.html"
+       href="3_Classification.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">0 - Overview</p>
+        <p class="prev-next-title">Machine learning in Earth Engine</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -12655,6 +12569,7 @@ Learn more: https://developers.google.com/earth-engine/datasets/catalog/MODIS_00
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagecollection">ImageCollection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-collection-metadata-and-information">Image Collection metadata and information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-an-imagecollection">Filtering an ImageCollection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-over-an-imagecollection">Mapping over an ImageCollection</a></li>
