@@ -24,9 +24,9 @@ parts:
       - file: book/1_python_zero2hero/2_python_basics/05-Ex-Try-Python-Basics.ipynb
       - file: book/1_python_zero2hero/2_python_basics/06-Control-Flow-Statements.ipynb
       - file: book/1_python_zero2hero/2_python_basics/07-Defining-Functions.ipynb
-      - file: book/1_python_zero2hero/2_python_basics/08-Ex-Create-module.ipynb
+      - file: book/1_python_zero2hero/2_python_basics/08-Ex-Build-A-Program.ipynb
       - file: book/1_python_zero2hero/2_python_basics/09-Modules-and-Packages.ipynb
-      - file: book/1_python_zero2hero/2_python_basics/10-Ex-Try-Python-Basics.ipynb
+      - file: book/1_python_zero2hero/2_python_basics/10-Ex-Create-module.ipynb
     - file: book/1_python_zero2hero/3_data_analysis_visualisation.md
       sections:
       - file: book/1_python_zero2hero/3_data_analysis_visualisation/01-Numpy-Intro.ipynb
@@ -79,6 +79,7 @@ parts:
       sections:
       - file: book/3_ml4eo/3_sat_ml_deep/00_intro.ipynb
       - file: book/3_ml4eo/3_sat_ml_deep/02_segmentation_unet.ipynb
+      - file: book/3_ml4eo/3_sat_ml_deep/03_autoencoders.ipynb 
       # - file: book/3_ml4eo/3_sat_ml_deep/3_rnn.ipynb
     - file: book/3_ml4eo/4_embeddings.md
       sections:
