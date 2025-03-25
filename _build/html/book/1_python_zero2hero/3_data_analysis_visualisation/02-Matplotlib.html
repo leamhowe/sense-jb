@@ -209,7 +209,6 @@
 <li class="toctree-l2"><a class="reference internal" href="01-Numpy-Intro.html"> Introduction to NumPy</a></li>
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Matplotlib - Intro</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="03-Working-with-datetime.html">Working with dates and times</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-Pandas-Intro.html">Introduction to pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05-Plotting-with-Seaborn.html">Statistical plotting with Seaborn</a></li>
@@ -241,10 +240,12 @@
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/2_eo_data.html">2 - EO data</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/3_gee_python.html">3 - GEE Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/ee_api_colab_setup.html">Earth Engine Python API Colab Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">Google Earth Engine: JavaScript, but Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">3.1 - Open and Display</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">ImageCollection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/3_Classification.html">Machine learning in Earth Engine</a></li>
 </ul>
 </details></li>
 </ul>
@@ -514,30 +515,29 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Matplotlib - Intro</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parts-of-a-figure">Parts of a Figure</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-axes-axis">Figure, Axes, Axis</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plots">Line plots</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-and-named-colors">Default and named colors</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-subplots">Multiple subplots</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-with-real-data">Subplots with real data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-from-a-text-file">Read data from a text file</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kwargs">Kwargs</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime">Datetime</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plots">Line plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colours">Colours</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-and-named-colours">Default and named colours</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-subplots">Multiple subplots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plots-with-real-data">Plots with real data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-from-a-text-file">Read data from a text file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kwargs">Kwargs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime">Datetime</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-of-bar-on-nao-index-data">Demonstration of bar() on NAO index data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-sequantial-and-diverging-colormaps">Default sequantial and diverging colormaps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#public-service-announcement">Public service announcement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#countour-and-countourf-plots">Countour and countourf plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-colorbar">How to add a colorbar?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-save-a-figure">How to save a figure?</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#read-nao-data">Read NAO data</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-sequantial-and-diverging-colormaps">Default sequantial and diverging colormaps</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#public-service-announcement">Public service announcement</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#countour-and-countourf-plots">Countour and countourf plots</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-colorbar">How to add a colorbar?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-save-a-figure">How to save a figure?</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-figures">Combined figures</a></li>
@@ -547,9 +547,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References:</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -628,8 +625,9 @@ document.write(`
 </div>
 </div>
 </section>
+</section>
 <section id="line-plots">
-<h3>Line plots<a class="headerlink" href="#line-plots" title="Link to this heading">#</a></h3>
+<h2>Line plots<a class="headerlink" href="#line-plots" title="Link to this heading">#</a></h2>
 <p>Lets draw two cosine functions of different amplitude on the same <strong>Axes</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -663,8 +661,10 @@ document.write(`
 </div>
 <p>** Tip: by adding a semicolon at the end of a function, the output is suppressed.</p>
 </section>
-<section id="default-and-named-colors">
-<h3>Default and named colors<a class="headerlink" href="#default-and-named-colors" title="Link to this heading">#</a></h3>
+<section id="colours">
+<h2>Colours<a class="headerlink" href="#colours" title="Link to this heading">#</a></h2>
+<section id="default-and-named-colours">
+<h3>Default and named colours<a class="headerlink" href="#default-and-named-colours" title="Link to this heading">#</a></h3>
 <p><img alt="" src="../../../_images/dflt_style_changes-1.png" /></p>
 <p><strong>Exercise 0 (10 mins)</strong>. The figure before is generated using the default settings. The code below shows these settings explicitly. Play with the values to explore their effect. For details on changing properties see <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html">line plots on the matplotlib website</a></p>
 <div class="cell docutils container">
@@ -728,8 +728,9 @@ document.write(`
 </div>
 </div>
 </section>
+</section>
 <section id="multiple-subplots">
-<h3>Multiple subplots<a class="headerlink" href="#multiple-subplots" title="Link to this heading">#</a></h3>
+<h2>Multiple subplots<a class="headerlink" href="#multiple-subplots" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> is a function that creates a figure and a grid of subplots with a single call, while providing reasonable control over how the individual plots are created.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -755,8 +756,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="subplots-with-real-data">
-<h3>Subplots with real data<a class="headerlink" href="#subplots-with-real-data" title="Link to this heading">#</a></h3>
+<section id="plots-with-real-data">
+<h2>Plots with real data<a class="headerlink" href="#plots-with-real-data" title="Link to this heading">#</a></h2>
 <p>To practice our plotting we are going to work with data from the NOAA ESRL Carbon Cycle Cooperative Global Air Sampling Network.</p>
 <p>Source: <a class="reference external" href="https://www.esrl.noaa.gov/gmd/dv/data/">https://www.esrl.noaa.gov/gmd/dv/data/</a></p>
 <p>Monthly averages of atmospheric carbon dioxide (<span class="math notranslate nohighlight">\(CO_2\)</span>) and methane (<span class="math notranslate nohighlight">\(CH_4\)</span>)</p>
@@ -789,7 +790,7 @@ document.write(`
 </table>
 </div>
 <section id="read-data-from-a-text-file">
-<h4>Read data from a text file<a class="headerlink" href="#read-data-from-a-text-file" title="Link to this heading">#</a></h4>
+<h3>Read data from a text file<a class="headerlink" href="#read-data-from-a-text-file" title="Link to this heading">#</a></h3>
 <p>The simplest way to load data from a text file in <code class="docutils literal notranslate"><span class="pre">numpy</span></code> is to use <code class="docutils literal notranslate"><span class="pre">np.loadtxt()</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -839,7 +840,7 @@ document.write(`
 </div>
 </section>
 <section id="kwargs">
-<h4>Kwargs<a class="headerlink" href="#kwargs" title="Link to this heading">#</a></h4>
+<h3>Kwargs<a class="headerlink" href="#kwargs" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>remember from yesterday, you can store any number of keyword arguments in a dictionary, and later unpack it when calling a function</p></li>
 </ul>
@@ -875,7 +876,7 @@ document.write(`
 </div>
 </section>
 <section id="datetime">
-<h4>Datetime<a class="headerlink" href="#datetime" title="Link to this heading">#</a></h4>
+<h3>Datetime<a class="headerlink" href="#datetime" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code> module helps to work with time arrays</p></li>
 </ul>
@@ -1034,7 +1035,6 @@ document.write(`
 </div>
 </div>
 </section>
-</section>
 <section id="demonstration-of-bar-on-nao-index-data">
 <h3>Demonstration of bar() on NAO index data<a class="headerlink" href="#demonstration-of-bar-on-nao-index-data" title="Link to this heading">#</a></h3>
 <p>Bar plots are created in much the same way as line plots, with two arrays of equal size.</p>
@@ -1044,14 +1044,10 @@ document.write(`
 <p>Data stored in text file in the following way:</p>
 <p>Year | Month | Value</p>
 <p>1950 1 0.92000E+00</p>
-</section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="read-nao-data">
-<h1>Read NAO data<a class="headerlink" href="#read-nao-data" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nao_yr</span><span class="p">,</span> <span class="n">nao_mn</span><span class="p">,</span> <span class="n">nao_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../data/nao_monthly.txt&#39;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read NEAO data</span>
+<span class="n">nao_yr</span><span class="p">,</span> <span class="n">nao_mn</span><span class="p">,</span> <span class="n">nao_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../data/nao_monthly.txt&#39;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1114,8 +1110,9 @@ document.write(`
 <img alt="../../../_images/d33e38b2bc6005c75d93ae1a1e844a91e05fcca5c88cb3ea7281a06558cfe0fb.png" src="../../../_images/d33e38b2bc6005c75d93ae1a1e844a91e05fcca5c88cb3ea7281a06558cfe0fb.png" />
 </div>
 </div>
+</section>
 <section id="scatter-plots">
-<h2>Scatter plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h2>
+<h3>Scatter plots<a class="headerlink" href="#scatter-plots" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>display data as a collection of points, each having the value of one variable determining the position on the horizontal axis and the value of the other variable determining the position on the vertical axis</p></li>
 <li><p>colorcode the data points to display an additional variable</p></li>
@@ -1147,16 +1144,16 @@ document.write(`
 </div>
 </section>
 <section id="default-sequantial-and-diverging-colormaps">
-<h2>Default sequantial and diverging colormaps<a class="headerlink" href="#default-sequantial-and-diverging-colormaps" title="Link to this heading">#</a></h2>
+<h3>Default sequantial and diverging colormaps<a class="headerlink" href="#default-sequantial-and-diverging-colormaps" title="Link to this heading">#</a></h3>
 <p>More info here, <a class="reference external" href="https://matplotlib.org/examples/color/colormaps_reference.html">colormaps reference</a>.</p>
 <img src="../figures/colormaps_reference_00.png" style="height:50%; width:50%;">
 <img src="../figures/colormaps_reference_03.png" style="height:50%; width:50%;"></section>
 <section id="public-service-announcement">
-<h2>Public service announcement<a class="headerlink" href="#public-service-announcement" title="Link to this heading">#</a></h2>
+<h3>Public service announcement<a class="headerlink" href="#public-service-announcement" title="Link to this heading">#</a></h3>
 <p><strong>Jet has no place in the 21st century</strong>. Also referred to as rainbow, jet is an <a class="reference external" href="http://medvis.org/2012/08/21/rainbow-colormaps-what-are-they-good-for-absolutely-nothing/">awful colormap</a> that promotes <a class="reference external" href="https://blogs.egu.eu/divisions/gd/2017/08/23/the-rainbow-colour-map/">bad science</a>. The distortions caused by these colour maps has been <a class="reference internal" href="#www.fabiocrameri.ch/resources/PosterScientificColourMaps_Crameri.pdf"><span class="xref myst">widely</span></a> <a class="reference external" href="https://academic.oup.com/icesjms/article/77/2/826/5684813">documented</a>. Python ships with great perceptually uniform default colormaps (shown above). If they’re not quite what you want, check out these great custom colourmaps crafted for <a class="reference external" href="https://matplotlib.org/cmocean/">oceanography</a> and <a class="reference external" href="http://www.fabiocrameri.ch/colourmaps.php">geophysics</a>.</p>
 </section>
 <section id="countour-and-countourf-plots">
-<h2>Countour and countourf plots<a class="headerlink" href="#countour-and-countourf-plots" title="Link to this heading">#</a></h2>
+<h3>Countour and countourf plots<a class="headerlink" href="#countour-and-countourf-plots" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">contour()</span></code> and <code class="docutils literal notranslate"><span class="pre">contourf()</span></code> draw contour lines and filled contours, respectively</p></li>
 <li><p>good for 2D gridded data</p></li>
@@ -1197,7 +1194,7 @@ document.write(`
 </div>
 </div>
 <section id="how-to-add-a-colorbar">
-<h3>How to add a colorbar?<a class="headerlink" href="#how-to-add-a-colorbar" title="Link to this heading">#</a></h3>
+<h4>How to add a colorbar?<a class="headerlink" href="#how-to-add-a-colorbar" title="Link to this heading">#</a></h4>
 <p>The <strong>colorbar</strong> has to have its own <strong>Axes</strong>!</p>
 <p>This is created by adding a colorbar to the figure, telling matplotlib which plotted values to use for the colorbar content with <code class="docutils literal notranslate"><span class="pre">fig.colorbar(mappable,</span> <span class="pre">ax=ax_no)</span></code></p>
 <div class="cell docutils container">
@@ -1222,7 +1219,7 @@ document.write(`
 </div>
 </section>
 <section id="how-to-save-a-figure">
-<h3>How to save a figure?<a class="headerlink" href="#how-to-save-a-figure" title="Link to this heading">#</a></h3>
+<h4>How to save a figure?<a class="headerlink" href="#how-to-save-a-figure" title="Link to this heading">#</a></h4>
 <p>Use <code class="docutils literal notranslate"><span class="pre">fig.savefig(fname,</span> <span class="pre">dpi=,</span> <span class="pre">facecolor=,</span> <span class="pre">bbox_inches='tight',</span> <span class="pre">**kwargs)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1245,6 +1242,7 @@ document.write(`
 <img alt="../../../_images/4ceae952b4ad10ec2d16be05ef425e121ef653e4a0c2defbce3ecfd66d87d839.png" src="../../../_images/4ceae952b4ad10ec2d16be05ef425e121ef653e4a0c2defbce3ecfd66d87d839.png" />
 </div>
 </div>
+</section>
 </section>
 </section>
 <section id="combined-figures">
@@ -1746,30 +1744,29 @@ findfont: Font family &#39;Comic Neue&#39; not found.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Matplotlib - Intro</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parts-of-a-figure">Parts of a Figure</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-axes-axis">Figure, Axes, Axis</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plots">Line plots</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-and-named-colors">Default and named colors</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-subplots">Multiple subplots</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-with-real-data">Subplots with real data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-from-a-text-file">Read data from a text file</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kwargs">Kwargs</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime">Datetime</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plots">Line plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colours">Colours</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-and-named-colours">Default and named colours</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-subplots">Multiple subplots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plots-with-real-data">Plots with real data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-from-a-text-file">Read data from a text file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kwargs">Kwargs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime">Datetime</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-of-bar-on-nao-index-data">Demonstration of bar() on NAO index data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-sequantial-and-diverging-colormaps">Default sequantial and diverging colormaps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#public-service-announcement">Public service announcement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#countour-and-countourf-plots">Countour and countourf plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-colorbar">How to add a colorbar?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-save-a-figure">How to save a figure?</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#read-nao-data">Read NAO data</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots">Scatter plots</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-sequantial-and-diverging-colormaps">Default sequantial and diverging colormaps</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#public-service-announcement">Public service announcement</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#countour-and-countourf-plots">Countour and countourf plots</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-colorbar">How to add a colorbar?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-save-a-figure">How to save a figure?</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-figures">Combined figures</a></li>
@@ -1779,9 +1776,6 @@ findfont: Font family &#39;Comic Neue&#39; not found.
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References:</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

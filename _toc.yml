@@ -55,9 +55,11 @@ parts:
     - file: book/2_geo_python/2_eo_data.md
     - file: book/2_geo_python/3_gee_python.ipynb
       sections:
+      - file: book/2_geo_python/3_gee_python/ee_api_colab_setup.ipynb
       - file: book/2_geo_python/3_gee_python/0_First_steps.ipynb
       - file: book/2_geo_python/3_gee_python/1_Open_and_display.ipynb
       - file: book/2_geo_python/3_gee_python/2_Time_series.ipynb
+      - file: book/2_geo_python/3_gee_python/3_Classification.ipynb
     - file: book/2_geo_python/4_putting_it_together.ipynb
       sections:
       - file: book/2_geo_python/
