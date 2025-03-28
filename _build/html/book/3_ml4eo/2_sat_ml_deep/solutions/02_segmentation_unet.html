@@ -1,0 +1,2169 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Semantic segmentation of Aerial Imaginary with U-Net-like architectures &#8212; SENSE Training Resources</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/3_ml4eo/2_sat_ml_deep/solutions/02_segmentation_unet';</script>
+    <link rel="icon" href="../../../../_static/sense_logo_transp_white_crop.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-light" alt="SENSE Training Resources - Home"/>
+    <script>document.write(`<img src="../../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-dark" alt="SENSE Training Resources - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">🐍 Book 1 - Python Software Carpentry</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../1_python_zero2hero/book1_overview.html">0 - Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../1_python_zero2hero/1_intro.html">1 - Intro to Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/1_intro/00-Introduction.html">1.0 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/1_intro/01-How-to-Run-Python-Code.html">1.1 How to Run Python Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/1_intro/02-Jupyter-Notebook.html">1.2 Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/1_intro/03-Basic-Python-Syntax.html">1.3 Python Language Syntax</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics.html">2 - Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/01-Semantics-Variables.html">2.1 Variables and Objects in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/02-Semantics-Operators.html">2.2 Basic Python Semantics: Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/03-Built-in-Scalar-Types.html">2.3 Built-In Types: Simple Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/04-Built-in-Data-Structures.html">2.4 Built-In Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/05-Ex-Try-Python-Basics.html">2.5 Exercise: Try Python Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/06-Control-Flow-Statements.html">2.6 Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/07-Defining-Functions.html">2.5 Defining and Using Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/08-Ex-Build-A-Program.html">2.8 Exercise: Build a simple program (1 h)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/09-Modules-and-Packages.html">2.9 Modules and Packages</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/2_python_basics/10-Ex-Create-module.html">Exercise: create a module and reuse code from it (1 h)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../1_python_zero2hero/3_data_analysis_visualisation.html">3 - Data Analysis &amp; Visualisation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/3_data_analysis_visualisation/01-Numpy-Intro.html">3.1 Introduction to NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/3_data_analysis_visualisation/02-Matplotlib.html">3.2 Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/3_data_analysis_visualisation/03-Working-with-datetime.html">3.3 The datetime library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/3_data_analysis_visualisation/04-Pandas-Intro.html">3.4 Intro to pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../1_python_zero2hero/3_data_analysis_visualisation/05-Plotting-with-Seaborn.html">3.5 Statistical plotting with Seaborn</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🛰️ Book 2 - GeoPython</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../2_geo_python/book2_overview.html">0 - Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../2_geo_python/1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/1_spatial_data_tools/01_cartopy.html">Cartopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/1_spatial_data_tools/02_geopandas.html">GeoPandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/1_spatial_data_tools/03_rasterio.html">Rasterio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/1_spatial_data_tools/04_Xarray_NetCDF_Intro.html">Working with NetCDF files</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/1_spatial_data_tools/05_rioxarray.html">Rioxarray</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../2_geo_python/2_eo_data.html">2 - EO data (under construction)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../2_geo_python/3_gee_python.html">3 - GEE Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/3_gee_python/ee_api_colab_setup.html">Earth Engine Python API Colab Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/3_gee_python/0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/3_gee_python/1_Open_and_display.html">3.1 - Open and Display</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../2_geo_python/3_gee_python/2_Time_series.html">3.2 - Time Series</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🤖 Book 3 - Machine Learning for EO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../book3_overview.html">0 - Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_sat_ml_intro.html">1 - Classical ML with satellite data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_sat_ml_intro/1_linear_regression.html">1.1 Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../1_sat_ml_intro/2_classification.html">1.2 Classification</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../1_sat_ml_intro/3_kalman_filter.html">1.3 Kalman Filter</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../1_sat_ml_intro/4_gee_classifiers.html">1.4 - Classifiers in Earth Engine</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../2_sat_ml_deep.html">2 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02_segmentation_unet.html">Segmentation</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../03_autoencoders.html">Autoencoders</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_embeddings.html">3 - Embeddings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_embeddings/notebooks/1a_Use_PCA_analysis_to_study_tile_embeddings.html">Use PCA analysis on tile embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_embeddings/notebooks/1b_Exploring_embedding_space_with_clustering_methods.html">How are the study tiles clustered in the embedding space?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_embeddings/notebooks/2_Working_with_your_own_data.html">Working with your own input data</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfm.html">4 - Geospatial Foundation Models</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/leamhowe/sense-jb/blob/main/book/3_ml4eo/2_sat_ml_deep/solutions/02_segmentation_unet.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/leamhowe/sense-jb" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/leamhowe/sense-jb/issues/new?title=Issue%20on%20page%20%2Fbook/3_ml4eo/2_sat_ml_deep/solutions/02_segmentation_unet.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/book/3_ml4eo/2_sat_ml_deep/solutions/02_segmentation_unet.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Semantic segmentation of Aerial Imaginary with U-Net-like architectures</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Semantic segmentation of Aerial Imaginary with U-Net-like architectures</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-on-gpu">Run on GPU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-nongeodatasets">Custom NonGeoDatasets</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataloaders">Dataloaders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-batch">Visualise Batch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation-model">Segmentation Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop">Training Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-results">Visualise results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-finetune-the-segmentation-model">Exercise 1: Finetune the segmentation model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-try-another-model-architecture">Exercise 2: Try another model architecture</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>Written by: Leam Howe <br />
+Adapted from work by David Hogg, Fangjun Li, Fengming Lin available at <a class="github reference external" href="https://github.com/lfj95/SENSE2023/tree/main">lfj95/SENSE2023</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="semantic-segmentation-of-aerial-imaginary-with-u-net-like-architectures">
+<h1><strong>Semantic segmentation of Aerial Imaginary with U-Net-like architectures</strong><a class="headerlink" href="#semantic-segmentation-of-aerial-imaginary-with-u-net-like-architectures" title="Link to this heading">#</a></h1>
+<p>This notebook is a simple semantic segmentation program. The goal is to build and train a model which is able to automatically label each pixel in an aerial image with its semantic category.</p>
+<p>The dataset we use consists of aerial imagery of Dubai obtained by MBRSC satellites and annotated with pixel-wise semantic segmentation in 6 classes. The total volume of the dataset is 1305 256*256 images grouped into 6 larger tiles. The classes are:</p>
+<ul class="simple">
+<li><p>Building</p></li>
+<li><p>Land (unpaved area)</p></li>
+<li><p>Road</p></li>
+<li><p>Vegetation</p></li>
+<li><p>Water</p></li>
+<li><p>Unlabeled</p></li>
+</ul>
+<p>U-Net is a convolutional neural network architecture originally developed for the segmentation of medical images (<a class="reference external" href="https://arxiv.org/abs/1505.04597">Ronneberger et al., 2015</a>), but is now widely used outside this domain. There is more information on U-Net <a class="reference external" href="https://towardsdatascience.com/u-net-b229b32b4a71">here</a>.</p>
+<p><img alt="Diagram of U-Net architecture" src="book/3_ml4eo/2_sat_ml_deep/solutions/images/u-net_architecture.png" /></p>
+<section id="run-on-gpu">
+<h2>Run on GPU<a class="headerlink" href="#run-on-gpu" title="Link to this heading">#</a></h2>
+<p>For model runtime speed, check Collab is running on GPU.</p>
+<p>Click the “<strong>Runtime</strong>” dropdown menu. Select “<strong>Change runtime type</strong>”. Now select ‘<strong>GPU</strong>’ in the “<strong>Hardware accelerator</strong>” dropdown menu.</p>
+</section>
+<section id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">#</a></h2>
+<p>We need to install some extract packages before we start</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %pip install torchgeo scikit-learn</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># import kornia.augmentation as K</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torchvision.transforms.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">colors</span> <span class="k">as</span> <span class="n">mcolors</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tensor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchgeo.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">NonGeoDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchvision.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToTensor</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">load_ext</span> tensorboard
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ModelCheckpoint</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch.loggers</span><span class="w"> </span><span class="kn">import</span> <span class="n">TensorBoardLogger</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchgeo.trainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SemanticSegmentationTask</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The tensorboard extension is already loaded. To reload it, use:
+  %reload_ext tensorboard
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tmp_path = &#39;~/tmp/surface_water/&#39;</span>
+<span class="c1"># utils.download_and_extract_archive(</span>
+<span class="c1">#     &#39;https://hf.co/datasets/cordmaur/earth_surface_water/resolve/main/earth_surface_water.zip&#39;,</span>
+<span class="c1">#     tmp_path,</span>
+<span class="c1"># )</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Loading a dataset</p></li>
+<li><p>Creating a RasterDataset, DataLoaders and Samplers</p></li>
+<li><p>Normalising the data</p></li>
+<li><p>Spectral indicies</p></li>
+<li><p>define a unet model</p></li>
+<li><p>loss function and metrics</p></li>
+<li><p>training loop</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>Overview<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Loading a dataset</p></li>
+<li><p>Creating a custom NonGeoDataset</p></li>
+<li><p>Define a unet model using TorchGeo Lightning Trainers</p></li>
+<li><p>Training a unet model</p></li>
+<li><p>Evaluating the trained segmentation model</p></li>
+</ul>
+<p>Exercises:</p>
+<ol class="arabic simple">
+<li><p>Fine-tune your model</p></li>
+<li><p>Try using pretrained weights</p></li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="custom-nongeodatasets">
+<h1>Custom NonGeoDatasets<a class="headerlink" href="#custom-nongeodatasets" title="Link to this heading">#</a></h1>
+<p>Previously we have seen examples of loading datasets that TorchGeo has made available and easy to integrate, a list of these are available <a class="reference external" href="https://torchgeo.readthedocs.io/en/latest/api/datasets.html">here</a>. But what happens if you want to use another dataset or you have created your own…</p>
+<p>TorchGeo has the functionality to build your own custom Dataset. More details on this can be found here: <a class="reference external" href="https://torchgeo.readthedocs.io/en/latest/api/datasets.html">https://torchgeo.readthedocs.io/en/latest/api/datasets.html</a></p>
+<p>Let’s create our own custom NonGeoDataset (a dataset without georeferencing) class that will take take our dataset and prepare it for training our U-Net model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CustomNonGeoDataset</span><span class="p">(</span><span class="n">NonGeoDataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom dataset for semantic segmentation of satellite data.</span>
+
+<span class="sd">    Dataset features:</span>
+<span class="sd">    - Images: RGB satellite images in .jpg format.</span>
+<span class="sd">    - Masks: Grayscale masks in .png format.</span>
+<span class="sd">    - Classes: Binary or multi-class segmentation masks.</span>
+
+<span class="sd">    Dataset format:</span>
+<span class="sd">    - Images and masks are stored in separate directories (`images` and `mask`).</span>
+<span class="sd">    - Filenames of images and masks match exactly (e.g., `Tile1_00_009.jpg` and `Tile1_00_009.png`).</span>
+<span class="sd">    - Labels are stored in a .npy file, with one label per image.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+        <span class="n">split</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;train&quot;</span><span class="p">,</span>
+        <span class="n">transforms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">download</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the dataset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            root: Root directory where dataset is stored.</span>
+<span class="sd">            split: One of &quot;train&quot;, &quot;val&quot;, or &quot;test&quot;.</span>
+<span class="sd">            transforms: A function/transform to apply to the input and target.</span>
+<span class="sd">            download: If True, download the dataset (not implemented in this example).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">split</span> <span class="o">=</span> <span class="n">split</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="n">transforms</span>
+
+        <span class="c1"># Define paths for images and masks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">/</span> <span class="n">split</span> <span class="o">/</span> <span class="s2">&quot;images&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">/</span> <span class="n">split</span> <span class="o">/</span> <span class="s2">&quot;mask&quot;</span>
+
+        <span class="c1"># List all image and mask files</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.jpg&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.png&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Load labels from .npy file</span>
+        <span class="n">labels_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">/</span> <span class="s1">&#39;labels.npy&#39;</span>
+        <span class="k">if</span> <span class="n">labels_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dict_load</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">labels_path</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">split</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_load</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;labels_train&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">split</span> <span class="o">==</span> <span class="s1">&#39;valid&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_load</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;labels_valid&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">split</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_load</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;labels_test&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels for split &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">split</span><span class="si">}</span><span class="s2">&#39; not found in </span><span class="si">{</span><span class="n">labels_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels file not found: </span><span class="si">{</span><span class="n">labels_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Ensure that the number of images and masks match</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_files</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_files</span><span class="p">),</span> <span class="s2">&quot;Number of images and masks must match.&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of samples in the dataset.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_files</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a single sample (image and mask) from the dataset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            index: Index of the sample to retrieve.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary containing the image and mask as tensors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Load image</span>
+        <span class="n">img_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_files</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>  <span class="c1"># Ensure 3 channels (RGB)</span>
+        
+
+        <span class="c1"># Convert to tensors</span>
+        <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">ToTensor</span><span class="p">()(</span><span class="n">img</span><span class="p">)</span>
+        <span class="c1"># print(f&quot;image tensor shape: {img_tensor.shape}&quot;)  # Debug print</span>
+        
+        <span class="c1"># mask_tensor = ToTensor()(mask)</span>
+        <span class="c1"># print(f&quot;Labels: {self.labels}&quot;)  # Debug print</span>
+        <span class="c1"># print(f&quot;Labels: {self.labels.shape}&quot;)  # Debug print</span>
+        <span class="n">labels_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">index</span><span class="p">])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">long</span><span class="p">()</span> <span class="c1"># Convert to long tensor (e.g. float32 -&gt; int64)</span>
+        <span class="c1"># print(f&quot;Labels tensor shape: {labels_tensor.shape}&quot;)</span>
+
+        <span class="c1"># Apply transforms if provided</span>
+        <span class="c1"># sample = {&quot;image&quot;: img_tensor, &quot;mask&quot;: mask_tensor}</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">img_tensor</span><span class="p">,</span> <span class="s2">&quot;mask&quot;</span><span class="p">:</span> <span class="n">labels_tensor</span><span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">:</span>
+            <span class="n">sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sample</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plot a sample from the dataset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            index: Index of the sample to plot.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A matplotlib figure showing the image and mask.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>  <span class="c1"># Convert to HWC format</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;mask&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>  <span class="c1"># Remove channel dimension</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Image&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> 
+                     <span class="n">vmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                     <span class="n">vmax</span><span class="o">=</span><span class="mi">6</span>
+                    <span class="c1">#  cmap=cmap</span>
+                     <span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mask&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="dataloaders">
+<h2>Dataloaders<a class="headerlink" href="#dataloaders" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchvision.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">Compose</span><span class="p">,</span> <span class="n">ToTensor</span><span class="p">,</span> <span class="n">Resize</span>
+
+<span class="c1"># Define transforms (optional)</span>
+<span class="c1"># For example, resize images and masks to 512x512 and convert them to tensors</span>
+<span class="n">transforms</span> <span class="o">=</span> <span class="n">Compose</span><span class="p">([</span>
+    <span class="c1"># Resize((512, 512)),  # Resize images and masks to 512x512</span>
+    <span class="c1"># ToTensor(),           # Convert images and masks to PyTorch tensors</span>
+<span class="p">])</span>
+
+<span class="c1"># Create datasets</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">CustomNonGeoDataset</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;./dubai_segmentation&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms</span><span class="p">)</span>
+<span class="n">val_dataset</span> <span class="o">=</span> <span class="n">CustomNonGeoDataset</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;./dubai_segmentation&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;valid&quot;</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms</span><span class="p">)</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">CustomNonGeoDataset</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;./dubai_segmentation&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms</span><span class="p">)</span>
+
+<span class="c1"># Define batch size</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Adjust as needed</span>
+
+<span class="c1"># Create DataLoaders</span>
+<span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">train_dataset</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Shuffle the training data</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># Number of subprocesses for data loading</span>
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Speed up data transfer to GPU</span>
+<span class="p">)</span>
+
+<span class="n">val_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">val_dataset</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Do not shuffle validation data</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># Number of subprocesses for data loading</span>
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Speed up data transfer to GPU</span>
+<span class="p">)</span>
+
+<span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">test_dataset</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Do not shuffle test data</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>  <span class="c1"># Number of subprocesses for data loading</span>
+    <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Speed up data transfer to GPU</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Print details</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training DataLoader: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">)</span><span class="si">}</span><span class="s2"> batches of size </span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation DataLoader: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">val_dataloader</span><span class="p">)</span><span class="si">}</span><span class="s2"> batches of size </span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test DataLoader: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">)</span><span class="si">}</span><span class="s2"> batches of size </span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training DataLoader: 98 batches of size 8
+Validation DataLoader: 33 batches of size 8
+Test DataLoader: 33 batches of size 8
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualise-batch">
+<h2>Visualise Batch<a class="headerlink" href="#visualise-batch" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the colormap</span>
+<span class="n">class_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span> <span class="s1">&#39;Road&#39;</span><span class="p">,</span> <span class="s1">&#39;Land&#39;</span><span class="p">,</span> <span class="s1">&#39;Vegetation&#39;</span><span class="p">,</span> <span class="s1">&#39;Water&#39;</span><span class="p">,</span> <span class="s1">&#39;Unlabeled&#39;</span><span class="p">]</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span>
+    <span class="s1">&#39;#3C1098&#39;</span><span class="p">,</span>  <span class="c1"># Building</span>
+    <span class="s1">&#39;#8429F6&#39;</span><span class="p">,</span>  <span class="c1"># Road</span>
+    <span class="s1">&#39;#6EC1E4&#39;</span><span class="p">,</span>  <span class="c1"># Land (unpaved area)</span>
+    <span class="s1">&#39;#FEDD3A&#39;</span><span class="p">,</span>  <span class="c1"># Vegetation</span>
+    <span class="s1">&#39;#E2A929&#39;</span><span class="p">,</span>  <span class="c1"># Water</span>
+    <span class="s1">&#39;#9B9B9B&#39;</span>   <span class="c1"># Unlabeled</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to visualize a specific batch of images and masks</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">visualise_batch</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">batch_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visualize a specific batch of images and masks from a dataloader.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataloader (DataLoader): The dataloader containing the dataset.</span>
+<span class="sd">        batch_idx (int): The index of the batch to visualize.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Iterate through the dataloader to the specified batch</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">batch_idx</span><span class="p">:</span>
+            <span class="n">images</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+            <span class="n">masks</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span>
+            <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Batch index </span><span class="si">{</span><span class="n">batch_idx</span><span class="si">}</span><span class="s2"> is out of range for the dataloader.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Plot the images and masks</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="mi">5</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_pil_image</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Image&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+        
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                          <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+                          <span class="n">vmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                          <span class="n">vmax</span><span class="o">=</span><span class="mi">5</span>
+                          <span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mask&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Add legend</span>
+        <span class="n">legend_handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">class_names</span><span class="p">))]</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legend_handles</span><span class="p">,</span> <span class="n">class_names</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visualise_batch</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">,</span> <span class="n">batch_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/8ff31adecf9102f20aa9c30b20d44fddf9fbabed4243d7a4dbed467a4b7a9e15.png" src="../../../../_images/8ff31adecf9102f20aa9c30b20d44fddf9fbabed4243d7a4dbed467a4b7a9e15.png" />
+</div>
+</div>
+</section>
+<section id="segmentation-model">
+<h2>Segmentation Model<a class="headerlink" href="#segmentation-model" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pytorch_lightning as pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchgeo.trainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SemanticSegmentationTask</span>
+
+<span class="c1"># Define the task</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">SemanticSegmentationTask</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ce&#39;</span><span class="p">,</span>  <span class="c1"># Cross-entropy loss</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;unet&#39;</span><span class="p">,</span>  <span class="c1"># U-Net model</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># Input channels (e.g., RGB images)</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>  <span class="c1"># Number of output classes</span>
+    <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>  <span class="c1"># Learning rate</span>
+    <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># Patience for early stopping</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="training-loop">
+<h2>Training Loop<a class="headerlink" href="#training-loop" title="Link to this heading">#</a></h2>
+<p>The training function should receive the number of epochs, the model, the dataloaders, the loss function (to be optimized) the accuracy function (to assess the results), the optimizer (that will adjust the parameters of the model in the correct direction) and the transformations to be applied to each batch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if GPU is available</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+<span class="n">device</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>device(type=&#39;cuda&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">num_workers</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">max_epochs</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">fast_dev_run</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accelerator</span> <span class="o">=</span> <span class="s1">&#39;gpu&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span>
+<span class="n">default_root_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="s1">&#39;experiments&#39;</span><span class="p">)</span>
+<span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">dirpath</span><span class="o">=</span><span class="n">default_root_dir</span><span class="p">,</span> <span class="n">save_top_k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_last</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">early_stopping_callback</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">min_delta</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">TensorBoardLogger</span><span class="p">(</span><span class="n">save_dir</span><span class="o">=</span><span class="n">default_root_dir</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;tutorial_logs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># def training_step(self, batch, batch_idx):</span>
+<span class="c1">#     x, y = batch</span>
+<span class="c1">#     y_hat = self(x)</span>
+<span class="c1">#     loss = self.loss_fn(y_hat, y)</span>
+<span class="c1">#     accuracy = (y_hat.argmax(dim=1) == y).float().mean()</span>
+
+<span class="c1">#     # Log loss and accuracy</span>
+<span class="c1">#     self.log(&#39;train_loss&#39;, loss, on_step=True, on_epoch=True, prog_bar=True)</span>
+<span class="c1">#     self.log(&#39;train_acc&#39;, accuracy, on_step=True, on_epoch=True, prog_bar=True)</span>
+
+<span class="c1">#     return loss</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">lightning.pytorch.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">TQDMProgressBar</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">accelerator</span><span class="o">=</span><span class="n">accelerator</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_callback</span><span class="p">,</span> <span class="n">early_stopping_callback</span><span class="p">,</span> <span class="n">TQDMProgressBar</span><span class="p">(</span><span class="n">refresh_rate</span><span class="o">=</span><span class="mi">10</span><span class="p">)],</span>
+    <span class="c1"># fast_dev_run=fast_dev_run,</span>
+    <span class="n">log_every_n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+    <span class="n">min_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="n">max_epochs</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># history = </span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">train_dataloaders</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span> <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">val_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/exports/csce/datastore/geos/users/s2112771/miniforge3/envs/sensebook/lib/python3.12/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:654: Checkpoint directory /exports/csce/datastore/geos/users/s2112771/sense_cpd/sense_book/book/3_ml4eo/3_sat_ml_deep/experiments exists and is not empty.
+INFO: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+INFO:lightning.pytorch.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+INFO: 
+  | Name          | Type             | Params | Mode 
+-----------------------------------------------------------
+0 | model         | Unet             | 32.5 M | train
+1 | criterion     | CrossEntropyLoss | 0      | train
+2 | train_metrics | MetricCollection | 0      | train
+3 | val_metrics   | MetricCollection | 0      | train
+4 | test_metrics  | MetricCollection | 0      | train
+-----------------------------------------------------------
+32.5 M    Trainable params
+0         Non-trainable params
+32.5 M    Total params
+130.087   Total estimated model params size (MB)
+233       Modules in train mode
+0         Modules in eval mode
+INFO:lightning.pytorch.callbacks.model_summary:
+  | Name          | Type             | Params | Mode 
+-----------------------------------------------------------
+0 | model         | Unet             | 32.5 M | train
+1 | criterion     | CrossEntropyLoss | 0      | train
+2 | train_metrics | MetricCollection | 0      | train
+3 | val_metrics   | MetricCollection | 0      | train
+4 | test_metrics  | MetricCollection | 0      | train
+-----------------------------------------------------------
+32.5 M    Trainable params
+0         Non-trainable params
+32.5 M    Total params
+130.087   Total estimated model params size (MB)
+233       Modules in train mode
+0         Modules in eval mode
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 38: 100%|██████████| 98/98 [00:11&lt;00:00,  8.57it/s, v_num=2]         
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_dataset = CustomNonGeoDataset(root=&quot;./dubai_segmentation&quot;, split=&quot;test&quot;, transforms=transforms)</span>
+<span class="c1"># test_dataloader = DataLoader(</span>
+<span class="c1">#     test_dataset,</span>
+<span class="c1">#     batch_size=batch_size,</span>
+<span class="c1">#     shuffle=False,  # Do not shuffle test data</span>
+<span class="c1">#     num_workers=num_workers,  # Number of subprocesses for data loading</span>
+<span class="c1">#     pin_memory=True,  # Speed up data transfer to GPU</span>
+<span class="c1"># )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">dataloaders</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+INFO:lightning.pytorch.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Testing DataLoader 0: 100%|██████████| 33/33 [00:00&lt;00:00, 47.59it/s]
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        Test metric               DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  test_MulticlassAccuracy      0.8341513276100159
+test_MulticlassJaccardIndex    0.7154885530471802
+         test_loss             0.4819890260696411
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 0.4819890260696411,
+  &#39;test_MulticlassAccuracy&#39;: 0.8341513276100159,
+  &#39;test_MulticlassJaccardIndex&#39;: 0.7154885530471802}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">dataloaders</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b2120016116c4eeb9ca9c5d7748458e6", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        Test metric               DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  test_MulticlassAccuracy      0.8310921788215637
+test_MulticlassJaccardIndex    0.7109988927841187
+         test_loss             0.5420687794685364
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 0.5420687794685364,
+  &#39;test_MulticlassAccuracy&#39;: 0.8310921788215637,
+  &#39;test_MulticlassJaccardIndex&#39;: 0.7109988927841187}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualise-results">
+<h2>Visualise results<a class="headerlink" href="#visualise-results" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the model from the checkpoint</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">SemanticSegmentationTask</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span><span class="s1">&#39;./experiments/last-v3.ckpt&#39;</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">task</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SemanticSegmentationTask(
+  (model): Unet(
+    (encoder): ResNetEncoder(
+      (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (layer1): Sequential(
+        (0): Bottleneck(
+          (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (downsample): Sequential(
+            (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): Bottleneck(
+          (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (2): Bottleneck(
+          (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+      )
+      (layer2): Sequential(
+        (0): Bottleneck(
+          (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (downsample): Sequential(
+            (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): Bottleneck(
+          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (2): Bottleneck(
+          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (3): Bottleneck(
+          (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+      )
+      (layer3): Sequential(
+        (0): Bottleneck(
+          (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (downsample): Sequential(
+            (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): Bottleneck(
+          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (2): Bottleneck(
+          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (3): Bottleneck(
+          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (4): Bottleneck(
+          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (5): Bottleneck(
+          (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+      )
+      (layer4): Sequential(
+        (0): Bottleneck(
+          (conv1): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (downsample): Sequential(
+            (0): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): Bottleneck(
+          (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (2): Bottleneck(
+          (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+      )
+    )
+    (decoder): UnetDecoder(
+      (center): Identity()
+      (blocks): ModuleList(
+        (0): DecoderBlock(
+          (conv1): Conv2dReLU(
+            (0): Conv2d(3072, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention1): Attention(
+            (attention): Identity()
+          )
+          (conv2): Conv2dReLU(
+            (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention2): Attention(
+            (attention): Identity()
+          )
+        )
+        (1): DecoderBlock(
+          (conv1): Conv2dReLU(
+            (0): Conv2d(768, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention1): Attention(
+            (attention): Identity()
+          )
+          (conv2): Conv2dReLU(
+            (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention2): Attention(
+            (attention): Identity()
+          )
+        )
+        (2): DecoderBlock(
+          (conv1): Conv2dReLU(
+            (0): Conv2d(384, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention1): Attention(
+            (attention): Identity()
+          )
+          (conv2): Conv2dReLU(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention2): Attention(
+            (attention): Identity()
+          )
+        )
+        (3): DecoderBlock(
+          (conv1): Conv2dReLU(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention1): Attention(
+            (attention): Identity()
+          )
+          (conv2): Conv2dReLU(
+            (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention2): Attention(
+            (attention): Identity()
+          )
+        )
+        (4): DecoderBlock(
+          (conv1): Conv2dReLU(
+            (0): Conv2d(32, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention1): Attention(
+            (attention): Identity()
+          )
+          (conv2): Conv2dReLU(
+            (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (attention2): Attention(
+            (attention): Identity()
+          )
+        )
+      )
+    )
+    (segmentation_head): SegmentationHead(
+      (0): Conv2d(16, 6, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): Identity()
+      (2): Activation(
+        (activation): Identity()
+      )
+    )
+  )
+  (criterion): JaccardLoss()
+  (train_metrics): MetricCollection(
+    (MulticlassAccuracy): MulticlassAccuracy()
+    (MulticlassJaccardIndex): MulticlassJaccardIndex(),
+    prefix=train_
+  )
+  (val_metrics): MetricCollection(
+    (MulticlassAccuracy): MulticlassAccuracy()
+    (MulticlassJaccardIndex): MulticlassJaccardIndex(),
+    prefix=val_
+  )
+  (test_metrics): MetricCollection(
+    (MulticlassAccuracy): MulticlassAccuracy()
+    (MulticlassJaccardIndex): MulticlassJaccardIndex(),
+    prefix=test_
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">dataloaders</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/exports/csce/datastore/geos/users/s2112771/miniforge3/envs/sensebook/lib/python3.12/site-packages/lightning/fabric/plugins/environments/slurm.py:204: The `srun` command is available on your system but is not used. HINT: If your intention is to run Lightning on SLURM, prepend your python command with `srun` like so: srun python /exports/csce/datastore/geos/users/s2112771/miniforg ...
+You are using a CUDA device (&#39;NVIDIA L4&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "2de35ca923d04d56b434048a83b10a50", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        Test metric               DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  test_MulticlassAccuracy      0.8192617893218994
+test_MulticlassJaccardIndex    0.6938555836677551
+         test_loss             0.38248372077941895
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 0.38248372077941895,
+  &#39;test_MulticlassAccuracy&#39;: 0.8192617893218994,
+  &#39;test_MulticlassJaccardIndex&#39;: 0.6938555836677551}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>  <span class="c1"># Disable dropout and batch normalization</span>
+<span class="n">task</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>  <span class="c1"># Freeze the model for inference</span>
+
+<span class="c1"># Initialize lists to store predictions and ground truth masks</span>
+<span class="n">all_preds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_masks</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="c1"># Get a batch of test data</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">))</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
+    <span class="n">masks</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Make predictions</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">task</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="c1"># Convert predictions to masks</span>
+    <span class="n">predicted_masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Store predictions and ground truth masks</span>
+    <span class="n">all_preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>  <span class="c1"># Move predictions to CPU</span>
+    <span class="n">all_masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">masks</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>  <span class="c1"># Move masks to CPU</span>
+
+<span class="c1"># Concatenate predictions and ground truth masks</span>
+<span class="n">all_preds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">all_preds</span><span class="p">)</span>
+<span class="n">all_masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">all_masks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to visualize a batch of images and masks</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">visualise_batch</span><span class="p">(</span><span class="n">dataloader</span><span class="p">,</span> <span class="n">predicted_masks</span><span class="p">):</span>
+    <span class="c1"># Get a batch of training data</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dataloader</span><span class="p">))</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+    <span class="n">masks</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+    
+    <span class="c1"># Plot the images and masks</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="mi">5</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">to_pil_image</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">predicted_mask</span> <span class="o">=</span> <span class="n">predicted_masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+        
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Image&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+        
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mask&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+        
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">predicted_mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Predicted Mask&quot;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    
+        <span class="c1"># Add legend</span>
+        <span class="c1"># legend_labels = [&#39;Building&#39;, &#39;Land&#39;, &#39;Road&#39;, &#39;Vegetation&#39;, &#39;Water&#39;, &#39;Unlabeled&#39;]</span>
+        <span class="c1"># legend_labels = [&#39;Water&#39;, &#39;Land (unpaved area)&#39;, &#39;Road&#39;, &#39;Building&#39;, &#39;Vegetation&#39;, &#39;Unlabelled&#39;]</span>
+        <span class="n">legend_handles</span> <span class="o">=</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">class_names</span><span class="p">))]</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">legend_handles</span><span class="p">,</span> <span class="n">class_names</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visualise_batch</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">,</span> <span class="n">predicted_masks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/07f4ece343cb305514abdbb8a4b39a1a9ecbe24f341993a0f50bbdd95f2760cb.png" src="../../../../_images/07f4ece343cb305514abdbb8a4b39a1a9ecbe24f341993a0f50bbdd95f2760cb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torchmetrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfusionMatrix</span>
+
+<span class="c1"># Define the number of classes</span>
+<span class="n">num_classes</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># Adjust based on your dataset</span>
+
+<span class="c1"># Initialize the confusion matrix</span>
+<span class="n">conf_matrix</span> <span class="o">=</span> <span class="n">ConfusionMatrix</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">&quot;multiclass&quot;</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+
+<span class="c1"># Compute the confusion matrix</span>
+<span class="n">conf_matrix</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">all_preds</span><span class="p">,</span> <span class="n">all_masks</span><span class="p">)</span>
+<span class="n">conf_matrix</span> <span class="o">=</span> <span class="n">conf_matrix</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_confusion_matrix</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">,</span> <span class="n">class_names</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot a confusion matrix.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        conf_matrix (torch.Tensor or numpy.ndarray): Confusion matrix.</span>
+<span class="sd">        class_names (list): List of class names.</span>
+<span class="sd">        normalize (bool): Whether to normalize the confusion matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="n">conf_matrix</span> <span class="o">=</span> <span class="n">conf_matrix</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+        <span class="n">conf_matrix</span> <span class="o">=</span> <span class="n">conf_matrix</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">conf_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span> <span class="k">if</span> <span class="n">normalize</span> <span class="k">else</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+                <span class="n">xticklabels</span><span class="o">=</span><span class="n">class_names</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">class_names</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Normalized Confusion Matrix&#39;</span> <span class="k">if</span> <span class="n">normalize</span> <span class="k">else</span> <span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the normalized confusion matrix</span>
+<span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">,</span> <span class="n">class_names</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;pink_r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/4d8f8bfd8082a92ede5eaf114c7d9a15407584e4ccfa6eade9732889e4a93d58.png" src="../../../../_images/4d8f8bfd8082a92ede5eaf114c7d9a15407584e4ccfa6eade9732889e4a93d58.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the normalized confusion matrix</span>
+<span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">,</span> <span class="n">class_names</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;pink_r&#39;</span><span class="p">)</span>
+<span class="c1"># plot_confusion_matrix(conf_matrix, class_names, normalize=True, cmap=&#39;bone_r&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/23400aacf3805b51e42f088025feee7afbecf737fd534d9993662bf57aa34be1.png" src="../../../../_images/23400aacf3805b51e42f088025feee7afbecf737fd534d9993662bf57aa34be1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mcolors</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Define the colormap</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span>
+    <span class="s1">&#39;#3C1098&#39;</span><span class="p">,</span>  <span class="c1"># Building</span>
+    <span class="s1">&#39;#8429F6&#39;</span><span class="p">,</span>  <span class="c1"># Land (unpaved area)</span>
+    <span class="s1">&#39;#6EC1E4&#39;</span><span class="p">,</span>  <span class="c1"># Road</span>
+    <span class="s1">&#39;#FEDD3A&#39;</span><span class="p">,</span>  <span class="c1"># Vegetation</span>
+    <span class="s1">&#39;#E2A929&#39;</span><span class="p">,</span>  <span class="c1"># Water</span>
+    <span class="s1">&#39;#9B9B9B&#39;</span>   <span class="c1"># Unlabeled</span>
+<span class="p">])</span>
+
+<span class="c1"># Define the labels for each color</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Building&#39;</span><span class="p">,</span> <span class="s1">&#39;Land (unpaved area)&#39;</span><span class="p">,</span> <span class="s1">&#39;Road&#39;</span><span class="p">,</span> <span class="s1">&#39;Vegetation&#39;</span><span class="p">,</span> <span class="s1">&#39;Water&#39;</span><span class="p">,</span> <span class="s1">&#39;Unlabeled&#39;</span><span class="p">]</span>
+
+<span class="c1"># Create a figure and axis</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Create a colorbar</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Define boundaries for each color</span>
+<span class="n">norm</span> <span class="o">=</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">BoundaryNorm</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">cmap</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">),</span>
+                  <span class="n">cax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="n">bounds</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>  <span class="c1"># Set the labels for the colorbar</span>
+
+<span class="c1"># Display the colorbar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/0180286393932e8ae9c25710be6c07bdd1854ae5edc6baa6bcdbe19c25fe2769.png" src="../../../../_images/0180286393932e8ae9c25710be6c07bdd1854ae5edc6baa6bcdbe19c25fe2769.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_loop</span><span class="p">(</span>
+    <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">train_dl</span><span class="p">:</span> <span class="n">DataLoader</span><span class="p">,</span>
+    <span class="n">val_dl</span><span class="p">:</span> <span class="n">DataLoader</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+    <span class="n">loss_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+    <span class="n">acc_fns</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_tfms</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+    <span class="c1"># size = len(dataloader.dataset)</span>
+    <span class="n">cuda_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">accum_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">train_dl</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">batch_tfms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">X</span> <span class="o">=</span> <span class="n">batch_tfms</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">X</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="n">y</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">cuda_model</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+            <span class="c1"># BackProp</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+            <span class="c1"># update the accum loss</span>
+            <span class="n">accum_loss</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_dl</span><span class="p">)</span>
+
+        <span class="c1"># Testing against the validation dataset</span>
+        <span class="k">if</span> <span class="n">acc_fns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">val_dl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># reset the accuracies metrics</span>
+            <span class="n">acc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">acc_fns</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">val_dl</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">batch_tfms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">X</span> <span class="o">=</span> <span class="n">batch_tfms</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">X</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+                    <span class="n">y</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+                    <span class="n">pred</span> <span class="o">=</span> <span class="n">cuda_model</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="s1">&#39;out&#39;</span><span class="p">]</span>
+
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">acc_fn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">acc_fns</span><span class="p">):</span>
+                        <span class="n">acc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">acc_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">val_dl</span><span class="p">))</span>
+
+            <span class="c1"># at the end of the epoch, print the errors, etc.</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">: Train Loss=</span><span class="si">{</span><span class="n">accum_loss</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1"> - Accs=</span><span class="si">{</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">acc</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1">: Train Loss=</span><span class="si">{</span><span class="n">accum_loss</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="exercise-1-finetune-the-segmentation-model">
+<h3>Exercise 1: Finetune the segmentation model<a class="headerlink" href="#exercise-1-finetune-the-segmentation-model" title="Link to this heading">#</a></h3>
+<p>Now try adjusting the model by implementing different methods of reducing overfitting and increasing the model’s ability to generalise.</p>
+<ol class="arabic simple">
+<li><p>Retrain the model by using or adding a different loss function and see what happens to the performance of the segmentation model.</p></li>
+</ol>
+<blockquote>
+<div><p>Hint: Further details for loss options can be found in the <a class="reference external" href="https://torchgeo.readthedocs.io/en/latest/api/trainers.html#torchgeo.trainers.SemanticSegmentationTask">TorchGeo SemanticSegmentationTask documentation</a></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the task</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">SemanticSegmentationTask</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;jaccard&#39;</span><span class="p">,</span>  <span class="c1"># Cross-entropy loss (default)</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;unet&#39;</span><span class="p">,</span>  <span class="c1"># U-Net model</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># Input channels (e.g., RGB images)</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>  <span class="c1"># Number of output classes</span>
+    <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>  <span class="c1"># Learning rate</span>
+    <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># Patience for early stopping</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the model with updated task</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">train_dataloaders</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span> <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">val_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO: You are using a CUDA device (&#39;NVIDIA L4&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+INFO:lightning.pytorch.utilities.rank_zero:You are using a CUDA device (&#39;NVIDIA L4&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+/exports/csce/datastore/geos/users/s2112771/miniforge3/envs/sensebook/lib/python3.12/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:654: Checkpoint directory /exports/csce/datastore/geos/users/s2112771/sense_cpd/sense_book/book/3_ml4eo/3_sat_ml_deep/experiments exists and is not empty.
+INFO: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+INFO:lightning.pytorch.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+INFO: 
+  | Name          | Type             | Params | Mode 
+-----------------------------------------------------------
+0 | model         | Unet             | 32.5 M | train
+1 | criterion     | JaccardLoss      | 0      | train
+2 | train_metrics | MetricCollection | 0      | train
+3 | val_metrics   | MetricCollection | 0      | train
+4 | test_metrics  | MetricCollection | 0      | train
+-----------------------------------------------------------
+32.5 M    Trainable params
+0         Non-trainable params
+32.5 M    Total params
+130.087   Total estimated model params size (MB)
+233       Modules in train mode
+0         Modules in eval mode
+INFO:lightning.pytorch.callbacks.model_summary:
+  | Name          | Type             | Params | Mode 
+-----------------------------------------------------------
+0 | model         | Unet             | 32.5 M | train
+1 | criterion     | JaccardLoss      | 0      | train
+2 | train_metrics | MetricCollection | 0      | train
+3 | val_metrics   | MetricCollection | 0      | train
+4 | test_metrics  | MetricCollection | 0      | train
+-----------------------------------------------------------
+32.5 M    Trainable params
+0         Non-trainable params
+32.5 M    Total params
+130.087   Total estimated model params size (MB)
+233       Modules in train mode
+0         Modules in eval mode
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "43256125e34845869863663a1b9e249d", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "55276d46486f48ca9359788e7d35a249", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "672499278b454e7d8165c9abab94ce2a", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "75deb79eb45849e4be362617c82aa82d", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "ad56cef9eb7d4db398783580f232bbc5", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "363fe6b09fc14de0b517dfcf6ecef776", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "9a624391f9ce48d78bdfc21f7d918820", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "66c05b2983f84b9c9fad900d87fee201", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "55cb7dd1df494794a0ab9783fe15c6e4", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "1c7bb2ab41784195b4fa45325f2a37ef", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "8f69c4c6a5a44b64a0c67caf63f9ba0f", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "8c73999be5194504a16edaf7a1cee8e3", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a82c2b3fc18d43399256b5b465113b32", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "6b6f0dae85a44de88227728e59631d17", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "b54837b603f744c5afd7711d16c2bd97", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "40c6e88a992a4a119cb855f5431a7aa0", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7b8053207d854680b39165cff612b6dd", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "daf20d0d60454e8aa24e966b3515d36e", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "aabcf57768ec4402a8265c4a4af97a99", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "35d25b64a94c4c53ac54700f6877ee52", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "e77c419eabb444a09bdf51c80e6d1f65", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "064a0a70f2d84e7c8791c9b6a91956db", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "b51f5190eea546fe9e10d82aea6dc0f3", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5744daab458c4687a04018a408ffb504", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5efa8bc02d3d431fb797fdd15ba6b9aa", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "72b1b01f95e744e98a415dfb3036f3d3", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "6b7d41fb5baa46b784d48db7b3bf7e00", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "243cb044594949cda25a632732615a38", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "9bd82a3d9c6b4c539af63afd742a677b", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "20d46994702141288cc0e75d96e4d188", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "04c92001a63048dfa13266e94e7d57a4", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "f607ad089efb4bc49321a2c2c6410c39", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "4c0a503b45724802a592646a38c0bc8a", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7c5fdb30086345b899271d2756d2f382", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "05047d91ed4b408c80726d00c80895bc", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "8d3d212623af459a9c96107e095af193", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "35b8e693f8284d928975437f00d05289", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "bd64a6fd3e234ffcbabc08f7de7aa0b5", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5b0f22f6b3724814927e0ed02490513f", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "84b7ec2a841c4b40965e80d07773dfed", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "eebebc2963df42eda8781558d87720ec", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "8829593a5cf845b2b837d5cda66b60eb", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "150cdb328e694c6b9451d44df19d0ea3", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "806eaffc9b184cd0b1ffb28a392f7231", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "09baae1fa278459cb3636bbb5ea49c05", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0b817f022ac7409eae0a30cab0742c7e", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "06bad02e5cbf415387ec7c6c63e5e862", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "8fb34c374b3b4b6688d1b7526e8b250d", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0f8000866eb74eab96b9976126656387", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7004d0883ade4dc99aa18e14a5e2df23", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0c868dd2e8324effbe95cb13a4c5333d", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5800882f94494c58ac096024ef6d0468", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO: `Trainer.fit` stopped: `max_epochs=50` reached.
+INFO:lightning.pytorch.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=50` reached.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate results on test set</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">dataloaders</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/exports/csce/datastore/geos/users/s2112771/miniforge3/envs/sensebook/lib/python3.12/site-packages/lightning/fabric/plugins/environments/slurm.py:204: The `srun` command is available on your system but is not used. HINT: If your intention is to run Lightning on SLURM, prepend your python command with `srun` like so: srun python /exports/csce/datastore/geos/users/s2112771/miniforg ...
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5d149b68eee949879e0390edcf6c6934", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        Test metric               DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  test_MulticlassAccuracy      0.8192617893218994
+test_MulticlassJaccardIndex    0.6938555836677551
+         test_loss             0.38248372077941895
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 0.38248372077941895,
+  &#39;test_MulticlassAccuracy&#39;: 0.8192617893218994,
+  &#39;test_MulticlassJaccardIndex&#39;: 0.6938555836677551}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-2-try-another-model-architecture">
+<h2>Exercise 2: Try another model architecture<a class="headerlink" href="#exercise-2-try-another-model-architecture" title="Link to this heading">#</a></h2>
+<p>Change the network architecture to U-net with Resnet backbone. Use pretrainded weights to initialize it, available pretrained weights are listed <a class="reference external" href="https://torchgeo.readthedocs.io/en/latest/api/models.html#pretrained-weights">here</a>.</p>
+<blockquote>
+<div><p>Hint: Torgeo Lightning Trainers have a <code>backbone</code> option, see the <a class="reference external" href="https://torchgeo.readthedocs.io/en/latest/api/trainers.html#torchgeo.trainers.SemanticSegmentationTask">documentation</a>. There are numerous backbone options available from <a class="reference external" href="https://smp.readthedocs.io/en/latest/models.html">smp</a> and <a class="reference external" href="https://smp.readthedocs.io/en/latest/encoders_timm.html">timm</a> that are easy to integrate (try Resnet or another of your choice). All backbones have pre-trained weights for faster and better convergence.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the task</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">SemanticSegmentationTask</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ce&#39;</span><span class="p">,</span>  <span class="c1"># Cross-entropy loss</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;unet&#39;</span><span class="p">,</span>  <span class="c1"># U-Net model</span>
+    <span class="n">backbone</span><span class="o">=</span><span class="s1">&#39;resnet18&#39;</span><span class="p">,</span>  <span class="c1"># ResNet-18 backbone</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;ResNet18_Weights.SENTINEL2_RGB_MOCO&#39;</span><span class="p">,</span>  <span class="c1"># Pre-trained weights</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># Input channels (e.g., RGB images)</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>  <span class="c1"># Number of output classes</span>
+    <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>  <span class="c1"># Learning rate</span>
+    <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># Patience for early stopping</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the task</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">SemanticSegmentationTask</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;jaccard&#39;</span><span class="p">,</span>  <span class="c1"># Cross-entropy loss</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;unet&#39;</span><span class="p">,</span>  <span class="c1"># U-Net model</span>
+    <span class="n">backbone</span><span class="o">=</span><span class="s1">&#39;resnet50&#39;</span><span class="p">,</span>  <span class="c1"># ResNet-18 backbone</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="s1">&#39;ResNet50_Weights.FMOW_RGB_GASSL&#39;</span><span class="p">,</span>  <span class="c1"># Pre-trained weights</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># Input channels (e.g., RGB images)</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>  <span class="c1"># Number of output classes</span>
+    <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>  <span class="c1"># Learning rate</span>
+    <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># Patience for early stopping</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading: &quot;https://hf.co/torchgeo/resnet50_fmow_rgb_gassl/resolve/fe8a91026cf9104f1e884316b8e8772d7af9052c/resnet50_fmow_rgb_gassl-da43d987.pth&quot; to /home/s2112771/.cache/torch/hub/checkpoints/resnet50_fmow_rgb_gassl-da43d987.pth
+100%|██████████| 90.0M/90.0M [00:00&lt;00:00, 197MB/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">configure_optimizers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hparams</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">])</span>
+
+<span class="c1"># Train the model with updated task</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">train_dataloaders</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span> <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">val_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name          | Type             | Params | Mode 
+-----------------------------------------------------------
+0 | model         | Unet             | 32.5 M | train
+1 | criterion     | JaccardLoss      | 0      | train
+2 | train_metrics | MetricCollection | 0      | train
+3 | val_metrics   | MetricCollection | 0      | train
+4 | test_metrics  | MetricCollection | 0      | train
+-----------------------------------------------------------
+32.5 M    Trainable params
+0         Non-trainable params
+32.5 M    Total params
+130.087   Total estimated model params size (MB)
+233       Modules in train mode
+0         Modules in eval mode
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9ab1f9f1852f470585ea4101836ecfe4", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "aabda77e549745ca85951a5f9391b820", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "90aebcd4b1d14110aa0328417dc62de3", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "1a3efca7173045acbe66cde8ef707723", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "c0e06b4bd28049618597acbe8a32d8e7", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "bce933ff85d54e03925640a27a76ba58", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "93d3368abcdd46f7a269a7a6a363bdac", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "e030e3821ab64a8099a5de48640fa2cb", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "b22699510a7e42a7886859eabd988e01", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "2e6c30082f4e43f7928696df8d7ac21f", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "34fa0ca0edb846a7b2544c2361193f58", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "914313c15ed74c13acca46c79affb00d", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "14092d67dc094fbc8dde5c59ba1b5354", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "15279afa34da4f64886d38b8468645d7", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "36b11c5a0cc44001aaf96439f07cbaae", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "88793fe654314696993a6a644e2a3854", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "4097a8d3bebe4603955f5b2062cfeff5", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "1e83747bed4549b1a7ff575f5700c4b1", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a05a3ad53ecd48398be3be7d6dcda094", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "df728496e7454d78ab9a289a99d8bbbd", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "cc29b828906f42d9a65068394928cca6", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7bfb6fd80ee149c2b5c32616aa9ddbe4", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "c0b1529db0374cd99f0a536c87267337", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "b42daad9d0f3467fbd76912125224bf6", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "8f965c832ca043bb9bd3dc500109a5a6", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a677207f7dcd4571a52938f0fbb53c03", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "156180757f4b422484d6053478411867", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "98b4b7a7bf0e4a12aaff39c60101eb89", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "f4ae4c4dd3b24406974dda1bb65b98f7", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "caad0b4eb9f24d1fb2f1e0a2948d98aa", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "99983b18019c4d7cbc818700d670357a", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "fc5818e2bb6b47698ab1181aa6c1afce", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "3e707431be3347a18e0fa11b1a66c35b", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate results on test set</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">dataloaders</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "7a56c66e64394a72b4304ea4d8516104", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        Test metric               DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  test_MulticlassAccuracy      0.8430196642875671
+test_MulticlassJaccardIndex    0.7286378741264343
+         test_loss             0.3561114966869354
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 0.3561114966869354,
+  &#39;test_MulticlassAccuracy&#39;: 0.8430196642875671,
+  &#39;test_MulticlassJaccardIndex&#39;: 0.7286378741264343}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the task</span>
+<span class="n">task</span> <span class="o">=</span> <span class="n">SemanticSegmentationTask</span><span class="p">(</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;ce&#39;</span><span class="p">,</span>  <span class="c1"># Cross-entropy loss</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;unet&#39;</span><span class="p">,</span>  <span class="c1"># U-Net model</span>
+    <span class="n">backbone</span><span class="o">=</span><span class="s1">&#39;resnet34&#39;</span><span class="p">,</span>  <span class="c1"># ResNet-18 backbone</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Pre-trained weights</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># Input channels (e.g., RGB images)</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>  <span class="c1"># Number of output classes</span>
+    <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>  <span class="c1"># Learning rate</span>
+    <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># Patience for early stopping</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the model with updated task</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">train_dataloaders</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span> <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">val_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name          | Type             | Params | Mode 
+-----------------------------------------------------------
+0 | model         | Unet             | 24.4 M | train
+1 | criterion     | CrossEntropyLoss | 0      | train
+2 | train_metrics | MetricCollection | 0      | train
+3 | val_metrics   | MetricCollection | 0      | train
+4 | test_metrics  | MetricCollection | 0      | train
+-----------------------------------------------------------
+24.4 M    Trainable params
+0         Non-trainable params
+24.4 M    Total params
+97.748    Total estimated model params size (MB)
+198       Modules in train mode
+0         Modules in eval mode
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "67b858f96c8f44299858d0300a7833f5", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a376a873e02a497cb56235133d01a9d1", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "ae1ac6fbc9e1413ab33c442214e79022", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "3619ec20ef544f04bbe01313c8e569ba", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "6dcccf61b9d64cf8adc56b3955929b1b", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "4ce5b7d6f089406c8cc797bf2b17b15e", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "ab6ab601f76e48319f5877735ab17d4c", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "28c3d5623001480fa239f01e09ab2d44", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "6b880a534a3049049a2c9ff5fd5fbb94", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "50793d3ce14b466d9d843e1260bae2fb", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "f24bac5aced84ee4875e5b6bd4e84c78", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "c96a537f78ef4085af7d0b3a649fd201", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "de7b62af796d42fba0ed73cec71b0240", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "f53fd82d861e463f864350f24bdbcc6a", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "4754fea2d48a452aa63099e069db9127", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "b4867099ba22499b98235b221f4fd3c8", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "11bb42cd02fa4726970ef2479ca04008", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "6cffd32c82764fa4b73ee49f49c369a5", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "de5c082e77d8428fa6a40ad838616fcf", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a9be100144624ed58cc09cc61cf5962f", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "1e5f386119394aac8f5690d6f0613825", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "2130430e14064feb908d3a0a90ce59b1", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "e8ce31f4ed3a4e82944e7aec962db783", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "d16166e048014c7caba47d7adfccf33c", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "7a16a75268db41e38fefb553ea8e6294", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "61e33d4ff14d4834be33632fd5ad1cc2", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "dd8e5a46c0074e0a8b7f2818c63ffdbb", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "18c24558b99a482bae78d40efedb7e80", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "17ac09c81f8c4862a64610b28087a773", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "93fa2e5d862c456491e5d8b49be67e6e", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0ef1b1c059fc4c17ac8e14071a14cfeb", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "6322cdeec4af4a8589f2491fa59cd656", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a67e6fe7dc0f4191ad24198923f72799", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a084ce6cd3624d9cb797a291dbedaa16", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "370803f49b254b4d83de395cc2f87d3e", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "00eb87cc18d941daa0d1fe6f2d88c32c", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "cc0d9f2564054e0d886249fabce57beb", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "63d76f89e7da4294a642009ebd9b9f4e", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "aebdd9f9d8454f3aa5ec9dbd9c33180b", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "544a2ef6139844eaa1372cbda6396f47", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5917fa4834ae400db4008b351b713957", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "e73c7649748e48cfb2f9b79035f6ef61", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "5be1db1edf524d08819296b2bd001c29", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0f7c12e30a864d218bcbd045e878a134", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "dfe577c738a54ea5879289b1ace23d0c", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "e6ab3f6cdc014b9f9fb913e31932b363", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "81ee5c47e7d04b988538425ef529f2fe", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "53cad1fc5e7745c1ac60b7eb28197411", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "a76ff69d43264d6f906b5b189f3a92de", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "4dd6ecd35f234dba91769ec7d33c183b", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "273359e8960e43a6bcd098c34134f595", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "4ab377ab4a0c4ee0a5c3f93c27590181", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`Trainer.fit` stopped: `max_epochs=50` reached.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate results on test set</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">task</span><span class="p">,</span> <span class="n">dataloaders</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a2fb7741e4014e4f969240f762b3c787", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        Test metric               DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  test_MulticlassAccuracy      0.8256281018257141
+test_MulticlassJaccardIndex    0.7030380964279175
+         test_loss             0.5146786570549011
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 0.5146786570549011,
+  &#39;test_MulticlassAccuracy&#39;: 0.8256281018257141,
+  &#39;test_MulticlassJaccardIndex&#39;: 0.7030380964279175}]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/3_ml4eo/2_sat_ml_deep/solutions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Semantic segmentation of Aerial Imaginary with U-Net-like architectures</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-on-gpu">Run on GPU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-nongeodatasets">Custom NonGeoDatasets</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataloaders">Dataloaders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-batch">Visualise Batch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentation-model">Segmentation Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop">Training Loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualise-results">Visualise results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-finetune-the-segmentation-model">Exercise 1: Finetune the segmentation model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-try-another-model-architecture">Exercise 2: Try another model architecture</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By SENSE CDT
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

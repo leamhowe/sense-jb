@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Statistical plotting with Seaborn &#8212; SENSE Training Resources</title>
+    <title>3.5 Statistical plotting with Seaborn &#8212; SENSE Training Resources</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -58,10 +58,11 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'book/1_python_zero2hero/3_data_analysis_visualisation/05-Plotting-with-Seaborn';</script>
+    <link rel="icon" href="../../../_static/sense_logo_transp_white_crop.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="0 - Overview" href="../../2_geo_python/book2_overview.html" />
-    <link rel="prev" title="Introduction to pandas" href="04-Pandas-Intro.html" />
+    <link rel="prev" title="3.4 Intro to pandas" href="04-Pandas-Intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,7 +180,7 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 1 - Python Software Carpentry</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">🐍 Book 1 - Python Software Carpentry</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../book1_overview.html">0 - Overview</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_intro.html">1 - Intro to Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -194,39 +195,33 @@
 <li class="toctree-l2"><a class="reference internal" href="../2_python_basics/02-Semantics-Operators.html">2.2 Basic Python Semantics: Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_python_basics/03-Built-in-Scalar-Types.html">2.3 Built-In Types: Simple Values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_python_basics/04-Built-in-Data-Structures.html">2.4 Built-In Data Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/05-Ex-Try-Python-Basics.html">Exercise</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/06-Control-Flow-Statements.html">2.5 Control Flow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/07-Defining-Functions.html">2.6 Defining and Using Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/08-Ex-Build-A-Program.html">Build a simple program (1 h)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/09-Modules-and-Packages.html">Modules and Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/05-Ex-Try-Python-Basics.html">2.5 Exercise: Try Python Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/06-Control-Flow-Statements.html">2.6 Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/07-Defining-Functions.html">2.5 Defining and Using Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/08-Ex-Build-A-Program.html">2.8 Exercise: Build a simple program (1 h)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/09-Modules-and-Packages.html">2.9 Modules and Packages</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/10-Ex-Create-module.html">Solution: create a module and reuse code from it (1 h)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_python_basics/10-Ex-Create-module.html">Exercise: create a module and reuse code from it (1 h)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../3_data_analysis_visualisation.html">3 - Plotting</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="01-Numpy-Intro.html"> Introduction to NumPy</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="02-Matplotlib.html">Matplotlib - Intro</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="03-Working-with-datetime.html">Working with dates and times</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-Pandas-Intro.html">Introduction to pandas</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Statistical plotting with Seaborn</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../3_data_analysis_visualisation.html">3 - Data Analysis &amp; Visualisation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-Numpy-Intro.html">3.1 Introduction to NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-Matplotlib.html">3.2 Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-Working-with-datetime.html">3.3 The datetime library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-Pandas-Intro.html">3.4 Intro to pandas</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.5 Statistical plotting with Seaborn</a></li>
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 2 - GeoPython</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🛰️ Book 2 - GeoPython</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/book2_overview.html">0 - Overview</a></li>
-
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/cartopy.html">Cartopy</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/geopandas.html">GeoPandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/rasterio.html">Rasterio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/rioxarray.html">Rioxarray</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/xarray.html">Xarray</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/20-Xarray-NetCDF-Intro.html">Working with NetCDF files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/01_cartopy.html">Cartopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/02_geopandas.html">GeoPandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/03_rasterio.html">Rasterio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/04_Xarray_NetCDF_Intro.html">Working with NetCDF files</a></li>
 
 
 
@@ -235,54 +230,55 @@
 
 
 
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/05_rioxarray.html">Rioxarray</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/2_eo_data.html">2 - EO data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/2_eo_data.html">2 - EO data (under construction)</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/3_gee_python.html">3 - GEE Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/ee_api_colab_setup.html">Earth Engine Python API Colab Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">Google Earth Engine: JavaScript, but Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">3.1 - Open and Display</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">ImageCollection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">3.2 - Time Series</a></li>
 </ul>
 </details></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Book 3 - Machine Learning for EO</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🤖 Book 3 - Machine Learning for EO</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../3_ml4eo/book3_overview.html">0 - Overview</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro.html">2 - Classical ML with satellite data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/1_linear_regression.html">Practical 1: Linear Regression</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/1_sat_ml_intro.html">1 - Classical ML with satellite data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/1_sat_ml_intro/1_linear_regression.html">2.1 Linear Regression</a></li>
 
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/2_classification.html">Practical 2: Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/1_sat_ml_intro/2_classification.html">2.2 Classification</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_intro/3_kalman_filter.html">Practical 3: Kalman Filter</a></li>
-
-
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep.html">3 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/00_intro.html">Satellite image deep learning with PyTorch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/02_segmentation_unet.html">Semantic segmentation of Aerial Imaginary with U-Net-like architectures</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_sat_ml_deep/03_autoencoders.html">Autoencoders</a></li>
-
-
-
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/1_sat_ml_intro/3_kalman_filter.html">2.3 Kalman Filter</a></li>
 
 
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/4_embeddings.html">4 - Embeddings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/1a_Use_PCA_analysis_to_study_tile_embeddings.html">Use PCA analysis on tile embeddings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/1b_Exploring_embedding_space_with_clustering_methods.html">How are the study tiles clustered in the embedding space?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/4_embeddings/notebooks/2_Working_with_your_own_data.html">Working with your own input data</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_deep.html">2 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_deep/02_segmentation_unet.html">Segmentation</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/2_sat_ml_deep/03_autoencoders.html">Autoencoders</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ml4eo/3_embeddings.html">3 - Embeddings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_embeddings/notebooks/1a_Use_PCA_analysis_to_study_tile_embeddings.html">Use PCA analysis on tile embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_embeddings/notebooks/1b_Exploring_embedding_space_with_clustering_methods.html">How are the study tiles clustered in the embedding space?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ml4eo/3_embeddings/notebooks/2_Working_with_your_own_data.html">Working with your own input data</a></li>
 
 </ul>
 </details></li>
@@ -502,7 +498,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Statistical plotting with Seaborn</h1>
+    <h1>3.5 Statistical plotting with Seaborn</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -527,7 +523,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="statistical-plotting-with-seaborn">
-<h1>Statistical plotting with Seaborn<a class="headerlink" href="#statistical-plotting-with-seaborn" title="Link to this heading">#</a></h1>
+<h1>3.5 Statistical plotting with Seaborn<a class="headerlink" href="#statistical-plotting-with-seaborn" title="Link to this heading">#</a></h1>
 <p><a class="reference external" href="https://seaborn.pydata.org/">https://seaborn.pydata.org/</a></p>
 <p>Seaborn is built on top of Matplotlib, and improves it in several ways:</p>
 <ul class="simple">
@@ -560,6 +556,100 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>cylinders</th>
+      <th>displacement</th>
+      <th>horsepower</th>
+      <th>weight</th>
+      <th>acceleration</th>
+      <th>model_year</th>
+      <th>origin</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>307.0</td>
+      <td>130.0</td>
+      <td>3504</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>usa</td>
+      <td>chevrolet chevelle malibu</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15.0</td>
+      <td>8</td>
+      <td>350.0</td>
+      <td>165.0</td>
+      <td>3693</td>
+      <td>11.5</td>
+      <td>70</td>
+      <td>usa</td>
+      <td>buick skylark 320</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>318.0</td>
+      <td>150.0</td>
+      <td>3436</td>
+      <td>11.0</td>
+      <td>70</td>
+      <td>usa</td>
+      <td>plymouth satellite</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>16.0</td>
+      <td>8</td>
+      <td>304.0</td>
+      <td>150.0</td>
+      <td>3433</td>
+      <td>12.0</td>
+      <td>70</td>
+      <td>usa</td>
+      <td>amc rebel sst</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17.0</td>
+      <td>8</td>
+      <td>302.0</td>
+      <td>140.0</td>
+      <td>3449</td>
+      <td>10.5</td>
+      <td>70</td>
+      <td>usa</td>
+      <td>ford torino</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>For relational plotting of two or more variables use <code class="docutils literal notranslate"><span class="pre">relplot</span></code>.
 This is equivalent to <code class="docutils literal notranslate"><span class="pre">scatterplot</span></code>.</p>
@@ -570,6 +660,9 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/698c4f5ee3b5b51a73e215f2285731993c92333b4b68dfd761740acc37b1c52a.png" src="../../../_images/698c4f5ee3b5b51a73e215f2285731993c92333b4b68dfd761740acc37b1c52a.png" />
+</div>
 </div>
 <p>This is also very similar to linear regression plot <code class="docutils literal notranslate"><span class="pre">lmplot</span></code> with <code class="docutils literal notranslate"><span class="pre">fit_reg=False</span></code></p>
 <div class="cell docutils container">
@@ -577,6 +670,12 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;horsepower&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">,</span> <span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7b0b3a74b380&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/2beae0f4ae9d5a59f882dde3c47b66a6b1d365ad45915b708a672519477bf9c4.png" src="../../../_images/2beae0f4ae9d5a59f882dde3c47b66a6b1d365ad45915b708a672519477bf9c4.png" />
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">hue=</span></code> parameter can be used to plot a third variable.</p>
@@ -589,6 +688,12 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7b0b3aa060f0&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/2f99d61cacf8962f042f03f37a1d29c1a6e310ee69274b203297edaec8f29203.png" src="../../../_images/2f99d61cacf8962f042f03f37a1d29c1a6e310ee69274b203297edaec8f29203.png" />
+</div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">replot</span></code> can use marker <code class="docutils literal notranslate"><span class="pre">size</span></code> to show yet another variable</p>
 <div class="cell docutils container">
@@ -599,6 +704,12 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7b0b325c0950&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/6d74d05a57094dabe9b9bf8644a4dcf0f516f695e2a91959d2f7b9519a6f263b.png" src="../../../_images/6d74d05a57094dabe9b9bf8644a4dcf0f516f695e2a91959d2f7b9519a6f263b.png" />
+</div>
 </div>
 <p>Joint plots are comonly used in exploratory data analysis.</p>
 <div class="cell docutils container">
@@ -608,6 +719,13 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;mpg&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;resid&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mpg</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7b0b3243e5d0&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/d47023c5529f564f6d58ce46ed16779c85b3db0753c741282f1c9cc0a2883dd3.png" src="../../../_images/d47023c5529f564f6d58ce46ed16779c85b3db0753c741282f1c9cc0a2883dd3.png" />
+<img alt="../../../_images/6df3154bf5b374ab594739ae26fd83b5e8d21948f3e0dc5acf2d5c7cd963e36d.png" src="../../../_images/6df3154bf5b374ab594739ae26fd83b5e8d21948f3e0dc5acf2d5c7cd963e36d.png" />
 </div>
 </div>
 <section id="plotting-a-regression">
@@ -628,6 +746,9 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/c2a44e9cffb323a7c4c70f65917bfefbe7498397bb1fa907a40c893b41bd467d.png" src="../../../_images/c2a44e9cffb323a7c4c70f65917bfefbe7498397bb1fa907a40c893b41bd467d.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -638,6 +759,12 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 <span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;l/100 km&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7b0b31957710&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/3d5423cc14a2052ade7e17b5e88f6e4073edb796ae63c43083b9d4cb5bdbd4ac.png" src="../../../_images/3d5423cc14a2052ade7e17b5e88f6e4073edb796ae63c43083b9d4cb5bdbd4ac.png" />
 </div>
 </div>
 </section>
@@ -651,6 +778,9 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/bab7367e0fcc6e597385f8373f1ef3b959d260e84ed2e999c809e2f3dce447e6.png" src="../../../_images/bab7367e0fcc6e597385f8373f1ef3b959d260e84ed2e999c809e2f3dce447e6.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -663,6 +793,9 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/59f68771ea5f2d2f7aec42faa5849ae312c78f1faef122ffa7ea2a412c71ce09.png" src="../../../_images/59f68771ea5f2d2f7aec42faa5849ae312c78f1faef122ffa7ea2a412c71ce09.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -672,6 +805,12 @@ This is equivalent to <code class="docutils literal notranslate"><span class="pr
 <span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;l/100km&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7b0b325c12b0&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/a4057fc7198aacaa44a538c911787602c29d93ec487673453c394f39c0b47057.png" src="../../../_images/a4057fc7198aacaa44a538c911787602c29d93ec487673453c394f39c0b47057.png" />
 </div>
 </div>
 </section>
@@ -686,6 +825,9 @@ These can be set with function <code class="docutils literal notranslate"><span 
 <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/868617d26f261e53d6846f08880c3d12d6b8e238cb9223c1dfb55e53ddb820da.png" src="../../../_images/868617d26f261e53d6846f08880c3d12d6b8e238cb9223c1dfb55e53ddb820da.png" />
 </div>
 </div>
 </section>
@@ -727,7 +869,7 @@ These can be set with function <code class="docutils literal notranslate"><span 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to pandas</p>
+        <p class="prev-next-title">3.4 Intro to pandas</p>
       </div>
     </a>
     <a class="right-next"

@@ -6,7 +6,8 @@ root: intro
 # format: jb-book
 # root: index
 parts:
-  - caption: Book 1 - Python Software Carpentry
+  - caption: 🐍 Book 1 - Python Software Carpentry 
+  # - file: book/1_python_zero2hero/book1_overview.ipynb
     chapters:
     - file: book/1_python_zero2hero/book1_overview.ipynb
     - file: book/1_python_zero2hero/1_intro.md
@@ -39,19 +40,19 @@ parts:
     #   sections:
     #   - file: book/1_python_zero2hero/5_best_practices/git_and_GitHub_for_beginners.ipynb
 
-  - caption: Book 2 - GeoPython
+  - caption: 🛰️ Book 2 - GeoPython
     chapters:
     - file: book/2_geo_python/book2_overview.ipynb
     - file: book/2_geo_python/1_spatial_data_tools.md
       sections:
       - file: book/2_geo_python/1_spatial_data_tools/00_intro_to_geospatial_data.ipynb
-      - file: book/2_geo_python/1_spatial_data_tools/cartopy.ipynb
+      - file: book/2_geo_python/1_spatial_data_tools/01_cartopy.ipynb
       # - file: book/2_geo_python/1_spatial_data_tools/03-Geospatial-Data-Types.ipynb
-      - file: book/2_geo_python/1_spatial_data_tools/geopandas.ipynb
-      - file: book/2_geo_python/1_spatial_data_tools/rasterio.ipynb
-      - file: book/2_geo_python/1_spatial_data_tools/rioxarray.ipynb
-      - file: book/2_geo_python/1_spatial_data_tools/xarray.ipynb
-      - file: book/2_geo_python/1_spatial_data_tools/20-Xarray-NetCDF-Intro.ipynb
+      - file: book/2_geo_python/1_spatial_data_tools/02_geopandas.ipynb
+      - file: book/2_geo_python/1_spatial_data_tools/03_rasterio.ipynb
+      - file: book/2_geo_python/1_spatial_data_tools/04_Xarray_NetCDF_Intro.ipynb
+      - file: book/2_geo_python/1_spatial_data_tools/05_rioxarray.ipynb
+      # - file: book/2_geo_python/1_spatial_data_tools/xarray.ipynb
     - file: book/2_geo_python/2_eo_data.md
     - file: book/2_geo_python/3_gee_python.ipynb
       sections:
@@ -59,12 +60,12 @@ parts:
       - file: book/2_geo_python/3_gee_python/0_First_steps.ipynb
       - file: book/2_geo_python/3_gee_python/1_Open_and_display.ipynb
       - file: book/2_geo_python/3_gee_python/2_Time_series.ipynb
-      - file: book/2_geo_python/3_gee_python/3_Classification.ipynb
+      # - file: book/2_geo_python/3_gee_python/3_Classification.ipynb
     - file: book/2_geo_python/4_putting_it_together.ipynb
       sections:
       - file: book/2_geo_python/
 
-  - caption: Book 3 - Machine Learning for EO
+  - caption: 🤖 Book 3 - Machine Learning for EO
     chapters:
     - file: book/3_ml4eo/book3_overview.ipynb
     #   sections:
@@ -72,22 +73,24 @@ parts:
       # - file: book/2_ml_for_eo/1_intro/01-What-is-ML.ipynb
       # - file: book/2_ml_for_eo/1_intro/02-ML-Workflow.ipynb
       # - file: book/2_ml_for_eo/1_intro/03-ML-Workflow-Example.ipynb
-    - file: book/3_ml4eo/2_sat_ml_intro.md
+    - file: book/3_ml4eo/1_sat_ml_intro.md
       sections:
-      - file: book/3_ml4eo/2_sat_ml_intro/1_linear_regression.ipynb
-      - file: book/3_ml4eo/2_sat_ml_intro/2_classification.ipynb
-      - file: book/3_ml4eo/2_sat_ml_intro/3_kalman_filter.ipynb
-    - file: book/3_ml4eo/3_sat_ml_deep.md
+      - file: book/3_ml4eo/1_sat_ml_intro/1_linear_regression.ipynb
+      - file: book/3_ml4eo/1_sat_ml_intro/2_classification.ipynb
+      - file: book/3_ml4eo/1_sat_ml_intro/3_kalman_filter.ipynb
+      - file: book/3_ml4eo/1_sat_ml_intro/4_gee_classifiers.ipynb
+    - file: book/3_ml4eo/2_sat_ml_deep.md
       sections:
-      - file: book/3_ml4eo/3_sat_ml_deep/00_intro.ipynb
-      - file: book/3_ml4eo/3_sat_ml_deep/02_segmentation_unet.ipynb
-      - file: book/3_ml4eo/3_sat_ml_deep/03_autoencoders.ipynb 
+      # - file: book/3_ml4eo/2_sat_ml_deep/00_intro.ipynb
+      - file: book/3_ml4eo/2_sat_ml_deep/02_segmentation_unet.ipynb
+      - file: book/3_ml4eo/2_sat_ml_deep/03_autoencoders.ipynb 
       # - file: book/3_ml4eo/3_sat_ml_deep/3_rnn.ipynb
-    - file: book/3_ml4eo/4_embeddings.md
+    - file: book/3_ml4eo/3_embeddings.md
       sections:
-      - file: book/3_ml4eo/4_embeddings/notebooks/1a_Use_PCA_analysis_to_study_tile_embeddings.ipynb
-      - file: book/3_ml4eo/4_embeddings/notebooks/1b_Exploring_embedding_space_with_clustering_methods.ipynb
-      - file: book/3_ml4eo/4_embeddings/notebooks/2_Working_with_your_own_data.ipynb
+      - file: book/3_ml4eo/3_embeddings/notebooks/1a_Use_PCA_analysis_to_study_tile_embeddings.ipynb
+      - file: book/3_ml4eo/3_embeddings/notebooks/1b_Exploring_embedding_space_with_clustering_methods.ipynb
+      - file: book/3_ml4eo/3_embeddings/notebooks/2_Working_with_your_own_data.ipynb
+    - file: book/3_ml4eo/gfm.md
 
 
  

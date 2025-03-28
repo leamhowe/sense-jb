@@ -10,7 +10,9 @@ Python is the most popular programming language. This includes within Environmen
 
 Therefore in these tutorials we focus on using Python for geospatial applications.
 
-This website hosts 3 books which build on each other. building from python basics, to working with geospatial data in python, to writing and implementing your very own deep learning with Eeath Observation (EO) data. 
+This website hosts 3 books which build on each other. building from python basics, to working with geospatial data in python, to writing and implementing your very own deep learning with Earth Observation (EO) data. 
+
+As is such with an open-source ecosystem there are numerous ways of doing the same task, we should some good options but by no means are they the only way and keep you ears pricked because new libraries and updates are constantly being released! Don't become to set in your ways, be open to learning new ways of doing things and adapting your workflow. 
 
 <!-- ![](figures/scipy-ecosystem.png) -->
 

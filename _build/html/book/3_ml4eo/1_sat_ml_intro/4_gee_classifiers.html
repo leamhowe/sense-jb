@@ -1,0 +1,1417 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.4 - Classifiers in Earth Engine &#8212; SENSE Training Resources</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'book/3_ml4eo/1_sat_ml_intro/4_gee_classifiers';</script>
+    <link rel="icon" href="../../../_static/sense_logo_transp_white_crop.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="2 - Deep Learning with PyTorch" href="../2_sat_ml_deep.html" />
+    <link rel="prev" title="1.3 Kalman Filter" href="3_kalman_filter.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-light" alt="SENSE Training Resources - Home"/>
+    <script>document.write(`<img src="../../../_static/Sense-logo-4_transpCol-1024x431.png" class="logo__image only-dark" alt="SENSE Training Resources - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">🐍 Book 1 - Python Software Carpentry</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1_python_zero2hero/book1_overview.html">0 - Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/1_intro.html">1 - Intro to Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/00-Introduction.html">1.0 Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/01-How-to-Run-Python-Code.html">1.1 How to Run Python Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/02-Jupyter-Notebook.html">1.2 Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/1_intro/03-Basic-Python-Syntax.html">1.3 Python Language Syntax</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics.html">2 - Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/01-Semantics-Variables.html">2.1 Variables and Objects in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/02-Semantics-Operators.html">2.2 Basic Python Semantics: Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/03-Built-in-Scalar-Types.html">2.3 Built-In Types: Simple Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/04-Built-in-Data-Structures.html">2.4 Built-In Data Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/05-Ex-Try-Python-Basics.html">2.5 Exercise: Try Python Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/06-Control-Flow-Statements.html">2.6 Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/07-Defining-Functions.html">2.5 Defining and Using Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/08-Ex-Build-A-Program.html">2.8 Exercise: Build a simple program (1 h)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/09-Modules-and-Packages.html">2.9 Modules and Packages</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/2_python_basics/10-Ex-Create-module.html">Exercise: create a module and reuse code from it (1 h)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation.html">3 - Data Analysis &amp; Visualisation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/01-Numpy-Intro.html">3.1 Introduction to NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/02-Matplotlib.html">3.2 Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/03-Working-with-datetime.html">3.3 The datetime library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/04-Pandas-Intro.html">3.4 Intro to pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_python_zero2hero/3_data_analysis_visualisation/05-Plotting-with-Seaborn.html">3.5 Statistical plotting with Seaborn</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🛰️ Book 2 - GeoPython</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/book2_overview.html">0 - Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools.html">1 - GeoPython Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/00_intro_to_geospatial_data.html">Introduction to Geospatial Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/01_cartopy.html">Cartopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/02_geopandas.html">GeoPandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/03_rasterio.html">Rasterio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/04_Xarray_NetCDF_Intro.html">Working with NetCDF files</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/1_spatial_data_tools/05_rioxarray.html">Rioxarray</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_geo_python/2_eo_data.html">2 - EO data (under construction)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../2_geo_python/3_gee_python.html">3 - GEE Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/ee_api_colab_setup.html">Earth Engine Python API Colab Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/0_First_steps.html">Linking Google Colab to your GitHub page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/1_Open_and_display.html">3.1 - Open and Display</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../2_geo_python/3_gee_python/2_Time_series.html">3.2 - Time Series</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🤖 Book 3 - Machine Learning for EO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../book3_overview.html">0 - Overview</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../1_sat_ml_intro.html">1 - Classical ML with satellite data</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1_linear_regression.html">1.1 Linear Regression</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="2_classification.html">1.2 Classification</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="3_kalman_filter.html">1.3 Kalman Filter</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.4 - Classifiers in Earth Engine</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_sat_ml_deep.html">2 - Deep Learning with PyTorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_sat_ml_deep/02_segmentation_unet.html">Segmentation</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../2_sat_ml_deep/03_autoencoders.html">Autoencoders</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_embeddings.html">3 - Embeddings</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_embeddings/notebooks/1a_Use_PCA_analysis_to_study_tile_embeddings.html">Use PCA analysis on tile embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_embeddings/notebooks/1b_Exploring_embedding_space_with_clustering_methods.html">How are the study tiles clustered in the embedding space?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_embeddings/notebooks/2_Working_with_your_own_data.html">Working with your own input data</a></li>
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/leamhowe/sense-jb/blob/main/book/3_ml4eo/1_sat_ml_intro/4_gee_classifiers.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/leamhowe/sense-jb" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/leamhowe/sense-jb/issues/new?title=Issue%20on%20page%20%2Fbook/3_ml4eo/1_sat_ml_intro/4_gee_classifiers.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/book/3_ml4eo/1_sat_ml_intro/4_gee_classifiers.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.4 - Classifiers in Earth Engine</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-classification-algorithms">Supervised classification algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-classification">Unsupervised classification</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>Resources from SENSE training 2022 developed by Encarni Medina-Lopez <br />
+Licensed under CC0 1.0 Universal (<a class="reference internal" href="#other_licenses/CC0_1_LICENSE"><span class="xref myst">CC0 1.0</span></a>) Public Domain Dedication</p>
+<section class="tex2jax_ignore mathjax_ignore" id="classifiers-in-earth-engine">
+<h1>1.4 - Classifiers in Earth Engine<a class="headerlink" href="#classifiers-in-earth-engine" title="Link to this heading">#</a></h1>
+<p>Machine Learning (ML) in Earth Engine is supported with Earth Engine API methods in the <code class="docutils literal notranslate"><span class="pre">ee.Classifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ee.Clusterer</span></code>, or <code class="docutils literal notranslate"><span class="pre">ee.Reducer</span></code> packages for training and inference within Earth Engine.</p>
+<p>These are useful for approx. less than 400 images.</p>
+<p>If more, TensorFlow is the way to go.</p>
+<p>TensorFlow is developed and trained outside of Earth Engine, but Earth Engine provides the option to import and export data in <a class="reference external" href="https://www.tensorflow.org/tutorials/load_data/tfrecord#tfrecords_format_details">TFRecord</a> format. This way, you can generate training datasets in Earth Engine.</p>
+<p>Due to time limitations, we are going to focus on Classifiers, but you should explore further in your own time!</p>
+<section id="supervised-classification-algorithms">
+<h2>Supervised classification algorithms<a class="headerlink" href="#supervised-classification-algorithms" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Classifier</span></code> package handles supervised classification by traditional Machine Learning (ML) algorithms running in Earth Engine.</p>
+<p>These classifiers include Classification and Regression Trees (<a class="reference external" href="https://towardsdatascience.com/https-medium-com-lorrli-classification-and-regression-analysis-with-decision-trees-c43cdbc58054">CART</a>), <a class="reference external" href="https://towardsdatascience.com/understanding-random-forest-58381e0602d2">RandomForest</a>, <a class="reference external" href="https://towardsdatascience.com/all-about-naive-bayes-8e13cef044cf">NaiveBayes</a> and Support Vector Machine (<a class="reference external" href="https://towardsdatascience.com/support-vector-machines-svm-c9ef22815589">SVM</a>).</p>
+<p>The way classification works is:</p>
+<ul class="simple">
+<li><p>Collect training data. Assemble features which have a property that stores the known class label and properties storing numeric values for the predictors.</p></li>
+<li><p>Instantiate a classifier. Set its parameters if necessary.</p></li>
+<li><p>Train the classifier using the training data.</p></li>
+<li><p>Classify an image or feature collection.</p></li>
+<li><p>Estimate classification error with independent validation data.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import earthengine API</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ee</span>
+<span class="c1"># Authenticate and initialise </span>
+<span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
+<span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><p>To authorize access needed by Earth Engine, open the following
+        URL in a web browser and follow the instructions:</p>
+        <p><a href=https://code.earthengine.google.com/client-auth?scopes=https%3A//www.googleapis.com/auth/earthengine%20https%3A//www.googleapis.com/auth/cloud-platform%20https%3A//www.googleapis.com/auth/devstorage.full_control&request_id=u3igXtLsEmX_zg0MmRhdYYQw3bS9N3YJ4ShohBGZVqM&tc=4Ycm_BHTrOvDXovAeSg5LoswMi3E7zGXsuWOoaAxO8U&cc=bfCY-DJoVrSZq8FvynWDCaJA-A5iN3qSYbKF7ozvkW8>https://code.earthengine.google.com/client-auth?scopes=https%3A//www.googleapis.com/auth/earthengine%20https%3A//www.googleapis.com/auth/cloud-platform%20https%3A//www.googleapis.com/auth/devstorage.full_control&request_id=u3igXtLsEmX_zg0MmRhdYYQw3bS9N3YJ4ShohBGZVqM&tc=4Ycm_BHTrOvDXovAeSg5LoswMi3E7zGXsuWOoaAxO8U&cc=bfCY-DJoVrSZq8FvynWDCaJA-A5iN3qSYbKF7ozvkW8</a></p>
+        <p>The authorization workflow will generate a code, which you should paste in the box below.</p>
+        </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully saved authorization token.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a cloud-free Landsat 8 TOA composite (from raw imagery)</span>
+<span class="n">l8</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LC08/C02/T1&#39;</span><span class="p">)</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Algorithms</span><span class="o">.</span><span class="n">Landsat</span><span class="o">.</span><span class="n">simpleComposite</span><span class="p">(</span><span class="n">l8</span><span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-31&#39;</span><span class="p">))</span><span class="c1">#,asFloat=&#39;true&#39;)</span>
+
+<span class="c1"># Use these bands for prediction.</span>
+<span class="n">bands</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B5&#39;</span><span class="p">,</span> <span class="s1">&#39;B6&#39;</span><span class="p">,</span> <span class="s1">&#39;B7&#39;</span><span class="p">,</span> <span class="s1">&#39;B10&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">]</span>
+
+<span class="c1"># Load training points. The numeric property &#39;class&#39; stores known labels.</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;GOOGLE/EE/DEMOS/demo_landcover_labels&#39;</span><span class="p">)</span>
+
+<span class="c1"># This property stores the land cover labels as consecutive</span>
+<span class="c1"># integers starting from zero.</span>
+<span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;landcover&#39;</span>
+
+<span class="c1"># Overlay the points on the imagery to get training.</span>
+<span class="n">training</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="n">label</span><span class="p">],</span><span class="n">scale</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># Train a CART classifier with default parameters.</span>
+<span class="n">trained</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">smileCart</span><span class="p">()</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">bands</span><span class="p">)</span>
+
+<span class="c1"># Classify the image with the same bands used for training.</span>
+<span class="n">classified</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">bands</span><span class="p">)</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">trained</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the result</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+<span class="c1">#!pip install geehydro # Life saver for plotting GEE stuff with Python!</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geehydro</span>
+<span class="c1">#print(points.getInfo())</span>
+<span class="c1"># Use folium to visualize the imagery.</span>
+<span class="nb">map</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">37.820452055421086</span><span class="p">,</span><span class="o">-</span><span class="mf">122.27096557617189</span><span class="p">],</span><span class="n">zoom_start</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="nb">map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;bands&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">]},</span> <span class="s1">&#39;image&#39;</span><span class="p">)</span>
+<span class="nb">map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">classified</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]},</span> <span class="s1">&#39;classification&#39;</span><span class="p">)</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+<span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_d2d8c9ab1710436307ce1df86c914303 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_d2d8c9ab1710436307ce1df86c914303&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_d2d8c9ab1710436307ce1df86c914303 = L.map(
+                &quot;map_d2d8c9ab1710436307ce1df86c914303&quot;,
+                {
+                    center: [37.820452055421086, -122.27096557617189],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 11,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_21ee4b7df3e93d9ddc2cdb1c0dce4e9b = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_21ee4b7df3e93d9ddc2cdb1c0dce4e9b.addTo(map_d2d8c9ab1710436307ce1df86c914303);
+        
+    
+            var tile_layer_92f00180527866a66877096a57076eb4 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/fc634654e1b911ad0ba9d0f1c93851ec-ce74ee592400d08571f4a8cd815ba025/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_92f00180527866a66877096a57076eb4.addTo(map_d2d8c9ab1710436307ce1df86c914303);
+        
+    
+            var tile_layer_20cb10c9b670b4996a2bb7fa60433366 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/7d660b705d969b4ab5a6a7125d4860e0-bd63178cf457bc2b6f92e9d4515b2fa4/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_20cb10c9b670b4996a2bb7fa60433366.addTo(map_d2d8c9ab1710436307ce1df86c914303);
+        
+    
+            var layer_control_e84911c649fa2a622a6a470cfc3e3759_layers = {
+                base_layers : {
+                    &quot;openstreetmap&quot; : tile_layer_21ee4b7df3e93d9ddc2cdb1c0dce4e9b,
+                },
+                overlays :  {
+                    &quot;image&quot; : tile_layer_92f00180527866a66877096a57076eb4,
+                    &quot;classification&quot; : tile_layer_20cb10c9b670b4996a2bb7fa60433366,
+                },
+            };
+            let layer_control_e84911c649fa2a622a6a470cfc3e3759 = L.control.layers(
+                layer_control_e84911c649fa2a622a6a470cfc3e3759_layers.base_layers,
+                layer_control_e84911c649fa2a622a6a470cfc3e3759_layers.overlays,
+                {
+  &quot;position&quot;: &quot;topright&quot;,
+  &quot;collapsed&quot;: true,
+  &quot;autoZIndex&quot;: true,
+}
+            ).addTo(map_d2d8c9ab1710436307ce1df86c914303);
+
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+<p>Note that the training property (<code class="docutils literal notranslate"><span class="pre">'landcover'</span></code>) stores consecutive integers starting at 0 (Use <code class="docutils literal notranslate"><span class="pre">remap()</span></code> on your table to turn your class labels into consecutive integers starting at zero if necessary).</p>
+<p>If the training data are polygons representing homogenous regions, every pixel in each polygon is a training point. You can use polygons to train as illustrated in the following example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a cloud-free Landsat 8 TOA composite (from raw imagery).</span>
+<span class="n">l8</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LC08/C02/T1&#39;</span><span class="p">)</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Algorithms</span><span class="o">.</span><span class="n">Landsat</span><span class="o">.</span><span class="n">simpleComposite</span><span class="p">(</span><span class="n">l8</span><span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-12-31&#39;</span><span class="p">))</span>
+
+<span class="c1"># Use these bands for prediction.</span>
+<span class="n">bands</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B5&#39;</span><span class="p">,</span> <span class="s1">&#39;B6&#39;</span><span class="p">,</span> <span class="s1">&#39;B7&#39;</span><span class="p">,</span> <span class="s1">&#39;B10&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">]</span>
+
+<span class="c1"># Manually created polygons.</span>
+<span class="n">forest1</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="o">-</span><span class="mf">63.0187</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.3958</span><span class="p">,</span> <span class="o">-</span><span class="mf">62.9793</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.3443</span><span class="p">)</span>
+<span class="n">forest2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="o">-</span><span class="mf">62.8145</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.206</span><span class="p">,</span> <span class="o">-</span><span class="mf">62.7688</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.1735</span><span class="p">)</span>
+<span class="n">nonForest1</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="o">-</span><span class="mf">62.8161</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.5001</span><span class="p">,</span> <span class="o">-</span><span class="mf">62.7921</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.4486</span><span class="p">)</span>
+<span class="n">nonForest2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="o">-</span><span class="mf">62.6788</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.044</span><span class="p">,</span> <span class="o">-</span><span class="mf">62.6459</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.9986</span><span class="p">)</span>
+
+<span class="c1"># Make a FeatureCollection from the hand-made geometries.</span>
+<span class="n">polygons</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">([</span>
+  <span class="n">ee</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">nonForest1</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}),</span>
+  <span class="n">ee</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">nonForest2</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}),</span>
+  <span class="n">ee</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">forest1</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+  <span class="n">ee</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">forest2</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+<span class="p">])</span>
+
+<span class="c1"># Get the values for all pixels in each polygon in the training.</span>
+  <span class="c1"># Get the sample from the polygons FeatureCollection.</span>
+  <span class="c1"># Keep this list of properties from the polygons.</span>
+  <span class="c1"># Set the scale to get Landsat pixels in the polygons.</span>
+<span class="n">training</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">(</span><span class="n">polygons</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+  
+<span class="c1"># Create an SVM classifier with custom parameters.</span>
+<span class="c1"># RBF = Radial Basis Function kernel</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">libsvm</span><span class="p">(</span><span class="n">kernelType</span><span class="o">=</span><span class="s1">&#39;RBF&#39;</span><span class="p">,</span><span class="n">gamma</span><span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span><span class="n">cost</span><span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Train the classifier.</span>
+<span class="n">trained</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">bands</span><span class="p">);</span>
+
+<span class="c1"># Classify one image.</span>
+
+<span class="n">classified</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">trained</span><span class="p">)</span>
+
+<span class="c1"># Redude the region to plot it without issues</span>
+
+<span class="n">roi</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="o">-</span><span class="mf">62.836</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.2399</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">61</span><span class="p">]);</span>
+<span class="n">classified_reduced</span> <span class="o">=</span> <span class="n">classified</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the result</span>
+
+<span class="nb">map</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">9.2399</span><span class="p">,</span><span class="o">-</span><span class="mf">62.836</span><span class="p">],</span><span class="n">zoom_start</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="nb">map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;bands&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">]},</span> <span class="s1">&#39;image&#39;</span><span class="p">)</span>
+<span class="nb">map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">polygons</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">&#39;training polygons&#39;</span><span class="p">)</span>
+<span class="c1"># map.addLayer(classified_reduced, {&#39;min&#39;: 0, &#39;max&#39;: 1, &#39;palette&#39;: [&#39;red&#39;, &#39;green&#39;]}, &#39;deforestation&#39;) # Probably wont be able to plot it!</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+<span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_e5f383a1cde61a06487d756c572361b8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_e5f383a1cde61a06487d756c572361b8&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_e5f383a1cde61a06487d756c572361b8 = L.map(
+                &quot;map_e5f383a1cde61a06487d756c572361b8&quot;,
+                {
+                    center: [-9.2399, -62.836],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 9,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_9b030a480c89def8e6b70df958fa199a = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_9b030a480c89def8e6b70df958fa199a.addTo(map_e5f383a1cde61a06487d756c572361b8);
+        
+    
+            var tile_layer_dbcb7e325b2a29997ae813a27ddeb20b = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/fc634654e1b911ad0ba9d0f1c93851ec-edcecd9e9329857ea80f00ffa6c9b2f3/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_dbcb7e325b2a29997ae813a27ddeb20b.addTo(map_e5f383a1cde61a06487d756c572361b8);
+        
+    
+            var tile_layer_0eda716b8c12508a3dcac549f79c2ce9 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/b8960f507ba2545cd4c8c5cfb1f1bf47-4c437997d52043008d9b828facaac454/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_0eda716b8c12508a3dcac549f79c2ce9.addTo(map_e5f383a1cde61a06487d756c572361b8);
+        
+    
+            var layer_control_cfffb441eba4bda7f18e10740e3f6c8a_layers = {
+                base_layers : {
+                    &quot;openstreetmap&quot; : tile_layer_9b030a480c89def8e6b70df958fa199a,
+                },
+                overlays :  {
+                    &quot;image&quot; : tile_layer_dbcb7e325b2a29997ae813a27ddeb20b,
+                    &quot;training polygons&quot; : tile_layer_0eda716b8c12508a3dcac549f79c2ce9,
+                },
+            };
+            let layer_control_cfffb441eba4bda7f18e10740e3f6c8a = L.control.layers(
+                layer_control_cfffb441eba4bda7f18e10740e3f6c8a_layers.base_layers,
+                layer_control_cfffb441eba4bda7f18e10740e3f6c8a_layers.overlays,
+                {
+  &quot;position&quot;: &quot;topright&quot;,
+  &quot;collapsed&quot;: true,
+  &quot;autoZIndex&quot;: true,
+}
+            ).addTo(map_e5f383a1cde61a06487d756c572361b8);
+
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+</section>
+<section id="unsupervised-classification">
+<h2>Unsupervised classification<a class="headerlink" href="#unsupervised-classification" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ee.Clusterer</span></code> package handles unsupervised classification (or clustering) in Earth Engine. More details about each Clusterer are available in the <a class="reference external" href="https://code.earthengine.google.com/#workspace">reference docs in the Code Editor</a>.</p>
+<p>Clusterers are used in the same manner as classifiers in Earth Engine. The general workflow for clustering is:</p>
+<ul class="simple">
+<li><p>Assemble features with numeric properties in which to find clusters.</p></li>
+<li><p>Instantiate a clusterer. Set its parameters if necessary.</p></li>
+<li><p>Train the clusterer using the training data.</p></li>
+<li><p>Apply the clusterer to an image or feature collection.</p></li>
+<li><p>Label the clusters.</p></li>
+</ul>
+<p>The training data is a <code class="docutils literal notranslate"><span class="pre">FeatureCollection</span></code> with properties that will be input to the clusterer.</p>
+<p>Unlike classifiers, there is no input class value for a Clusterer.</p>
+<p>Like classifiers, the data for the train and apply steps are expected to have the same number of values. When a trained clusterer is applied to an image or table, it assigns an integer cluster ID to each pixel or feature.</p>
+<p>These algorithms are currently based on the algorithms with the same name in <a class="reference external" href="https://www.cs.waikato.ac.nz/ml/weka/">Weka</a>.</p>
+<p>Here is a simple example of building and using an <code class="docutils literal notranslate"><span class="pre">ee.Clusterer</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a pre-computed Landsat composite for input.</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;LANDSAT/LE7_TOA_1YEAR/2001&#39;</span><span class="p">)</span>
+<span class="c1"># input = ee.Image(&#39;LANDSAT/LANDSAT_LE7_TOA_1YEAR/2001&#39;)</span>
+<span class="c1"># input = ee.Image(&#39;LANDSAT/LE07/C02/T1_ANNUAL_TOA/2001&#39;)</span>
+
+<span class="c1"># Define a region in which to generate a sample of the input.</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span><span class="mf">29.7</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">32.5</span><span class="p">,</span> <span class="mf">31.7</span><span class="p">)</span>
+
+<span class="c1"># Display the sample region.</span>
+
+<span class="nb">map</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mi">31</span><span class="p">,</span><span class="mf">31.5</span><span class="p">],</span><span class="n">zoom_start</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="nb">map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">()</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">{},</span> <span class="s1">&#39;region&#39;</span><span class="p">)</span>
+<span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_50427165c64b2e58c9701ea4428ab830 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_50427165c64b2e58c9701ea4428ab830&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_50427165c64b2e58c9701ea4428ab830 = L.map(
+                &quot;map_50427165c64b2e58c9701ea4428ab830&quot;,
+                {
+                    center: [31.0, 31.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 8,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0171d112ab8577aa69272cd4eb390244 = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_0171d112ab8577aa69272cd4eb390244.addTo(map_50427165c64b2e58c9701ea4428ab830);
+        
+    
+            var tile_layer_902d40b7013a98dba1a15df87266653e = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/5e0a6aa772ee522bb578e1d4a4cd4276-4f23a5eb7dd4e84aab0ce4181cf961f8/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_902d40b7013a98dba1a15df87266653e.addTo(map_50427165c64b2e58c9701ea4428ab830);
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make the training dataset.</span>
+<span class="n">training</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">region</span> <span class="o">=</span> <span class="n">region</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span> <span class="mi">30</span><span class="p">,</span>  <span class="n">numPixels</span><span class="o">=</span> <span class="mi">5000</span><span class="p">)</span>
+
+<span class="c1"># Instantiate the clusterer and train it.</span>
+<span class="n">clusterer</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Clusterer</span><span class="o">.</span><span class="n">wekaKMeans</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training</span><span class="p">)</span>
+
+<span class="c1"># Cluster the input using the trained clusterer.</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">cluster</span><span class="p">(</span><span class="n">clusterer</span><span class="p">)</span>
+
+<span class="c1"># Display the clusters with random colors.</span>
+
+<span class="nb">map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">randomVisualizer</span><span class="p">(),</span> <span class="p">{},</span> <span class="s1">&#39;clusters&#39;</span><span class="p">)</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+<span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_50427165c64b2e58c9701ea4428ab830 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_50427165c64b2e58c9701ea4428ab830&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_50427165c64b2e58c9701ea4428ab830 = L.map(
+                &quot;map_50427165c64b2e58c9701ea4428ab830&quot;,
+                {
+                    center: [31.0, 31.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 8,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0171d112ab8577aa69272cd4eb390244 = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_0171d112ab8577aa69272cd4eb390244.addTo(map_50427165c64b2e58c9701ea4428ab830);
+        
+    
+            var tile_layer_902d40b7013a98dba1a15df87266653e = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/5e0a6aa772ee522bb578e1d4a4cd4276-4f23a5eb7dd4e84aab0ce4181cf961f8/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_902d40b7013a98dba1a15df87266653e.addTo(map_50427165c64b2e58c9701ea4428ab830);
+        
+    
+            tile_layer_0171d112ab8577aa69272cd4eb390244.addTo(map_50427165c64b2e58c9701ea4428ab830);
+        
+    
+            tile_layer_902d40b7013a98dba1a15df87266653e.addTo(map_50427165c64b2e58c9701ea4428ab830);
+        
+    
+            var tile_layer_4e68674631c5704771f0dee9db496618 = L.tileLayer(
+                &quot;https://earthengine.googleapis.com/v1/projects/522364178051/maps/a35787b5777d6bc7db4e8ebdb58c716a-8aa253d143bc4d2e2c7749c50b2f730e/tiles/{z}/{x}/{y}&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 18,
+  &quot;maxNativeZoom&quot;: 18,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;Google Earth Engine&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_4e68674631c5704771f0dee9db496618.addTo(map_50427165c64b2e58c9701ea4428ab830);
+        
+    
+            var layer_control_e7b631d30fcce013b0f5e0990659997e_layers = {
+                base_layers : {
+                    &quot;openstreetmap&quot; : tile_layer_0171d112ab8577aa69272cd4eb390244,
+                },
+                overlays :  {
+                    &quot;region&quot; : tile_layer_902d40b7013a98dba1a15df87266653e,
+                    &quot;clusters&quot; : tile_layer_4e68674631c5704771f0dee9db496618,
+                },
+            };
+            let layer_control_e7b631d30fcce013b0f5e0990659997e = L.control.layers(
+                layer_control_e7b631d30fcce013b0f5e0990659997e_layers.base_layers,
+                layer_control_e7b631d30fcce013b0f5e0990659997e_layers.overlays,
+                {
+  &quot;position&quot;: &quot;topright&quot;,
+  &quot;collapsed&quot;: true,
+  &quot;autoZIndex&quot;: true,
+}
+            ).addTo(map_50427165c64b2e58c9701ea4428ab830);
+
+        
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./book/3_ml4eo/1_sat_ml_intro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_kalman_filter.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1.3 Kalman Filter</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../2_sat_ml_deep.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2 - Deep Learning with PyTorch</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-classification-algorithms">Supervised classification algorithms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-classification">Unsupervised classification</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By SENSE CDT
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
