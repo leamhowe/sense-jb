@@ -3,8 +3,9 @@
 
 title: SENSE Training Resources
 author: SENSE CDT
-# logo: sense_badge.png
-logo: Sense-logo-4_transpCol-1024x431.png
+logo: _static/sense_badge.png
+# logo: Sense-logo-4_transpCol-1024x431.png
+# logo: images/SENSE-logo.jpg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
