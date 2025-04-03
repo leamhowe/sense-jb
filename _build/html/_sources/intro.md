@@ -2,8 +2,8 @@
 <span style="font-size: 40px;">**Welcome to the SENSE library of Earth Observation tutorials!**</span> \
 Collated and developed by Leam Howe
 
-\
-![satellite image of a fjord](images/ffjord_crop.jpg)
+
+![SENSE CDT written by Landsat](images/SENSE_CDT.png)
 # Introduction
 
 
@@ -32,9 +32,12 @@ This website hosts 3 books (or ‘modules’) which build on each other but can 
 - Set the groundwork and provide tools for independent geospatial data analysis and deployment of machine learning workflows with satellite data. 
 ```
 
-Python is the most popular programming language. This includes within Environmental Science and Machine Learning. And this is not without good reason: [Why Python keeps growing, explained.](https://github.blog/developer-skills/programming-languages-and-frameworks/why-python-keeps-growing-explained/) Therefore in these tutorials we focus on using Python for geospatial applications with a particular focus on the use of satellite data within Environmental Science. As is such with an open-source ecosystem, there are numerous ways of doing the same task, we show some good options but by no means are they the only way and keep you ears pricked because new libraries and updates are constantly being released! It is also worth mentioning that there are other tools beside python (e.g. QGIS, R), and python might not have the solution for every application. Often the answer lies in combining multiple tools, so keep an open mind, don't become to set in your ways, be open to learning new ways of doing things and adapting your workflow. 
-
 Python is the most popular programming language. This includes within Environmental Science and Machine Learning. And this is not without good reason: [Why Python keeps growing, explained.](https://github.blog/developer-skills/programming-languages-and-frameworks/why-python-keeps-growing-explained/). Therefore, in these tutorials we focus on using Python for geospatial applications with a particular focus on the use of satellite data within Environmental Science. As is such with an open-source ecosystem, there are numerous ways of doing the same task, we show some good options but by no means are they the only way; keep your ears pricked because new libraries and updates are constantly being released! It is also worth mentioning that there are other tools beside python (e.g. QGIS, R, GEE), and python might not have the solution for every application. Often the answer lies in combining multiple tools, so keep an open mind, don't become to set in your ways, be open to learning new ways of doing things and adapting your workflow. 
+
+__________________________
+
+![satellite image of a fjord](images/ffjord_crop.jpg)
+
 
 <!-- ![](figures/scipy-ecosystem.png) -->
 
