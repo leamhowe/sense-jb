@@ -25,7 +25,7 @@ This website hosts 3 books (or ‘modules’) which build on each other but can 
 ```{admonition} Learning goals
 :class: tip
 
-- Confident coding in Python, and aware of best practices if not regularly implementing the.
+- Confident coding in Python, and aware of best practices if not regularly implementing them.
 - Able to use Python to read, process, analyse, and visualise data in a variety of formats including tabular, vector, and raster.
 - Filter and extract pertinent data from massive online data platforms using powerful tools such as Xarray and Google Earth Engine.
 - Develop and apply machine learning workflows, from data preparation through to training and evaluation. 
